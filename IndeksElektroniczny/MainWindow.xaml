@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Style="{StaticResource SmallWindowStyle}"
         MouseDown="Window_MouseDown"
-        Title="MainWindow" Height="400" Width="400">
+        Title="MainWindow" Height="400" Width="800">
     <StackPanel>
         <StackPanel  Background="#333">
             <Grid>

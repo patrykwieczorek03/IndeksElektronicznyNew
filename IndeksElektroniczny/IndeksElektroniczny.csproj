@@ -109,6 +109,9 @@
     <Compile Include="StudentZajeciaPrzeglądanieGrupWindow.xaml.cs">
       <DependentUpon>StudentZajeciaPrzeglądanieGrupWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ZapytanieWindow.xaml.cs">
+      <DependentUpon>ZapytanieWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="AdministratorTwojeDaneWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,6 +189,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StudentZajeciaPrzeglądanieGrupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ZapytanieWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
