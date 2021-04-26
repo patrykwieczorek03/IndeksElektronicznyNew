@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Style="{StaticResource SmallWindowStyle}"
         MouseDown="Window_MouseDown"
-        Title="MainWindow" Height="290" Width="400">
+        Title="MainWindow" Height="400" Width="400">
     <StackPanel>
         <StackPanel  Background="#333">
             <Grid>
@@ -22,6 +22,12 @@
             </Grid>
         </StackPanel>
         <StackPanel>
+            <Border Padding="5" Grid.Column="0">
+                <StackPanel>
+                    <TextBlock Text="Politechnika Opolska" Style="{StaticResource UniversityTextBlock}"/>
+                    <fa:ImageAwesome Icon="University"/>
+                </StackPanel>
+            </Border>
             <Border Padding="20">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -31,7 +37,6 @@
                     <fa:ImageAwesome Icon="User"/>
                     <TextBox x:Name="LoginTextBox" Grid.Column="1"  Text="Login"/>
                 </Grid>
-
             </Border>
             <Border Padding="20">
                 <Grid>

@@ -70,6 +70,18 @@
     <Compile Include="AdministratorUzytkownicySystemuWindow.xaml.cs">
       <DependentUpon>AdministratorUzytkownicySystemuWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DziekanatStudenciDodajWindow.xaml.cs">
+      <DependentUpon>DziekanatStudenciDodajWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DziekanatStudenciEdytujWindow.xaml.cs">
+      <DependentUpon>DziekanatStudenciEdytujWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DziekanatStudenciWindow.xaml.cs">
+      <DependentUpon>DziekanatStudenciWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DziekanatTwojeDaneWindow.xaml.cs">
+      <DependentUpon>DziekanatTwojeDaneWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProwadzacyOcenianieWindow.xaml.cs">
       <DependentUpon>ProwadzacyOcenianieWindow.xaml</DependentUpon>
     </Compile>
@@ -110,6 +122,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdministratorUzytkownicySystemuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DziekanatStudenciDodajWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DziekanatStudenciEdytujWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DziekanatStudenciWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DziekanatTwojeDaneWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

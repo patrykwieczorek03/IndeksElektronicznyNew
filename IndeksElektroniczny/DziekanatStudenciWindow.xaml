@@ -1,4 +1,4 @@
-﻿<Window x:Class="IndeksElektroniczny.ProwadzacyZajeciaKursWindow"
+﻿<Window x:Class="IndeksElektroniczny.DziekanatStudenciWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:IndeksElektroniczny"
         mc:Ignorable="d"
         Style="{StaticResource FullScreenWindowStyle}"
-        Title="ProwadzacyZajeciaKursWindow">
+        Title="DziekanatStudenciWindow">
     <StackPanel>
         <StackPanel  Background="#333">
             <Grid>
@@ -35,14 +35,11 @@
                         <TextBlock Text="Politechnika Opolska" Style="{StaticResource UniversityTextBlock}"/>
                     </StackPanel>
                 </Border>
-                <Border Padding="5" Grid.Column="1">
+                <Border Padding="5" Grid.Column="2">
                     <Button Style="{StaticResource ButtonOption}" Content="Twoje dane"/>
                 </Border>
-                <Border Padding="5" Grid.Column="2">
-                    <Button Style="{StaticResource ButtonOption}" Content="Zajęcia"/>
-                </Border>
                 <Border Padding="5" Grid.Column="3">
-                    <Button Style="{StaticResource ButtonOption}" Content="Ocenianie"/>
+                    <Button Style="{StaticResource ButtonOption}" Content="Studenci"/>
                 </Border>
                 <Border Padding="5" Grid.Column="4">
                     <Button Style="{StaticResource ButtonOption}" Content="Wyloguj"/>
@@ -51,9 +48,9 @@
         </StackPanel>
         <Border Padding="20">
             <StackPanel>
-                <TextBlock Text="Grupy kursu: ..." Style="{StaticResource PageTitleTextBlock}"/>
-                <DataGrid Height="200"/>
+                <TextBlock Text="Lista studentów" Style="{StaticResource PageTitleTextBlock}"/>
             </StackPanel>
         </Border>
     </StackPanel>
 </Window>
+

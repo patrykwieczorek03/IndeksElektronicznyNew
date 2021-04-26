@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:IndeksElektroniczny"
         mc:Ignorable="d"
         Style="{StaticResource FullScreenWindowStyle}"
@@ -29,7 +30,10 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Border Padding="5" Grid.Column="0">
-                    <TextBlock Text="Politechnika Opolska" Style="{StaticResource UniversityTextBlock}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="University"/>
+                        <TextBlock Text="Politechnika Opolska" Style="{StaticResource UniversityTextBlock}"/>
+                    </StackPanel>
                 </Border>
                 <Border Padding="5" Grid.Column="2">
                     <Button Style="{StaticResource ButtonOption}" Content="Twoje dane"/>
