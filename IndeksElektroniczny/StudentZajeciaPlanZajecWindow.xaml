@@ -1,0 +1,71 @@
+﻿<Window x:Class="IndeksElektroniczny.StudentZajeciaPlanZajecWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IndeksElektroniczny"
+        mc:Ignorable="d"
+        Style="{StaticResource FullScreenWindowStyle}"
+        Title="StudentZajeciaPlanZajecWindow">
+    <StackPanel>
+        <StackPanel  Background="#333">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100*"/>
+                    <ColumnDefinition Width="400*"/>
+                    <ColumnDefinition Width="30*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource TitleBarTextBlock}" Text="Student" Grid.Column="0"/>
+                <Button Style="{StaticResource TitleBarButton}" Click="Close_Click" Grid.Column="2"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Padding="5" Grid.Column="0">
+                    <TextBlock Text="Politechnika Opolska" Style="{StaticResource UniversityTextBlock}"/>
+                </Border>
+                <Border Padding="5" Grid.Column="1">
+                    <Button Style="{StaticResource ButtonOption}" Content="Twoje dane"/>
+                </Border>
+                <Border Padding="5" Grid.Column="2">
+                    <Button Style="{StaticResource ButtonOption}" Content="Indeks"/>
+                </Border>
+                <Border Padding="5" Grid.Column="3">
+                    <Button Style="{StaticResource ButtonOption}" Content="Zajęcia"/>
+                </Border>
+                <Border Padding="5" Grid.Column="4">
+                    <Button Style="{StaticResource ButtonOption}" Content="Wyloguj"/>
+                </Border>
+            </Grid>
+        </StackPanel>
+        <Border Padding="20">
+            <StackPanel>
+                <TextBlock Text="Plan zajęć" Style="{StaticResource PageTitleTextBlock}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <Border Margin="0 0 10 10">
+                            <Button Style="{StaticResource ButtonOption}" Content="Przeglądanie grup"/>
+                        </Border>
+                        <Border Margin="0 0 10 10">
+                            <Button Style="{StaticResource ButtonOption}" Content="Plan zajęć"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <DataGrid x:Name="LessonsDataGrid" Height="200"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</Window>

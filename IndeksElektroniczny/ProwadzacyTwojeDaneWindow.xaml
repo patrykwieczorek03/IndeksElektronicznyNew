@@ -1,0 +1,110 @@
+﻿<Window x:Class="IndeksElektroniczny.ProwadzacyTwojeDaneWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IndeksElektroniczny"
+        mc:Ignorable="d"
+        Style="{StaticResource FullScreenWindowStyle}"
+        Title="ProwadzacyTwojeDaneWindow">
+    <StackPanel>
+        <StackPanel  Background="#333">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100*"/>
+                    <ColumnDefinition Width="400*"/>
+                    <ColumnDefinition Width="30*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource TitleBarTextBlock}" Text="Student" Grid.Column="0"/>
+                <Button Style="{StaticResource TitleBarButton}" Click="Close_Click" Grid.Column="2"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Padding="5" Grid.Column="0">
+                    <TextBlock Text="Politechnika Opolska" Style="{StaticResource UniversityTextBlock}"/>
+                </Border>
+                <Border Padding="5" Grid.Column="1">
+                    <Button Style="{StaticResource ButtonOption}" Content="Twoje dane"/>
+                </Border>
+                <Border Padding="5" Grid.Column="2">
+                    <Button Style="{StaticResource ButtonOption}" Content="Zajęcia"/>
+                </Border>
+                <Border Padding="5" Grid.Column="3">
+                    <Button Style="{StaticResource ButtonOption}" Content="Ocenianie"/>
+                </Border>
+                <Border Padding="5" Grid.Column="4">
+                    <Button Style="{StaticResource ButtonOption}" Content="Wyloguj"/>
+                </Border>
+            </Grid>
+        </StackPanel>
+        <Border Padding="20">
+            <StackPanel>
+                <TextBlock Text="Dane osobowe" Style="{StaticResource PageTitleTextBlock}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Style="{StaticResource TableBorder}" Grid.Column="0" Grid.Row="0">
+                        <TextBlock Text="Pesel"/>
+                    </Border>
+                    <Border Style="{StaticResource TableBorder}" Padding="5" Grid.Column="1" Grid.Row="0">
+                        <TextBox x:Name="PeselTextBox" Text="Pesel"/>
+                    </Border>
+
+                    <Border Style="{StaticResource TableBorder}" Padding="5" Grid.Column="0" Grid.Row="1">
+                        <TextBlock Text="Imie"/>
+                    </Border>
+                    <Border Style="{StaticResource TableBorder}" Padding="5" Grid.Column="1" Grid.Row="1">
+                        <TextBox x:Name="ImieTextBox" Text="Imie"/>
+                    </Border>
+
+                    <Border Style="{StaticResource TableBorder}" Padding="5" Grid.Column="0" Grid.Row="2">
+                        <TextBlock Text="Nazwisko"/>
+                    </Border>
+                    <Border Style="{StaticResource TableBorder}" Padding="5" Grid.Column="1" Grid.Row="2">
+                        <TextBox x:Name="NazwiskoTextBox" Text="Nazwisko"/>
+                    </Border>
+
+                    <Border Style="{StaticResource TableBorder}" Padding="5" Grid.Column="0" Grid.Row="3">
+                        <TextBlock Text="Data urodzenia"/>
+                    </Border>
+                    <Border Style="{StaticResource TableBorder}" Padding="5" Grid.Column="1" Grid.Row="3">
+                        <TextBox x:Name="DataUrodzeniaTextBox" Text="Data urodzenia"/>
+                    </Border>
+
+                    <Border Style="{StaticResource TableBorder}" Padding="5" Grid.Column="0" Grid.Row="4">
+                        <TextBlock Text="Płeć"/>
+                    </Border>
+                    <Border Style="{StaticResource TableBorder}" Padding="5" Grid.Column="1" Grid.Row="4">
+                        <TextBox x:Name="PlecTextBox" Text="Plec"/>
+                    </Border>
+
+                    <Border Style="{StaticResource TableBorder}" Padding="5" Grid.Column="0" Grid.Row="5">
+                        <TextBlock Text="Numer kontaktory"/>
+                    </Border>
+                    <Border Style="{StaticResource TableBorder}" Padding="5" Grid.Column="1" Grid.Row="5">
+                        <TextBox x:Name="NumerKontaktowyTextBox" Text="Numer kontaktory"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</Window>
