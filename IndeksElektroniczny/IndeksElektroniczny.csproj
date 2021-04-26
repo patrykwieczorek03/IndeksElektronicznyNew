@@ -61,6 +61,12 @@
     <Compile Include="AdministratorTwojeDaneWindow.xaml.cs">
       <DependentUpon>AdministratorTwojeDaneWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdministratorUzytkownicySystemuDodajWindow.xaml.cs">
+      <DependentUpon>AdministratorUzytkownicySystemuDodajWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdministratorUzytkownicySystemuEdytujWindow.xaml.cs">
+      <DependentUpon>AdministratorUzytkownicySystemuEdytujWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdministratorUzytkownicySystemuWindow.xaml.cs">
       <DependentUpon>AdministratorUzytkownicySystemuWindow.xaml</DependentUpon>
     </Compile>
@@ -92,6 +98,14 @@
       <DependentUpon>StudentZajeciaPrzeglądanieGrupWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AdministratorTwojeDaneWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdministratorUzytkownicySystemuDodajWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdministratorUzytkownicySystemuEdytujWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
