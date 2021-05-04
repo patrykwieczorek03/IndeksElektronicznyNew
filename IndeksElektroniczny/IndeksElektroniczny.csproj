@@ -94,23 +94,8 @@
     <Compile Include="ProwadzacyZajeciaWindow.xaml.cs">
       <DependentUpon>ProwadzacyZajeciaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StudentIndeksDaneStudentaWindow.xaml.cs">
-      <DependentUpon>StudentIndeksDaneStudentaWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StudentIndeksOcenyWindow.xaml.cs">
-      <DependentUpon>StudentIndeksOcenyWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StudentTwojeDaneWindow.xaml.cs">
-      <DependentUpon>StudentTwojeDaneWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="StudentWindow.xaml.cs">
       <DependentUpon>StudentWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StudentZajeciaPlanZajecWindow.xaml.cs">
-      <DependentUpon>StudentZajeciaPlanZajecWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StudentZajeciaPrzeglądanieGrupWindow.xaml.cs">
-      <DependentUpon>StudentZajeciaPrzeglądanieGrupWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ZapytanieWindow.xaml.cs">
       <DependentUpon>ZapytanieWindow.xaml</DependentUpon>
@@ -175,27 +160,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StudentIndeksDaneStudentaWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StudentIndeksOcenyWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StudentTwojeDaneWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="StudentWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StudentZajeciaPlanZajecWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StudentZajeciaPrzeglądanieGrupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
