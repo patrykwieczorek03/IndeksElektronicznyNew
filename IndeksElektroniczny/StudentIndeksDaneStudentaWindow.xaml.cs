@@ -19,9 +19,14 @@ namespace IndeksElektroniczny
     /// </summary>
     public partial class StudentIndeksDaneStudentaWindow : Window
     {
-        public StudentIndeksDaneStudentaWindow()
+        Window previousWindow;
+
+        public StudentIndeksDaneStudentaWindow(Window prev)
         {
+            previousWindow = prev;
             InitializeComponent();
+            Indeks.IsEnabled = false;
+            prev.Close();
         }
 
         // The metod close the window after click on button

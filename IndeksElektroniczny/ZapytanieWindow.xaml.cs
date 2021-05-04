@@ -23,5 +23,40 @@ namespace IndeksElektroniczny
         {
             InitializeComponent();
         }
+
+        // The metod close the window after click on button
+        /// <summary>
+        /// The metod close the window after click on button
+        /// </summary>
+        /// <param name="sender"> Contains a reference to the object that triggered the event </param>
+        /// <param name="e"> Contains state information and event data associated with a routed event  </param>
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void YesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        // A method that allows change the position of the window
+        /// <summary>
+        /// A method that allows change the position of the window
+        /// </summary>
+        /// <param name="sender"> Contains a reference to the object that triggered the event </param>
+        /// <param name="e"> Contains state information and event data associated with a routed event  </param>
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
     }
 }

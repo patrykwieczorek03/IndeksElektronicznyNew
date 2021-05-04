@@ -34,5 +34,24 @@ namespace IndeksElektroniczny
         {
             this.Close();
         }
+
+        private void Indeks_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void Zajecia_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Wyloguj_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TwojeDane_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

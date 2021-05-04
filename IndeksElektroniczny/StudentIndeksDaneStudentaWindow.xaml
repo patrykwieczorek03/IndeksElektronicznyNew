@@ -36,10 +36,10 @@
                     </StackPanel>
                 </Border>
                 <Border Padding="5" Grid.Column="1">
-                    <Button Style="{StaticResource ButtonOption}" Content="Twoje dane"/>
+                    <Button x:Name="TwojeDane" Style="{StaticResource ButtonOption}" Content="Twoje dane"/>
                 </Border>
                 <Border Padding="5" Grid.Column="2">
-                    <Button Style="{StaticResource ButtonOption}" Content="Indeks"/>
+                    <Button x:Name="Indeks" Style="{StaticResource ButtonOption}" Content="Indeks"/>
                 </Border>
                 <Border Padding="5" Grid.Column="3">
                     <Button Style="{StaticResource ButtonOption}" Content="Zajęcia"/>
