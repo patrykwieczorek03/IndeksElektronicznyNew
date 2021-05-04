@@ -82,17 +82,8 @@
     <Compile Include="DziekanatTwojeDaneWindow.xaml.cs">
       <DependentUpon>DziekanatTwojeDaneWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProwadzacyOcenianieWindow.xaml.cs">
-      <DependentUpon>ProwadzacyOcenianieWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ProwadzacyTwojeDaneWindow.xaml.cs">
-      <DependentUpon>ProwadzacyTwojeDaneWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ProwadzacyZajeciaKursWindow.xaml.cs">
-      <DependentUpon>ProwadzacyZajeciaKursWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ProwadzacyZajeciaWindow.xaml.cs">
-      <DependentUpon>ProwadzacyZajeciaWindow.xaml</DependentUpon>
+    <Compile Include="ProwadzacyWindow.xaml.cs">
+      <DependentUpon>ProwadzacyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="StudentWindow.xaml.cs">
       <DependentUpon>StudentWindow.xaml</DependentUpon>
@@ -144,19 +135,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ProwadzacyOcenianieWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ProwadzacyTwojeDaneWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ProwadzacyZajeciaKursWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ProwadzacyZajeciaWindow.xaml">
+    <Page Include="ProwadzacyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

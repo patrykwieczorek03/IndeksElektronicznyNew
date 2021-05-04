@@ -15,22 +15,22 @@ using System.Windows.Shapes;
 namespace IndeksElektroniczny
 {
     /// <summary>
-    /// Logika interakcji dla klasy StudentWindow.xaml
+    /// Logika interakcji dla klasy ProwadzacyWindow.xaml
     /// </summary>
-    public partial class StudentWindow : Window
+    public partial class ProwadzacyWindow : Window
     {
+
         public List<TextBox> tableRowContentList { get; set; }
         public List<TextBlock> tableRowTitleList { get; set; }
-        public List<Button> buttonList { get; set; }
-        public List<Button> editButtonList { get; set; }
         public Button buttonSearch { get; set; }
+        public List<Button> editButtonList { get; set; }
         public DataGrid contentDataGrid { get; set; }
         public TextBox textBoxSearch { get; set; }
         public ComboBox comboBoxSearch { get; set; }
 
         public static System.Windows.Thickness margin = new Thickness(5);
 
-        public StudentWindow()
+        public ProwadzacyWindow()
         {
             InitializeComponent();
             CreateDaneOsobowe();
@@ -41,7 +41,7 @@ namespace IndeksElektroniczny
             Clear_Content();
 
             int all_rows = 12;
-            int rows = all_rows-1;
+            int rows = all_rows - 1;
             int columns = 6;
             int editButtons = 2;
 
@@ -78,7 +78,7 @@ namespace IndeksElektroniczny
                 Border infoBorder = new Border();
                 infoBorder.Style = borderStyle;
                 Grid.SetColumn(infoBorder, 1);
-                Grid.SetColumnSpan(infoBorder, columns-1);
+                Grid.SetColumnSpan(infoBorder, columns - 1);
                 Grid.SetRow(infoBorder, j);
                 contentGrid.Children.Add(infoBorder);
             }
@@ -109,7 +109,7 @@ namespace IndeksElektroniczny
                 TextBox tableRowContent = new TextBox();
                 tableRowContent.Margin = margin;
                 Grid.SetColumn(tableRowContent, 1);
-                Grid.SetColumnSpan(tableRowContent, columns-1);
+                Grid.SetColumnSpan(tableRowContent, columns - 1);
                 Grid.SetRow(tableRowContent, j);
                 tableRowContentList.Add(tableRowContent);
                 contentGrid.Children.Add(tableRowContentList[j]);
@@ -127,112 +127,19 @@ namespace IndeksElektroniczny
 
             editButtonList[0].Content = "Edytuj";
             editButtonList[1].Content = "Zapisz";
-
-            //editButtonList[0].Click += new RoutedEventHandler(this.DaneStudenta_Click);
-            //editButtonList[1].Click += new RoutedEventHandler(this.Oceny_Click);
         }
 
-
-        public void CreateIndeksDaneStudenta()
+        public void CreateZajeciaProwadzonekursy()
         {
             Clear_Content();
 
             int rows = 4;
             int columns = 5;
-            int buttons = 2;
 
-            titleTextBlock.Text = "Dane Studenta";
-
-            tableRowContentList = new List<TextBox>();
-            tableRowTitleList = new List<TextBlock>();
-            buttonList = new List<Button>();
-
-            Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
-            
-            for (int i = 0; i < columns; i++)
-            {
-                contentGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            }
-
-            for (int i = 0; i < rows; i++)
-            {
-                contentGrid.RowDefinitions.Add(new RowDefinition());
-            }
-
-            for (int i = 0; i < buttons; i++)
-            {
-                Button button = new Button();
-                button.Margin = margin;
-                Grid.SetColumn(button, 0);
-                Grid.SetRow(button, i);
-                buttonList.Add(button);
-                contentGrid.Children.Add(buttonList[i]);
-            }
-
-            buttonList[0].Content = "Dane Studenta";
-            buttonList[1].Content = "Oceny";
-
-            buttonList[0].Click += new RoutedEventHandler(this.DaneStudenta_Click);
-            buttonList[1].Click += new RoutedEventHandler(this.Oceny_Click);
-
-            for (int j = 0; j < rows; j++)
-            {
-                Border infoBorder = new Border();
-                infoBorder.Style = borderStyle;
-                Grid.SetColumn(infoBorder, 1);
-                Grid.SetRow(infoBorder, j);
-                contentGrid.Children.Add(infoBorder);
-            }
-
-            for (int j = 0; j < rows; j++)
-            {
-                Border infoBorder = new Border();
-                infoBorder.Style = borderStyle;
-                Grid.SetColumn(infoBorder, 2);
-                Grid.SetColumnSpan(infoBorder, columns - 2);
-                Grid.SetRow(infoBorder, j);
-                contentGrid.Children.Add(infoBorder);
-            }
-
-            for (int j = 0; j < rows; j++)
-            {
-                TextBlock tableRowTitle = new TextBlock();
-                Grid.SetColumn(tableRowTitle, 1);
-                Grid.SetRow(tableRowTitle, j);
-                tableRowTitleList.Add(tableRowTitle);
-                contentGrid.Children.Add(tableRowTitleList[j]);
-            }
-
-            tableRowTitleList[0].Text = "Nazwa kierunku";
-            tableRowTitleList[1].Text = "Stopień";
-            tableRowTitleList[2].Text = "Semestr";
-            tableRowTitleList[3].Text = "Numer indeksu";
-
-            for (int j = 0; j < rows; j++)
-            {
-                TextBox tableRowContent = new TextBox();
-                tableRowContent.Margin = margin;
-                Grid.SetColumn(tableRowContent, 2);
-                Grid.SetColumnSpan(tableRowContent, columns - 2);
-                Grid.SetRow(tableRowContent, j);
-                tableRowContentList.Add(tableRowContent);
-                contentGrid.Children.Add(tableRowContentList[j]);
-            }
-        }
-
-        public void CreateIndeksOceny()
-        {
-            Clear_Content();
-
-            int rows = 4;
-            int columns = 5;
-            int buttons = 2;
-
-            titleTextBlock.Text = "Oceny";
+            titleTextBlock.Text = "Prowadzone kursy";
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
-            buttonList = new List<Button>();
 
             Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
 
@@ -245,76 +152,10 @@ namespace IndeksElektroniczny
             {
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
-
-            for (int i = 0; i < buttons; i++)
-            {
-                Button button = new Button();
-                button.Margin = margin;
-                Grid.SetColumn(button, 0);
-                Grid.SetRow(button, i);
-                buttonList.Add(button);
-                contentGrid.Children.Add(buttonList[i]);
-            }
-
-            buttonList[0].Content = "Twoje Dane";
-            buttonList[1].Content = "Oceny";
-
-            buttonList[0].Click += new RoutedEventHandler(this.DaneStudenta_Click);
-            buttonList[1].Click += new RoutedEventHandler(this.Oceny_Click);
 
             contentDataGrid = new DataGrid();
-            Grid.SetColumn(contentDataGrid, 1);
-            Grid.SetColumnSpan(contentDataGrid, columns - 1);
-            Grid.SetRow(contentDataGrid, 0);
-            Grid.SetRowSpan(contentDataGrid, rows);
-            contentGrid.Children.Add(contentDataGrid);
-        }
-
-        public void CreateZajeciaPlanZajec()
-        {
-            Clear_Content();
-
-            int rows = 4;
-            int columns = 5;
-            int buttons = 2;
-
-            titleTextBlock.Text = "Plan zajęć";
-
-            tableRowContentList = new List<TextBox>();
-            tableRowTitleList = new List<TextBlock>();
-            buttonList = new List<Button>();
-
-            Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
-
-            for (int i = 0; i < columns; i++)
-            {
-                contentGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            }
-
-            for (int i = 0; i < rows; i++)
-            {
-                contentGrid.RowDefinitions.Add(new RowDefinition());
-            }
-
-            for (int i = 0; i < buttons; i++)
-            {
-                Button button = new Button();
-                button.Margin = margin;
-                Grid.SetColumn(button, 0);
-                Grid.SetRow(button, i);
-                buttonList.Add(button);
-                contentGrid.Children.Add(buttonList[i]);
-            }
-
-            buttonList[0].Content = "Przeglądanie grup";
-            buttonList[1].Content = "Plan zajęć";
-
-            buttonList[0].Click += new RoutedEventHandler(this.PrzegladanieGrup_Click);
-            buttonList[1].Click += new RoutedEventHandler(this.PlanZajec_Click);
-
-            contentDataGrid = new DataGrid();
-            Grid.SetColumn(contentDataGrid, 1);
-            Grid.SetColumnSpan(contentDataGrid, columns - 1);
+            Grid.SetColumn(contentDataGrid, 0);
+            Grid.SetColumnSpan(contentDataGrid, columns);
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows);
             contentGrid.Children.Add(contentDataGrid);
@@ -326,13 +167,11 @@ namespace IndeksElektroniczny
 
             int rows = 4;
             int columns = 5;
-            int buttons = 2;
 
-            titleTextBlock.Text = "Przeglądanie grup";
+            titleTextBlock.Text = "Grupy kursu: ............";
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
-            buttonList = new List<Button>();
 
             Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
 
@@ -346,21 +185,37 @@ namespace IndeksElektroniczny
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            for (int i = 0; i < buttons; i++)
+            contentDataGrid = new DataGrid();
+            Grid.SetColumn(contentDataGrid, 0);
+            Grid.SetColumnSpan(contentDataGrid, columns);
+            Grid.SetRow(contentDataGrid, 0);
+            Grid.SetRowSpan(contentDataGrid, rows);
+            contentGrid.Children.Add(contentDataGrid);
+        }
+
+        public void CreateOcenianie()
+        {
+            Clear_Content();
+
+            int rows = 4;
+            int columns = 5;
+
+            titleTextBlock.Text = "Ocenianie";
+
+            tableRowContentList = new List<TextBox>();
+            tableRowTitleList = new List<TextBlock>();
+
+            Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
+
+            for (int i = 0; i < columns; i++)
             {
-                Button button = new Button();
-                button.Margin = margin;
-                Grid.SetColumn(button, 0);
-                Grid.SetRow(button, i);
-                buttonList.Add(button);
-                contentGrid.Children.Add(buttonList[i]);
+                contentGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            buttonList[0].Content = "Przeglądanie grup";
-            buttonList[1].Content = "Plan zajęć";
-
-            buttonList[0].Click += new RoutedEventHandler(this.PrzegladanieGrup_Click);
-            buttonList[1].Click += new RoutedEventHandler(this.PlanZajec_Click);
+            for (int i = 0; i < rows; i++)
+            {
+                contentGrid.RowDefinitions.Add(new RowDefinition());
+            }
 
             buttonSearch = new Button();
             buttonSearch.Margin = margin;
@@ -371,20 +226,21 @@ namespace IndeksElektroniczny
 
             textBoxSearch = new TextBox();
             textBoxSearch.Margin = margin;
-            Grid.SetColumn(textBoxSearch, 1);
+            Grid.SetColumn(textBoxSearch, 0);
             Grid.SetColumnSpan(textBoxSearch, columns - 3);
             Grid.SetRow(textBoxSearch, 0);
             contentGrid.Children.Add(textBoxSearch);
 
             comboBoxSearch = new ComboBox();
             comboBoxSearch.Margin = margin;
-            Grid.SetColumn(comboBoxSearch, 3);
+            Grid.SetColumn(comboBoxSearch, 2);
+            Grid.SetColumnSpan(comboBoxSearch, columns - 3);
             Grid.SetRow(comboBoxSearch, 0);
             contentGrid.Children.Add(comboBoxSearch);
 
             contentDataGrid = new DataGrid();
-            Grid.SetColumn(contentDataGrid, 1);
-            Grid.SetColumnSpan(contentDataGrid, columns - 1);
+            Grid.SetColumn(contentDataGrid, 0);
+            Grid.SetColumnSpan(contentDataGrid, columns);
             Grid.SetRow(contentDataGrid, 1);
             Grid.SetRowSpan(contentDataGrid, rows - 1);
             contentGrid.Children.Add(contentDataGrid);
@@ -401,19 +257,14 @@ namespace IndeksElektroniczny
             this.Close();
         }
 
-        private void Indeks_Click(object sender, RoutedEventArgs e)
+        private void Ocenianie_Click(object sender, RoutedEventArgs e)
         {
-            CreateIndeksDaneStudenta();
-        }
-
-        private void Zajecia_Click(object sender, RoutedEventArgs e)
-        {
-            CreateZajeciaPrzegladanieGrup();
+            CreateOcenianie();
         }
 
         private void Wyloguj_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void TwojeDane_Click(object sender, RoutedEventArgs e)
@@ -421,24 +272,14 @@ namespace IndeksElektroniczny
             CreateDaneOsobowe();
         }
 
-        private void Oceny_Click(object sender, RoutedEventArgs e)
+        private void Zajecia_Click(object sender, RoutedEventArgs e)
         {
-            CreateIndeksOceny();
+            CreateZajeciaProwadzonekursy();
         }
 
-        private void DaneStudenta_Click(object sender, RoutedEventArgs e)
-        {
-            CreateIndeksDaneStudenta();
-        }
-
-        private void PrzegladanieGrup_Click(object sender, RoutedEventArgs e)
+        private void ZajeciaDataGrid_Click(object sender, RoutedEventArgs e)
         {
             CreateZajeciaPrzegladanieGrup();
-        }
-
-        private void PlanZajec_Click(object sender, RoutedEventArgs e)
-        {
-            CreateZajeciaPlanZajec();
         }
 
         private void Clear_Content()
