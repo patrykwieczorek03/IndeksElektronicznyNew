@@ -58,17 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AdministratorTwojeDaneWindow.xaml.cs">
-      <DependentUpon>AdministratorTwojeDaneWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AdministratorUzytkownicySystemuDodajWindow.xaml.cs">
-      <DependentUpon>AdministratorUzytkownicySystemuDodajWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AdministratorUzytkownicySystemuEdytujWindow.xaml.cs">
-      <DependentUpon>AdministratorUzytkownicySystemuEdytujWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AdministratorUzytkownicySystemuWindow.xaml.cs">
-      <DependentUpon>AdministratorUzytkownicySystemuWindow.xaml</DependentUpon>
+    <Compile Include="AdministratorWindow.xaml.cs">
+      <DependentUpon>AdministratorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DziekanatWindow.xaml.cs">
       <DependentUpon>DziekanatWindow.xaml</DependentUpon>
@@ -82,19 +73,7 @@
     <Compile Include="ZapytanieWindow.xaml.cs">
       <DependentUpon>ZapytanieWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="AdministratorTwojeDaneWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AdministratorUzytkownicySystemuDodajWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AdministratorUzytkownicySystemuEdytujWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AdministratorUzytkownicySystemuWindow.xaml">
+    <Page Include="AdministratorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

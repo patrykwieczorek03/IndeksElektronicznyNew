@@ -33,8 +33,9 @@ namespace IndeksElektroniczny
 
         public static System.Windows.Thickness margin = new Thickness(5);
 
-        public StudentWindow()
+        public StudentWindow(Window loginWindow)
         {
+            loginWindow.Close();
             InitializeComponent();
             CreateDaneOsobowe();
         }
@@ -42,6 +43,8 @@ namespace IndeksElektroniczny
         public void CreateDaneOsobowe()
         {
             Clear_Content();
+
+            ManageMainButtons(1);
 
             int all_rows = 13;
             int rows = all_rows - 1;
@@ -134,6 +137,8 @@ namespace IndeksElektroniczny
         {
             Clear_Content();
 
+            ManageMainButtons(2);
+
             int rows = 4;
             int columns = 5;
 
@@ -170,6 +175,9 @@ namespace IndeksElektroniczny
             contentGrid.Children.Add(buttonGrades);
             buttonGrades.Content = "Oceny";
             buttonGrades.Click += new RoutedEventHandler(this.Oceny_Click);
+
+            buttonStudentData.IsEnabled = false;
+            buttonGrades.IsEnabled = true;
 
             for (int j = 0; j < rows; j++)
             {
@@ -220,6 +228,8 @@ namespace IndeksElektroniczny
         {
             Clear_Content();
 
+            ManageMainButtons(2);
+
             int rows = 4;
             int columns = 5;
 
@@ -256,6 +266,9 @@ namespace IndeksElektroniczny
             buttonGrades.Content = "Oceny";
             buttonGrades.Click += new RoutedEventHandler(this.Oceny_Click);
 
+            buttonStudentData.IsEnabled = true;
+            buttonGrades.IsEnabled = false;
+
             contentDataGrid = new DataGrid();
             Grid.SetColumn(contentDataGrid, 1);
             Grid.SetColumnSpan(contentDataGrid, columns - 1);
@@ -267,6 +280,8 @@ namespace IndeksElektroniczny
         public void CreateZajeciaPlanZajec()
         {
             Clear_Content();
+
+            ManageMainButtons(3);
 
             int rows = 4;
             int columns = 5;
@@ -304,6 +319,9 @@ namespace IndeksElektroniczny
             buttonTimetable.Content = "Plan zajęć";
             buttonTimetable.Click += new RoutedEventHandler(this.PlanZajec_Click);
 
+            buttonTimetable.IsEnabled = false;
+            buttonGroups.IsEnabled = true;
+
             contentDataGrid = new DataGrid();
             Grid.SetColumn(contentDataGrid, 1);
             Grid.SetColumnSpan(contentDataGrid, columns - 1);
@@ -315,6 +333,8 @@ namespace IndeksElektroniczny
         public void CreateZajeciaPrzegladanieGrup()
         {
             Clear_Content();
+
+            ManageMainButtons(3);
 
             int rows = 4;
             int columns = 5;
@@ -360,6 +380,9 @@ namespace IndeksElektroniczny
             contentGrid.Children.Add(buttonSearch);
             buttonSearch.Click += new RoutedEventHandler(this.Szukaj_Click);
 
+            buttonTimetable.IsEnabled = true;
+            buttonGroups.IsEnabled = false;
+
             textBoxSearch = new TextBox();
             textBoxSearch.Margin = margin;
             Grid.SetColumn(textBoxSearch, 1);
@@ -379,6 +402,42 @@ namespace IndeksElektroniczny
             Grid.SetRow(contentDataGrid, 1);
             Grid.SetRowSpan(contentDataGrid, rows - 1);
             contentGrid.Children.Add(contentDataGrid);
+        }
+
+        private void Clear_Content()
+        {
+            contentGrid.Children.Clear();
+            contentGrid.RowDefinitions.Clear();
+            contentGrid.ColumnDefinitions.Clear();
+        }
+
+        private void ManageMainButtons(int activeButton)
+        {
+            if (activeButton == 1)
+            {
+                TwojeDane.IsEnabled = false;
+                Indeks.IsEnabled = true;
+                Zajecia.IsEnabled = true;
+            }
+            else if (activeButton == 2)
+            {
+                TwojeDane.IsEnabled = true;
+                Indeks.IsEnabled = false;
+                Zajecia.IsEnabled = true;
+            }
+            else if (activeButton == 3)
+            {
+                TwojeDane.IsEnabled = true;
+                Indeks.IsEnabled = true;
+                Zajecia.IsEnabled = false;
+            }
+            else if (activeButton == 4)
+            {
+                TwojeDane.IsEnabled = true;
+                Indeks.IsEnabled = true;
+                Zajecia.IsEnabled = true;
+            }
+            else throw new ArgumentException("Parameter must be in range 1 - 4", nameof(activeButton));
         }
 
         // The metod close the window after click on button
@@ -409,7 +468,8 @@ namespace IndeksElektroniczny
 
         private void Wyloguj_Click(object sender, RoutedEventArgs e)
         {
-            
+            MainWindow login = new MainWindow(this);
+            login.ShowDialog();
         }
 
         private void Szukaj_Click(object sender, RoutedEventArgs e)
@@ -440,13 +500,6 @@ namespace IndeksElektroniczny
         private void PlanZajec_Click(object sender, RoutedEventArgs e)
         {
             CreateZajeciaPlanZajec();
-        }
-
-        private void Clear_Content()
-        {
-            contentGrid.Children.Clear();
-            contentGrid.RowDefinitions.Clear();
-            contentGrid.ColumnDefinitions.Clear();
         }
     }
 }

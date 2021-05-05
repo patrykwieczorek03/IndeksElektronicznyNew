@@ -31,6 +31,12 @@ namespace IndeksElektroniczny
             InitializeComponent();
         }
 
+        public MainWindow(Window userWindow)
+        {
+            userWindow.Close();
+            InitializeComponent();
+        }
+
         // Logs the user in
         /// <summary>
         /// Logs the user in 
@@ -39,9 +45,10 @@ namespace IndeksElektroniczny
         /// <param name="e"> Contains state information and event data associated with a routed event  </param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            StudentWindow Student = new StudentWindow();
-            //ProwadzacyWindow Student = new ProwadzacyWindow();
-            //DziekanatWindow Student = new DziekanatWindow();
+            StudentWindow Student = new StudentWindow(this);
+            //ProwadzacyWindow Student = new ProwadzacyWindow(this);
+            //DziekanatWindow Student = new DziekanatWindow(this);
+            //AdministratorWindow Student = new AdministratorWindow(this);
             Student.ShowDialog();
         }
 

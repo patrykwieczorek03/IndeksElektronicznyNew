@@ -19,9 +19,10 @@ namespace IndeksElektroniczny
     /// </summary>
     public partial class ZapytanieWindow : Window
     {
-        public ZapytanieWindow()
+        public ZapytanieWindow(string question)
         {
             InitializeComponent();
+            questionTextBlock.Text = question;
         }
 
         // The metod close the window after click on button

@@ -34,8 +34,9 @@ namespace IndeksElektroniczny
 
         public static System.Windows.Thickness margin = new Thickness(5);
 
-        public DziekanatWindow()
+        public DziekanatWindow(Window loginWindow)
         {
+            loginWindow.Close();
             InitializeComponent();
             CreateDaneOsobowe();
         }
@@ -43,6 +44,8 @@ namespace IndeksElektroniczny
         public void CreateDaneOsobowe()
         {
             Clear_Content();
+
+            ManageMainButtons(1);
 
             int all_rows = 13;
             int rows = all_rows - 1;
@@ -132,6 +135,8 @@ namespace IndeksElektroniczny
         {
             Clear_Content();
 
+            ManageMainButtons(2);
+
             int rows = 12;
             int columns = 5;
 
@@ -172,6 +177,8 @@ namespace IndeksElektroniczny
         public void CreateStudenciStudent()
         {
             Clear_Content();
+
+            ManageMainButtons(3);
 
             int rows = 12;
             int columns = 5;
@@ -223,6 +230,8 @@ namespace IndeksElektroniczny
         public void CreateNowyStudent()
         {
             Clear_Content();
+
+            ManageMainButtons(3);
 
             int all_rows = 18;
             int rows = all_rows - 1;
@@ -320,6 +329,26 @@ namespace IndeksElektroniczny
             contentGrid.ColumnDefinitions.Clear();
         }
 
+        private void ManageMainButtons(int activeButton)
+        {
+            if (activeButton == 1)
+            {
+                TwojeDane.IsEnabled = false;
+                Studenci.IsEnabled = true;
+            }
+            else if (activeButton == 2)
+            {
+                TwojeDane.IsEnabled = true;
+                Studenci.IsEnabled = false;
+            }
+            else if (activeButton == 3)
+            {
+                TwojeDane.IsEnabled = true;
+                Studenci.IsEnabled = true;
+            }
+            else throw new ArgumentException("Parameter must be in range 1 - 3", nameof(activeButton));
+        }
+
         // The metod close the window after click on button
         /// <summary>
         /// The metod close the window after click on button
@@ -333,7 +362,8 @@ namespace IndeksElektroniczny
 
         private void Wyloguj_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow login = new MainWindow(this);
+            login.ShowDialog();
         }
 
         private void TwojeDane_Click(object sender, RoutedEventArgs e)
