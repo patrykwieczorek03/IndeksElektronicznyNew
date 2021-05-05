@@ -64,6 +64,79 @@ namespace DataBaseMySqlServices
             return userData;
         }
 
+        public StudentDataView DataBaseShowStudentDate(User user)
+        {
+            command = new MySqlCommand($"CALL wyswietl_dane_studenta('{user.UserID}')", this.conection);
+            reader = command.ExecuteReader();
+            StudentDataView studentData = new StudentDataView();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    studentData.StudyFiled = reader.GetValue(0).ToString();
+                    studentData.Degree = int.Parse(reader.GetValue(1).ToString());
+                    studentData.Semestr = int.Parse(reader.GetValue(2).ToString());
+                    studentData.IndexNumber = int.Parse(reader.GetValue(3).ToString());
+                }
+            }
+            reader.Close();
+            return studentData;
+
+        }
+
+        public List<StudentGradesDataView> DataBaseShowStudentGradesDate(User user)
+        {
+            command = new MySqlCommand($"CALL wyswietl_oceny_studenta('{user.UserID}')", this.conection);
+            reader = command.ExecuteReader();
+            List<StudentGradesDataView> studentGradesDatas = new List<StudentGradesDataView>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    StudentGradesDataView studentGradesData = new StudentGradesDataView();
+                    studentGradesData.Name = reader.GetValue(0).ToString();
+                    studentGradesData.Surname = reader.GetValue(1).ToString();
+                    studentGradesData.NameOfCoure = reader.GetValue(2).ToString();
+                    studentGradesData.Ects = int.Parse(reader.GetValue(3).ToString());
+                    studentGradesData.GroupID = int.Parse(reader.GetValue(4).ToString());
+                    if (!DBNull.Value.Equals(reader.GetValue(5))) studentGradesData.Grade = float.Parse(reader.GetValue(5).ToString());
+                    else studentGradesData.Grade = 0.0F;
+                    if (!DBNull.Value.Equals(reader.GetValue(6))) studentGradesData.GradeStatus = char.Parse(reader.GetValue(6).ToString());
+                    else studentGradesData.GradeStatus = 'N';
+                    studentGradesDatas.Add(studentGradesData);
+                }
+            }
+            reader.Close();
+            return studentGradesDatas;
+        }
+
+        public List<StudentTimeTableDataView> DataBaseShowStudentTimeTable(User user)
+        {
+            command = new MySqlCommand($"CALL wyswietl_plan_zajec_studenta('{user.UserID}')", this.conection);
+            reader = command.ExecuteReader();
+            List<StudentTimeTableDataView> studentTimeTableDatas = new List<StudentTimeTableDataView>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    StudentTimeTableDataView studentTimeTableData = new StudentTimeTableDataView();
+                    studentTimeTableData.Name = reader.GetValue(0).ToString();
+                    studentTimeTableData.Surname = reader.GetValue(1).ToString();
+                    studentTimeTableData.NameOfCoure = reader.GetValue(2).ToString();
+                    studentTimeTableData.Ects = int.Parse(reader.GetValue(3).ToString());
+                    studentTimeTableData.GroupID = int.Parse(reader.GetValue(4).ToString());
+                    studentTimeTableData.Building = reader.GetValue(5).ToString();
+                    studentTimeTableData.Room = int.Parse(reader.GetValue(6).ToString());
+                    studentTimeTableData.DayOfWeek = int.Parse(reader.GetValue(7).ToString());
+                    studentTimeTableData.TypeOfClasses = char.Parse(reader.GetValue(8).ToString());
+                    studentTimeTableData.StartTime = DateTime.Parse(reader.GetValue(9).ToString());
+                    studentTimeTableData.FinishTime = DateTime.Parse(reader.GetValue(10).ToString());
+                    studentTimeTableDatas.Add(studentTimeTableData);
+                }
+            }
+            reader.Close();
+            return studentTimeTableDatas;
+        }
 
         public void DataBaseRead()
         {

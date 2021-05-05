@@ -8,8 +8,8 @@ namespace DataBaseMySqlServices.Models
 {
     public class User
     {
-        public int UserID;
-        public char Role;
+        public int UserID { get; set; }
+        public char Role { get; set; }
 
         public bool CheckUser()
         {

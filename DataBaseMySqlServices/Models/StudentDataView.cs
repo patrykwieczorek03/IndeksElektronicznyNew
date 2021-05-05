@@ -8,12 +8,12 @@ namespace DataBaseMySqlServices.Models
 {
     public class StudentDataView
     {
-        string StudyFiled;
+        public string StudyFiled { get; set; }
 
-        int Degree;
+        public int Degree { get; set; }
 
-        int Semestr;
+        public int Semestr { get; set; }
 
-        string IndexNumber;
+        public int IndexNumber { get; set; }
     }
 }

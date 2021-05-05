@@ -38,6 +38,9 @@ namespace IndeksElektroniczny
         private User signInUser;
         private DataBaseMySqlService DbService;
         private UserDataView userDate;
+        private StudentDataView studentDate;
+        List<StudentGradesDataView> studentGradesDatas;
+        List<StudentTimeTableDataView> studentTimeTableDatas;
 
         public StudentWindow(Window loginWindow, User signInUser_a, DataBaseMySqlService DbService_a)
         {
@@ -138,20 +141,7 @@ namespace IndeksElektroniczny
 
             saveChangesButton.Click += new RoutedEventHandler(this.ZapiszZmiany_Click);
 
-            userDate = DbService.DataBaseShowUserDate(signInUser);
-
-            tableRowContentList[0].Text = userDate.Name;
-            tableRowContentList[1].Text = userDate.Surname;
-            tableRowContentList[2].Text = userDate.Pesel;
-            tableRowContentList[3].Text = userDate.DateOfBirth.ToString();
-            tableRowContentList[4].Text = userDate.Sex.ToString();
-            tableRowContentList[5].Text = userDate.ContactNumber;
-            tableRowContentList[6].Text = userDate.Country;
-            tableRowContentList[7].Text = userDate.City;
-            tableRowContentList[8].Text = userDate.Street;
-            tableRowContentList[9].Text = userDate.HouseNumber;
-            tableRowContentList[10].Text = userDate.ApartmentNumber;
-            tableRowContentList[11].Text = userDate.PostalCode;
+            UpdateUserData();
         }
 
 
@@ -244,6 +234,8 @@ namespace IndeksElektroniczny
                 tableRowContentList.Add(tableRowContent);
                 contentGrid.Children.Add(tableRowContentList[j]);
             }
+
+            UpdateStudentData();
         }
 
         public void CreateIndeksOceny()
@@ -297,6 +289,8 @@ namespace IndeksElektroniczny
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows);
             contentGrid.Children.Add(contentDataGrid);
+
+            UpdateStudentGradesData();
         }
 
         public void CreateZajeciaPlanZajec()
@@ -350,6 +344,8 @@ namespace IndeksElektroniczny
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows);
             contentGrid.Children.Add(contentDataGrid);
+
+            UpdateStudentTimeTableData();
         }
 
         public void CreateZajeciaPrzegladanieGrup()
@@ -522,6 +518,44 @@ namespace IndeksElektroniczny
         private void PlanZajec_Click(object sender, RoutedEventArgs e)
         {
             CreateZajeciaPlanZajec();
+        }
+
+        private void UpdateUserData()
+        {
+            userDate = DbService.DataBaseShowUserDate(signInUser);
+            tableRowContentList[0].Text = userDate.Pesel;
+            tableRowContentList[1].Text = userDate.Name;
+            tableRowContentList[2].Text = userDate.Surname;
+            tableRowContentList[3].Text = userDate.DateOfBirth.ToString();
+            tableRowContentList[4].Text = userDate.Sex.ToString();
+            tableRowContentList[5].Text = userDate.ContactNumber;
+            tableRowContentList[6].Text = userDate.Country;
+            tableRowContentList[7].Text = userDate.City;
+            tableRowContentList[8].Text = userDate.Street;
+            tableRowContentList[9].Text = userDate.HouseNumber;
+            tableRowContentList[10].Text = userDate.ApartmentNumber;
+            tableRowContentList[11].Text = userDate.PostalCode;
+        }
+
+        private void UpdateStudentData()
+        {
+            studentDate = DbService.DataBaseShowStudentDate(signInUser);
+            tableRowContentList[0].Text = studentDate.StudyFiled;
+            tableRowContentList[1].Text = studentDate.Degree.ToString();
+            tableRowContentList[2].Text = studentDate.Semestr.ToString();
+            tableRowContentList[3].Text = studentDate.IndexNumber.ToString();
+        }
+
+        private void UpdateStudentGradesData()
+        {
+            studentGradesDatas = DbService.DataBaseShowStudentGradesDate(signInUser);
+            contentDataGrid.ItemsSource = studentGradesDatas.ToList();
+        }
+
+        private void UpdateStudentTimeTableData()
+        {
+            studentTimeTableDatas = DbService.DataBaseShowStudentTimeTable(signInUser);
+            contentDataGrid.ItemsSource = studentTimeTableDatas.ToList();
         }
     }
 }

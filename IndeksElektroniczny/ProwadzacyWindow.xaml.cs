@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataBaseMySqlServices;
+using DataBaseMySqlServices.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,8 +32,14 @@ namespace IndeksElektroniczny
 
         public static System.Windows.Thickness margin = new Thickness(5);
 
-        public ProwadzacyWindow(Window loginWindow)
+        private User signInUser;
+        private DataBaseMySqlService DbService;
+        private UserDataView userDate;
+
+        public ProwadzacyWindow(Window loginWindow, User signInUser_a, DataBaseMySqlService DbService_a)
         {
+            signInUser = signInUser_a;
+            DbService = DbService_a;
             loginWindow.Close();
             InitializeComponent();
             CreateDaneOsobowe();
@@ -43,7 +51,7 @@ namespace IndeksElektroniczny
 
             ManageMainButtons(1);
 
-            int all_rows = 12;
+            int all_rows = 13;
             int rows = all_rows - 1;
             int columns = 6;
 
@@ -104,6 +112,7 @@ namespace IndeksElektroniczny
             tableRowTitleList[8].Text = "Ulica";
             tableRowTitleList[9].Text = "Numer domu";
             tableRowTitleList[10].Text = "Numer lokalu";
+            tableRowTitleList[11].Text = "Kod pocztowy";
 
             for (int j = 0; j < rows; j++)
             {
@@ -124,6 +133,8 @@ namespace IndeksElektroniczny
 
             saveChangesButton.Content = "Zapisz zmiany";
             saveChangesButton.Click += new RoutedEventHandler(this.ZapiszZmiany_Click);
+
+            UpdateTheData();
         }
 
         public void CreateZajeciaProwadzonekursy()
@@ -331,6 +342,23 @@ namespace IndeksElektroniczny
         private void ZajeciaDataGrid_Click(object sender, RoutedEventArgs e)
         {
             CreateZajeciaPrzegladanieGrup();
+        }
+
+        private void UpdateTheData()
+        {
+            userDate = DbService.DataBaseShowUserDate(signInUser);
+            tableRowContentList[0].Text = userDate.Pesel;
+            tableRowContentList[1].Text = userDate.Name;
+            tableRowContentList[2].Text = userDate.Surname;
+            tableRowContentList[3].Text = userDate.DateOfBirth.ToString();
+            tableRowContentList[4].Text = userDate.Sex.ToString();
+            tableRowContentList[5].Text = userDate.ContactNumber;
+            tableRowContentList[6].Text = userDate.Country;
+            tableRowContentList[7].Text = userDate.City;
+            tableRowContentList[8].Text = userDate.Street;
+            tableRowContentList[9].Text = userDate.HouseNumber;
+            tableRowContentList[10].Text = userDate.ApartmentNumber;
+            tableRowContentList[11].Text = userDate.PostalCode;
         }
     }
 }

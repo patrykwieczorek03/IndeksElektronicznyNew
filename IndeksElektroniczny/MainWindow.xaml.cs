@@ -61,14 +61,20 @@ namespace IndeksElektroniczny
                 if(SignInUser.Role == 'a')
                 {
                     MessageBox.Show("Zalogowałeś się jako admin");
+                    AdministratorWindow Administrator = new AdministratorWindow(this, SignInUser, DbService);
+                    Administrator.ShowDialog();
                 }
                 else if (SignInUser.Role == 'd')
                 {
                     MessageBox.Show("Zalogowałeś się jako pracownik dziekanatu");
+                    DziekanatWindow PracownikDziekanatu = new DziekanatWindow(this, SignInUser, DbService);
+                    PracownikDziekanatu.ShowDialog();
                 }
                 else if(SignInUser.Role == 'p')
                 {
                     MessageBox.Show("Zalogowałeś się jako prowadzacy");
+                    ProwadzacyWindow Prowadzacy = new ProwadzacyWindow(this, SignInUser, DbService);
+                    Prowadzacy.ShowDialog();
                 }
                 else if (SignInUser.Role == 's')
                 {
@@ -85,12 +91,6 @@ namespace IndeksElektroniczny
             {
                 MessageBox.Show("Nie poprawny login lub hasło");
             }
-
-            //StudentWindow Student = new StudentWindow(this);
-            //ProwadzacyWindow Prowadzacy = new ProwadzacyWindow(this);
-            //DziekanatWindow PracownikDziekanatu = new DziekanatWindow(this);
-            //AdministratorWindow Administrator = new AdministratorWindow(this);
-            //Student.ShowDialog();
         }
 
         // The metod close the window after click on button

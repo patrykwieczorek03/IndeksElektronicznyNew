@@ -8,17 +8,17 @@ namespace DataBaseMySqlServices.Models
 {
     public class UserDataView
     {
-        public string Name;
-        public string Surname;
-        public string Pesel;
-        public DateTime DateOfBirth;
-        public char Sex;
-        public string ContactNumber;
-        public string Country;
-        public string City;
-        public string Street;
-        public string HouseNumber;
-        public string ApartmentNumber;
-        public string PostalCode;
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Pesel { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public char Sex { get; set; }
+        public string ContactNumber { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string Street { get; set; }
+        public string HouseNumber { get; set; }
+        public string ApartmentNumber { get; set; }
+        public string PostalCode { get; set; }
     }
 }
