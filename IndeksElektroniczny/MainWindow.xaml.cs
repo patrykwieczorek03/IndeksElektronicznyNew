@@ -39,8 +39,9 @@ namespace IndeksElektroniczny
         /// <param name="e"> Contains state information and event data associated with a routed event  </param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            //StudentWindow Student = new StudentWindow();
-            ProwadzacyWindow Student = new ProwadzacyWindow();
+            StudentWindow Student = new StudentWindow();
+            //ProwadzacyWindow Student = new ProwadzacyWindow();
+            //DziekanatWindow Student = new DziekanatWindow();
             Student.ShowDialog();
         }
 

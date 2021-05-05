@@ -21,9 +21,12 @@ namespace IndeksElektroniczny
     {
         public List<TextBox> tableRowContentList { get; set; }
         public List<TextBlock> tableRowTitleList { get; set; }
-        public List<Button> buttonList { get; set; }
-        public List<Button> editButtonList { get; set; }
+        public Button saveChangesButton { get; set; }
         public Button buttonSearch { get; set; }
+        public Button buttonStudentData { get; set; }
+        public Button buttonGrades { get; set; }
+        public Button buttonGroups { get; set; }
+        public Button buttonTimetable { get; set; }
         public DataGrid contentDataGrid { get; set; }
         public TextBox textBoxSearch { get; set; }
         public ComboBox comboBoxSearch { get; set; }
@@ -40,16 +43,14 @@ namespace IndeksElektroniczny
         {
             Clear_Content();
 
-            int all_rows = 12;
-            int rows = all_rows-1;
+            int all_rows = 13;
+            int rows = all_rows - 1;
             int columns = 6;
-            int editButtons = 2;
 
             titleTextBlock.Text = "Dane osobowe";
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
-            editButtonList = new List<Button>();
 
             Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
 
@@ -103,6 +104,7 @@ namespace IndeksElektroniczny
             tableRowTitleList[8].Text = "Ulica";
             tableRowTitleList[9].Text = "Numer domu";
             tableRowTitleList[10].Text = "Numer lokalu";
+            tableRowTitleList[11].Text = "Kod pocztowy";
 
             for (int j = 0; j < rows; j++)
             {
@@ -115,21 +117,16 @@ namespace IndeksElektroniczny
                 contentGrid.Children.Add(tableRowContentList[j]);
             }
 
-            for (int i = 0; i < editButtons; i++)
-            {
-                Button editButton = new Button();
-                editButton.Margin = margin;
-                Grid.SetColumn(editButton, columns - 2 + i);
-                Grid.SetRow(editButton, 11);
-                editButtonList.Add(editButton);
-                contentGrid.Children.Add(editButtonList[i]);
-            }
 
-            editButtonList[0].Content = "Edytuj";
-            editButtonList[1].Content = "Zapisz";
+            saveChangesButton = new Button();
+            saveChangesButton.Margin = margin;
+            Grid.SetColumn(saveChangesButton, columns - 1);
+            Grid.SetRow(saveChangesButton, all_rows - 1);
+            contentGrid.Children.Add(saveChangesButton);
 
-            //editButtonList[0].Click += new RoutedEventHandler(this.DaneStudenta_Click);
-            //editButtonList[1].Click += new RoutedEventHandler(this.Oceny_Click);
+            saveChangesButton.Content = "Zapisz zmiany";
+
+            saveChangesButton.Click += new RoutedEventHandler(this.ZapiszZmiany_Click);
         }
 
 
@@ -139,13 +136,11 @@ namespace IndeksElektroniczny
 
             int rows = 4;
             int columns = 5;
-            int buttons = 2;
 
             titleTextBlock.Text = "Dane Studenta";
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
-            buttonList = new List<Button>();
 
             Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
             
@@ -159,21 +154,22 @@ namespace IndeksElektroniczny
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            for (int i = 0; i < buttons; i++)
-            {
-                Button button = new Button();
-                button.Margin = margin;
-                Grid.SetColumn(button, 0);
-                Grid.SetRow(button, i);
-                buttonList.Add(button);
-                contentGrid.Children.Add(buttonList[i]);
-            }
 
-            buttonList[0].Content = "Dane Studenta";
-            buttonList[1].Content = "Oceny";
+            buttonStudentData = new Button();
+            buttonStudentData.Margin = margin;
+            Grid.SetColumn(buttonStudentData, 0);
+            Grid.SetRow(buttonStudentData, 0);
+            contentGrid.Children.Add(buttonStudentData);
+            buttonStudentData.Content = "Dane Studenta";
+            buttonStudentData.Click += new RoutedEventHandler(this.DaneStudenta_Click);
 
-            buttonList[0].Click += new RoutedEventHandler(this.DaneStudenta_Click);
-            buttonList[1].Click += new RoutedEventHandler(this.Oceny_Click);
+            buttonGrades = new Button();
+            buttonGrades.Margin = margin;
+            Grid.SetColumn(buttonGrades, 0);
+            Grid.SetRow(buttonGrades, 1);
+            contentGrid.Children.Add(buttonGrades);
+            buttonGrades.Content = "Oceny";
+            buttonGrades.Click += new RoutedEventHandler(this.Oceny_Click);
 
             for (int j = 0; j < rows; j++)
             {
@@ -226,13 +222,11 @@ namespace IndeksElektroniczny
 
             int rows = 4;
             int columns = 5;
-            int buttons = 2;
 
             titleTextBlock.Text = "Oceny";
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
-            buttonList = new List<Button>();
 
             Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
 
@@ -246,21 +240,21 @@ namespace IndeksElektroniczny
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            for (int i = 0; i < buttons; i++)
-            {
-                Button button = new Button();
-                button.Margin = margin;
-                Grid.SetColumn(button, 0);
-                Grid.SetRow(button, i);
-                buttonList.Add(button);
-                contentGrid.Children.Add(buttonList[i]);
-            }
+            buttonStudentData = new Button();
+            buttonStudentData.Margin = margin;
+            Grid.SetColumn(buttonStudentData, 0);
+            Grid.SetRow(buttonStudentData, 0);
+            contentGrid.Children.Add(buttonStudentData);
+            buttonStudentData.Content = "Dane Studenta";
+            buttonStudentData.Click += new RoutedEventHandler(this.DaneStudenta_Click);
 
-            buttonList[0].Content = "Twoje Dane";
-            buttonList[1].Content = "Oceny";
-
-            buttonList[0].Click += new RoutedEventHandler(this.DaneStudenta_Click);
-            buttonList[1].Click += new RoutedEventHandler(this.Oceny_Click);
+            buttonGrades = new Button();
+            buttonGrades.Margin = margin;
+            Grid.SetColumn(buttonGrades, 0);
+            Grid.SetRow(buttonGrades, 1);
+            contentGrid.Children.Add(buttonGrades);
+            buttonGrades.Content = "Oceny";
+            buttonGrades.Click += new RoutedEventHandler(this.Oceny_Click);
 
             contentDataGrid = new DataGrid();
             Grid.SetColumn(contentDataGrid, 1);
@@ -276,13 +270,11 @@ namespace IndeksElektroniczny
 
             int rows = 4;
             int columns = 5;
-            int buttons = 2;
 
             titleTextBlock.Text = "Plan zajęć";
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
-            buttonList = new List<Button>();
 
             Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
 
@@ -296,21 +288,21 @@ namespace IndeksElektroniczny
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            for (int i = 0; i < buttons; i++)
-            {
-                Button button = new Button();
-                button.Margin = margin;
-                Grid.SetColumn(button, 0);
-                Grid.SetRow(button, i);
-                buttonList.Add(button);
-                contentGrid.Children.Add(buttonList[i]);
-            }
+            buttonGroups = new Button();
+            buttonGroups.Margin = margin;
+            Grid.SetColumn(buttonGroups, 0);
+            Grid.SetRow(buttonGroups, 0);
+            contentGrid.Children.Add(buttonGroups);
+            buttonGroups.Content = "Przeglądanie grup";
+            buttonGroups.Click += new RoutedEventHandler(this.PrzegladanieGrup_Click);
 
-            buttonList[0].Content = "Przeglądanie grup";
-            buttonList[1].Content = "Plan zajęć";
-
-            buttonList[0].Click += new RoutedEventHandler(this.PrzegladanieGrup_Click);
-            buttonList[1].Click += new RoutedEventHandler(this.PlanZajec_Click);
+            buttonTimetable = new Button();
+            buttonTimetable.Margin = margin;
+            Grid.SetColumn(buttonTimetable, 0);
+            Grid.SetRow(buttonTimetable, 1);
+            contentGrid.Children.Add(buttonTimetable);
+            buttonTimetable.Content = "Plan zajęć";
+            buttonTimetable.Click += new RoutedEventHandler(this.PlanZajec_Click);
 
             contentDataGrid = new DataGrid();
             Grid.SetColumn(contentDataGrid, 1);
@@ -326,13 +318,11 @@ namespace IndeksElektroniczny
 
             int rows = 4;
             int columns = 5;
-            int buttons = 2;
 
             titleTextBlock.Text = "Przeglądanie grup";
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
-            buttonList = new List<Button>();
 
             Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
 
@@ -346,21 +336,21 @@ namespace IndeksElektroniczny
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            for (int i = 0; i < buttons; i++)
-            {
-                Button button = new Button();
-                button.Margin = margin;
-                Grid.SetColumn(button, 0);
-                Grid.SetRow(button, i);
-                buttonList.Add(button);
-                contentGrid.Children.Add(buttonList[i]);
-            }
+            buttonGroups = new Button();
+            buttonGroups.Margin = margin;
+            Grid.SetColumn(buttonGroups, 0);
+            Grid.SetRow(buttonGroups, 0);
+            contentGrid.Children.Add(buttonGroups);
+            buttonGroups.Content = "Przeglądanie grup";
+            buttonGroups.Click += new RoutedEventHandler(this.PrzegladanieGrup_Click);
 
-            buttonList[0].Content = "Przeglądanie grup";
-            buttonList[1].Content = "Plan zajęć";
-
-            buttonList[0].Click += new RoutedEventHandler(this.PrzegladanieGrup_Click);
-            buttonList[1].Click += new RoutedEventHandler(this.PlanZajec_Click);
+            buttonTimetable = new Button();
+            buttonTimetable.Margin = margin;
+            Grid.SetColumn(buttonTimetable, 0);
+            Grid.SetRow(buttonTimetable, 1);
+            contentGrid.Children.Add(buttonTimetable);
+            buttonTimetable.Content = "Plan zajęć";
+            buttonTimetable.Click += new RoutedEventHandler(this.PlanZajec_Click);
 
             buttonSearch = new Button();
             buttonSearch.Margin = margin;
@@ -368,6 +358,7 @@ namespace IndeksElektroniczny
             Grid.SetColumn(buttonSearch, 4);
             Grid.SetRow(buttonSearch, 0);
             contentGrid.Children.Add(buttonSearch);
+            buttonSearch.Click += new RoutedEventHandler(this.Szukaj_Click);
 
             textBoxSearch = new TextBox();
             textBoxSearch.Margin = margin;
@@ -411,9 +402,19 @@ namespace IndeksElektroniczny
             CreateZajeciaPrzegladanieGrup();
         }
 
+        private void ZapiszZmiany_Click(object sender, RoutedEventArgs e)
+        {
+            CreateZajeciaPrzegladanieGrup();
+        }
+
         private void Wyloguj_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void Szukaj_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void TwojeDane_Click(object sender, RoutedEventArgs e)
