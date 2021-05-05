@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataBaseMySqlServices;
+using DataBaseMySqlServices.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,8 +35,14 @@ namespace IndeksElektroniczny
 
         public static System.Windows.Thickness margin = new Thickness(5);
 
-        public StudentWindow(Window loginWindow)
+        private User signInUser;
+        private DataBaseMySqlService DbService;
+        private UserDataView userDate;
+
+        public StudentWindow(Window loginWindow, User signInUser_a, DataBaseMySqlService DbService_a)
         {
+            signInUser = signInUser_a;
+            DbService = DbService_a;
             loginWindow.Close();
             InitializeComponent();
             CreateDaneOsobowe();
@@ -120,7 +128,6 @@ namespace IndeksElektroniczny
                 contentGrid.Children.Add(tableRowContentList[j]);
             }
 
-
             saveChangesButton = new Button();
             saveChangesButton.Margin = margin;
             Grid.SetColumn(saveChangesButton, columns - 1);
@@ -130,6 +137,21 @@ namespace IndeksElektroniczny
             saveChangesButton.Content = "Zapisz zmiany";
 
             saveChangesButton.Click += new RoutedEventHandler(this.ZapiszZmiany_Click);
+
+            userDate = DbService.DataBaseShowUserDate(signInUser);
+
+            tableRowContentList[0].Text = userDate.Name;
+            tableRowContentList[1].Text = userDate.Surname;
+            tableRowContentList[2].Text = userDate.Pesel;
+            tableRowContentList[3].Text = userDate.DateOfBirth.ToString();
+            tableRowContentList[4].Text = userDate.Sex.ToString();
+            tableRowContentList[5].Text = userDate.ContactNumber;
+            tableRowContentList[6].Text = userDate.Country;
+            tableRowContentList[7].Text = userDate.City;
+            tableRowContentList[8].Text = userDate.Street;
+            tableRowContentList[9].Text = userDate.HouseNumber;
+            tableRowContentList[10].Text = userDate.ApartmentNumber;
+            tableRowContentList[11].Text = userDate.PostalCode;
         }
 
 

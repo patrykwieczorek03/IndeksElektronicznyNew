@@ -133,5 +133,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataBaseMySqlServices\DataBaseMySqlServices.csproj">
+      <Project>{851B7853-C52F-468D-A323-ECAB86DD8F4E}</Project>
+      <Name>DataBaseMySqlServices</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

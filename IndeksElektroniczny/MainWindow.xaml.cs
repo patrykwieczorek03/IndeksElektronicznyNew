@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataBaseMySqlServices;
+using DataBaseMySqlServices.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace IndeksElektroniczny
 {
     // The MainWindow class containes window mechanics
@@ -22,6 +25,13 @@ namespace IndeksElektroniczny
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        DataBaseMySqlService DbService = new DataBaseMySqlService();
+
+        User SignInUser = new User();
+
         // Initializes the main window
         /// <summary>
         /// Initializes the main window.
@@ -45,11 +55,42 @@ namespace IndeksElektroniczny
         /// <param name="e"> Contains state information and event data associated with a routed event  </param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            StudentWindow Student = new StudentWindow(this);
-            //ProwadzacyWindow Student = new ProwadzacyWindow(this);
-            //DziekanatWindow Student = new DziekanatWindow(this);
-            //AdministratorWindow Student = new AdministratorWindow(this);
-            Student.ShowDialog();
+            SignInUser = DbService.DataBaseSignIn(this.LoginTextBox.Text, this.HasloTextBox.Text);
+            if(SignInUser.CheckUser())
+            {
+                if(SignInUser.Role == 'a')
+                {
+                    MessageBox.Show("Zalogowałeś się jako admin");
+                }
+                else if (SignInUser.Role == 'd')
+                {
+                    MessageBox.Show("Zalogowałeś się jako pracownik dziekanatu");
+                }
+                else if(SignInUser.Role == 'p')
+                {
+                    MessageBox.Show("Zalogowałeś się jako prowadzacy");
+                }
+                else if (SignInUser.Role == 's')
+                {
+                    MessageBox.Show("Zalogowałeś się jako student");
+                    StudentWindow Student = new StudentWindow(this, SignInUser, DbService);
+                    Student.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Błąd");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nie poprawny login lub hasło");
+            }
+
+            //StudentWindow Student = new StudentWindow(this);
+            //ProwadzacyWindow Prowadzacy = new ProwadzacyWindow(this);
+            //DziekanatWindow PracownikDziekanatu = new DziekanatWindow(this);
+            //AdministratorWindow Administrator = new AdministratorWindow(this);
+            //Student.ShowDialog();
         }
 
         // The metod close the window after click on button
