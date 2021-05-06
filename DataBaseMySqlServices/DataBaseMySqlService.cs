@@ -13,6 +13,7 @@ namespace DataBaseMySqlServices
     {
         private MySqlCommand command;
         private MySqlDataReader reader;
+        private MySqlDataAdapter adapter = new MySqlDataAdapter();
         public DataBaseMySqlService() : base() { }
 
         public User DataBaseSignIn(string login, string password)  
@@ -175,6 +176,14 @@ namespace DataBaseMySqlServices
             {
                 Output = Output + reader.GetValue(0) + reader.GetValue(1) + reader.GetValue(2) + reader.GetValue(3);
             }
+        }
+
+        public void DataBaseAddUser(AddUserProcedure newUser)
+        {
+            command = new MySqlCommand($"call dodaj_uzytkownika('{newUser.Pesel}', '{newUser.Name}', '{newUser.Surname}', '{newUser.DateOfBirth}', '{newUser.Sex}', '{newUser.ContactNumber}', '{newUser.Country}', '{newUser.City}', '{newUser.Street}', '{newUser.HouseNumber}', '{newUser.ApartmentNumber}', '{newUser.PostalCode}', '{newUser.Login}', '{newUser.Password}', '{newUser.Role}', '{newUser.StudyField}', {newUser.Degree}, {newUser.Semestr}, {newUser.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
         }
 
         ~DataBaseMySqlService()

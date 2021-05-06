@@ -181,8 +181,6 @@ namespace IndeksElektroniczny
 
             addUserButton.Content = "Dodaj Użytkownika";
             addUserButton.Click += new RoutedEventHandler(this.DodajUzytkownika_Click);
-
-            UpdateTheData();
         }
 
         public void CreateUzytkownicyUser()
@@ -244,7 +242,7 @@ namespace IndeksElektroniczny
 
             ManageMainButtons(3);
 
-            int all_rows = 18;
+            int all_rows = 19;
             int rows = all_rows - 1;
             int columns = 6;
 
@@ -304,13 +302,14 @@ namespace IndeksElektroniczny
             tableRowTitleList[7].Text = "Miasto";
             tableRowTitleList[8].Text = "Ulica";
             tableRowTitleList[9].Text = "Numer domu";
-            tableRowTitleList[10].Text = "Kod pocztowy";
-            tableRowTitleList[11].Text = "Login";
-            tableRowTitleList[12].Text = "Hasło";
-            tableRowTitleList[13].Text = "Rola";
-            tableRowTitleList[14].Text = "Kierunek";
-            tableRowTitleList[15].Text = "Semestr";
-            tableRowTitleList[16].Text = "Stopień";
+            tableRowTitleList[10].Text = "Numer lokalu";
+            tableRowTitleList[11].Text = "Kod pocztowy";
+            tableRowTitleList[12].Text = "Login";
+            tableRowTitleList[13].Text = "Hasło";
+            tableRowTitleList[14].Text = "Rola";
+            tableRowTitleList[15].Text = "Kierunek";
+            tableRowTitleList[16].Text = "Semestr";
+            tableRowTitleList[17].Text = "Stopień";
 
             for (int j = 0; j < rows; j++)
             {
@@ -404,7 +403,7 @@ namespace IndeksElektroniczny
 
         private void ZapiszUzytkownika_Click(object sender, RoutedEventArgs e)
         {
-
+            AddNewUser();
         }
 
         private void UsunUzytkownika_Click(object sender, RoutedEventArgs e)
@@ -427,6 +426,31 @@ namespace IndeksElektroniczny
             tableRowContentList[9].Text = userDate.HouseNumber;
             tableRowContentList[10].Text = userDate.ApartmentNumber;
             tableRowContentList[11].Text = userDate.PostalCode;
+        }
+
+        private void AddNewUser()
+        {
+            AddUserProcedure newUser = new AddUserProcedure();
+            newUser.Pesel = tableRowContentList[0].Text;
+            newUser.Name = tableRowContentList[1].Text;
+            newUser.Surname = tableRowContentList[2].Text;
+            newUser.DateOfBirth = tableRowContentList[3].Text;
+            newUser.Sex = tableRowContentList[4].Text.ToCharArray()[0];
+            newUser.ContactNumber = tableRowContentList[5].Text;
+            newUser.Country = tableRowContentList[6].Text;
+            newUser.City = tableRowContentList[7].Text;
+            newUser.Street = tableRowContentList[8].Text;
+            newUser.HouseNumber = tableRowContentList[9].Text;
+            newUser.ApartmentNumber = tableRowContentList[10].Text;
+            newUser.PostalCode = tableRowContentList[11].Text;
+            newUser.Login = tableRowContentList[12].Text;
+            newUser.Password = tableRowContentList[13].Text;
+            newUser.Role = tableRowContentList[14].Text;
+            newUser.StudyField = tableRowContentList[15].Text;
+            newUser.Degree = int.Parse(tableRowContentList[16].Text);
+            newUser.Semestr = int.Parse(tableRowContentList[17].Text);
+            newUser.CurrentUser = signInUser.UserID;
+            DbService.DataBaseAddUser(newUser);
         }
     }
 }
