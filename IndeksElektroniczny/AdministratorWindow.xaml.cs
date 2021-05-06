@@ -38,7 +38,7 @@ namespace IndeksElektroniczny
         private User signInUser;
         private DataBaseMySqlService DbService;
         private UserDataView userDate;
-
+        List<UsersList> userListDatas;
         public AdministratorWindow(Window loginWindow, User signInUser_a, DataBaseMySqlService DbService_a)
         {
             signInUser = signInUser_a;
@@ -182,6 +182,7 @@ namespace IndeksElektroniczny
             addUserButton.Content = "Dodaj Użytkownika";
             addUserButton.Click += new RoutedEventHandler(this.DodajUzytkownika_Click);
 
+            UpdateUsersList();
         }
 
         public void CreateUzytkownicyUser()
@@ -234,6 +235,8 @@ namespace IndeksElektroniczny
 
             saveUserChangesButton.Content = "Zapisz zmiany";
             saveUserChangesButton.Click += new RoutedEventHandler(this.ZapiszZmianyUzytkownika_Click);
+
+            
         }
 
 
@@ -426,6 +429,12 @@ namespace IndeksElektroniczny
             tableRowContentList[9].Text = userDate.HouseNumber;
             tableRowContentList[10].Text = userDate.ApartmentNumber;
             tableRowContentList[11].Text = userDate.PostalCode;
+        }
+
+        private void UpdateUsersList()
+        {
+            userListDatas = DbService.DataBaseShowUsersList();
+            contentDataGrid.ItemsSource = userListDatas.ToList();
         }
     }
 }

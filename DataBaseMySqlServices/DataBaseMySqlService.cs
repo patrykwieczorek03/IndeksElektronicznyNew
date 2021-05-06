@@ -233,6 +233,27 @@ namespace DataBaseMySqlServices
             return browseGroupsDatas;
         }
 
+        public List<UsersList> DataBaseShowUsersList()
+        {
+            command = new MySqlCommand("SELECT * FROM lista_uzytkownikow_view", this.conection);
+            reader = command.ExecuteReader();
+            List<UsersList> userListDatas = new List<UsersList>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    UsersList userListData = new UsersList();
+                    userListData.UserID = int.Parse(reader.GetValue(0).ToString());
+                    userListData.Name = reader.GetValue(1).ToString();
+                    userListData.Surname = reader.GetValue(2).ToString();
+                    userListData.Role = char.Parse(reader.GetValue(3).ToString());
+                    userListDatas.Add(userListData);
+                }
+            }
+            reader.Close();
+            return userListDatas;
+        }
+
         public void DataBaseRead()
         {
             command = new MySqlCommand("SELECT * FROM student", this.conection);
