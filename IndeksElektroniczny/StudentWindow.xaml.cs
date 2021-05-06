@@ -132,6 +132,10 @@ namespace IndeksElektroniczny
                 contentGrid.Children.Add(tableRowContentList[j]);
             }
 
+            tableRowContentList[0].IsEnabled = false;
+            tableRowContentList[3].IsEnabled = false;
+            tableRowContentList[4].IsEnabled = false;
+
             saveChangesButton = new Button();
             saveChangesButton.Margin = margin;
             Grid.SetColumn(saveChangesButton, columns - 1);
@@ -229,6 +233,7 @@ namespace IndeksElektroniczny
             {
                 TextBox tableRowContent = new TextBox();
                 tableRowContent.Margin = margin;
+                tableRowContent.IsEnabled = false;
                 Grid.SetColumn(tableRowContent, 2);
                 Grid.SetColumnSpan(tableRowContent, columns - 2);
                 Grid.SetRow(tableRowContent, j);

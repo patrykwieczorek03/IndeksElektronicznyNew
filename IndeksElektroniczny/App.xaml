@@ -58,8 +58,8 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="Margin" Value="0,0,0,20"/>
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
         </Style>
 
         <Style x:Key="TextBlockWhite" TargetType="TextBlock">
