@@ -525,7 +525,7 @@ namespace IndeksElektroniczny
 
         private void UpdateUserData()
         {
-            userDate = DbService.DataBaseShowUserDate(signInUser);
+            userDate = DbService.DataBaseShowUserData(signInUser);
             tableRowContentList[0].Text = userDate.Pesel;
             tableRowContentList[1].Text = userDate.Name;
             tableRowContentList[2].Text = userDate.Surname;
@@ -542,7 +542,7 @@ namespace IndeksElektroniczny
 
         private void UpdateStudentData()
         {
-            studentDate = DbService.DataBaseShowStudentDate(signInUser);
+            studentDate = DbService.DataBaseShowStudentData(signInUser);
             tableRowContentList[0].Text = studentDate.StudyFiled;
             tableRowContentList[1].Text = studentDate.Degree.ToString();
             tableRowContentList[2].Text = studentDate.Semestr.ToString();
@@ -551,13 +551,13 @@ namespace IndeksElektroniczny
 
         private void UpdateStudentGradesData()
         {
-            studentGradesDatas = DbService.DataBaseShowStudentGradesDate(signInUser);
+            studentGradesDatas = DbService.DataBaseShowStudentGradesData(signInUser);
             contentDataGrid.ItemsSource = studentGradesDatas.ToList();
         }
 
         private void UpdateStudentTimeTableData()
         {
-            studentTimeTableDatas = DbService.DataBaseShowStudentTimeTable(signInUser);
+            studentTimeTableDatas = DbService.DataBaseShowStudentTimeTableData(signInUser);
             contentDataGrid.ItemsSource = studentTimeTableDatas.ToList();
         }
 

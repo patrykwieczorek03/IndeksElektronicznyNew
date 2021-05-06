@@ -37,7 +37,7 @@ namespace DataBaseMySqlServices
             return user;
         }
 
-        public UserDataView DataBaseShowUserDate(User user)
+        public UserDataView DataBaseShowUserData(User user)
         {
             command = new MySqlCommand($"CALL wyswietl_dane_uzytkownika('{user.UserID}')", this.conection);
             reader = command.ExecuteReader();
@@ -64,7 +64,7 @@ namespace DataBaseMySqlServices
             return userData;
         }
 
-        public StudentDataView DataBaseShowStudentDate(User user)
+        public StudentDataView DataBaseShowStudentData(User user)
         {
             command = new MySqlCommand($"CALL wyswietl_dane_studenta('{user.UserID}')", this.conection);
             reader = command.ExecuteReader();
@@ -84,7 +84,7 @@ namespace DataBaseMySqlServices
 
         }
 
-        public List<StudentGradesDataView> DataBaseShowStudentGradesDate(User user)
+        public List<StudentGradesDataView> DataBaseShowStudentGradesData(User user)
         {
             command = new MySqlCommand($"CALL wyswietl_oceny_studenta('{user.UserID}')", this.conection);
             reader = command.ExecuteReader();
@@ -102,7 +102,7 @@ namespace DataBaseMySqlServices
                     if (!DBNull.Value.Equals(reader.GetValue(5))) studentGradesData.Grade = float.Parse(reader.GetValue(5).ToString());
                     else studentGradesData.Grade = 0.0F;
                     if (!DBNull.Value.Equals(reader.GetValue(6))) studentGradesData.GradeStatus = char.Parse(reader.GetValue(6).ToString());
-                    else studentGradesData.GradeStatus = 'N';
+                    else studentGradesData.GradeStatus = 'E';
                     studentGradesDatas.Add(studentGradesData);
                 }
             }
@@ -110,7 +110,7 @@ namespace DataBaseMySqlServices
             return studentGradesDatas;
         }
 
-        public List<StudentTimeTableDataView> DataBaseShowStudentTimeTable(User user)
+        public List<StudentTimeTableDataView> DataBaseShowStudentTimeTableData(User user)
         {
             command = new MySqlCommand($"CALL wyswietl_plan_zajec_studenta('{user.UserID}')", this.conection);
             reader = command.ExecuteReader();
@@ -136,6 +136,73 @@ namespace DataBaseMySqlServices
             }
             reader.Close();
             return studentTimeTableDatas;
+        }
+
+        public List<LecturerGroupsDataView> DataBaseShowLecturerGroups(User user)
+        {
+            command = new MySqlCommand($"CALL wyswietl_grupy_kursu_prowadzacego('{user.UserID}')", this.conection);
+            reader = command.ExecuteReader();
+            List<LecturerGroupsDataView> lecturerGroupsDatas = new List<LecturerGroupsDataView>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    LecturerGroupsDataView lecturerGroupsData = new LecturerGroupsDataView();
+                    lecturerGroupsData.GroupID = int.Parse(reader.GetValue(0).ToString());
+                    lecturerGroupsData.Building = reader.GetValue(1).ToString();
+                    lecturerGroupsData.DayOfWeek = int.Parse(reader.GetValue(2).ToString());
+                    lecturerGroupsData.TypeOfClasses = char.Parse(reader.GetValue(3).ToString());
+                    lecturerGroupsData.StartTime = DateTime.Parse(reader.GetValue(4).ToString());
+                    lecturerGroupsData.FinishTime = DateTime.Parse(reader.GetValue(5).ToString());
+                    lecturerGroupsDatas.Add(lecturerGroupsData);
+                }
+            }
+            reader.Close();
+            return lecturerGroupsDatas;
+        }
+
+        public List<LecturerCursesDataView> DataBaseShowLecturerCurses(User user)
+        {
+            command = new MySqlCommand($"CALL wyswietl_prowadzone_kursy_prowadzacego('{user.UserID}')", this.conection);
+            reader = command.ExecuteReader();
+            List<LecturerCursesDataView> lecturerCursesDatas = new List<LecturerCursesDataView>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    LecturerCursesDataView lecturerCursesData = new LecturerCursesDataView();
+                    lecturerCursesData.NameOfCoure = reader.GetValue(0).ToString();
+                    lecturerCursesData.Ects = int.Parse(reader.GetValue(1).ToString());
+                    lecturerCursesDatas.Add(lecturerCursesData);
+                }
+            }
+            reader.Close();
+            return lecturerCursesDatas;
+        }
+
+        public List<LecturerStudentsDataView> DataBaseShowLecturerStudents(User user)
+        {
+            command = new MySqlCommand($"CALL wyswietl_studentow_prowadzacego('{user.UserID}')", this.conection);
+            reader = command.ExecuteReader();
+            List<LecturerStudentsDataView> lecturerStudentsDatas = new List<LecturerStudentsDataView>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    LecturerStudentsDataView lecturerStudentsData = new LecturerStudentsDataView();
+                    lecturerStudentsData.IndexNumber = int.Parse(reader.GetValue(0).ToString());
+                    lecturerStudentsData.NameOfCoure = reader.GetValue(1).ToString();
+                    lecturerStudentsData.GroupID = int.Parse(reader.GetValue(2).ToString());
+                    lecturerStudentsData.TypeOfClasses = char.Parse(reader.GetValue(3).ToString());
+                    if (!DBNull.Value.Equals(reader.GetValue(4))) lecturerStudentsData.Grade = float.Parse(reader.GetValue(5).ToString());
+                    else lecturerStudentsData.Grade = 0.0F;
+                    if (!DBNull.Value.Equals(reader.GetValue(5))) lecturerStudentsData.GradeStatus = char.Parse(reader.GetValue(6).ToString());
+                    else lecturerStudentsData.GradeStatus = 'E';
+                    lecturerStudentsDatas.Add(lecturerStudentsData);
+                }
+            }
+            reader.Close();
+            return lecturerStudentsDatas;
         }
 
         public List<BrowseGroupsDataView> DataBaseShowBrowseGroups()
