@@ -432,6 +432,12 @@ namespace IndeksElektroniczny
             tableRowContentList[11].Text = userDate.PostalCode;
         }
 
+        private void UpdateUsersList()
+        {
+            userListDatas = DbService.DataBaseShowUsersList();
+            contentDataGrid.ItemsSource = userListDatas.ToList();
+        }
+
         private void AddNewUser()
         {
             AddUserProcedure newUser = new AddUserProcedure();

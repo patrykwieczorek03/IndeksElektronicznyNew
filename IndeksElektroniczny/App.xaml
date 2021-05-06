@@ -75,7 +75,7 @@
             <Setter Property="Background" Value="#eee" />
             <Setter Property="Foreground">
                 <Setter.Value>
-                    <SolidColorBrush Color="Gray" Opacity="0.4"/>
+                    <SolidColorBrush Color="Black" Opacity="1"/>
                 </Setter.Value>
             </Setter>
             <Style.Resources>
