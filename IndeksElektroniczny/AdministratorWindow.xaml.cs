@@ -432,6 +432,127 @@ namespace IndeksElektroniczny
         private void AddNewUser()
         {
             AddUserProcedure newUser = new AddUserProcedure();
+            string errorMessage = "";
+            if (!DataValidation.DataValidation.ValidPesel(tableRowContentList[0].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidName(tableRowContentList[1].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSurname(tableRowContentList[2].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidDateOfBirth(tableRowContentList[3].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSex(tableRowContentList[4].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidContactNumber(tableRowContentList[5].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidCountry(tableRowContentList[6].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidCity(tableRowContentList[7].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidStreet(tableRowContentList[8].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidHouseNumber(tableRowContentList[9].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidApartmentNumber(tableRowContentList[10].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidPostalCode(tableRowContentList[11].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidLogin(tableRowContentList[12].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidPassword(tableRowContentList[13].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidRole(tableRowContentList[14].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (tableRowContentList[14].Text == "s")
+            {
+                if (!DataValidation.DataValidation.ValidStudyField(tableRowContentList[15].Text, out errorMessage))
+                {
+                    MessageBox.Show(errorMessage);
+                    return;
+                }
+
+                if (!DataValidation.DataValidation.ValidDegree(tableRowContentList[16].Text, out errorMessage))
+                {
+                    MessageBox.Show(errorMessage);
+                    return;
+                }
+
+                if (!DataValidation.DataValidation.ValidSemestr(tableRowContentList[17].Text, out errorMessage))
+                {
+                    MessageBox.Show(errorMessage);
+                    return;
+                }
+                newUser.StudyField = tableRowContentList[15].Text;
+                newUser.Degree = int.Parse(tableRowContentList[16].Text);
+                newUser.Semestr = int.Parse(tableRowContentList[17].Text);
+            }
+            else
+            {
+                newUser.StudyField = "";
+                newUser.Degree = 0;
+                newUser.Semestr = 0;
+            }
+
             newUser.Pesel = tableRowContentList[0].Text;
             newUser.Name = tableRowContentList[1].Text;
             newUser.Surname = tableRowContentList[2].Text;
@@ -447,9 +568,6 @@ namespace IndeksElektroniczny
             newUser.Login = tableRowContentList[12].Text;
             newUser.Password = tableRowContentList[13].Text;
             newUser.Role = tableRowContentList[14].Text;
-            newUser.StudyField = tableRowContentList[15].Text;
-            newUser.Degree = int.Parse(tableRowContentList[16].Text);
-            newUser.Semestr = int.Parse(tableRowContentList[17].Text);
             newUser.CurrentUser = signInUser.UserID;
             DbService.DataBaseAddUser(newUser);
         }

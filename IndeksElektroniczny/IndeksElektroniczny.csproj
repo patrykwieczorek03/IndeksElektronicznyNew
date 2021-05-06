@@ -138,6 +138,10 @@
       <Project>{851B7853-C52F-468D-A323-ECAB86DD8F4E}</Project>
       <Name>DataBaseMySqlServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataValidation\DataValidation.csproj">
+      <Project>{3cc59192-b6fd-44fb-adff-d2a584a0a032}</Project>
+      <Name>DataValidation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

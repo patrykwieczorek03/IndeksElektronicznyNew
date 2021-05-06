@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndeksElektroniczny", "Inde
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseMySqlServices", "DataBaseMySqlServices\DataBaseMySqlServices.csproj", "{851B7853-C52F-468D-A323-ECAB86DD8F4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataValidation", "DataValidation\DataValidation.csproj", "{3CC59192-B6FD-44FB-ADFF-D2A584A0A032}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{851B7853-C52F-468D-A323-ECAB86DD8F4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{851B7853-C52F-468D-A323-ECAB86DD8F4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{851B7853-C52F-468D-A323-ECAB86DD8F4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CC59192-B6FD-44FB-ADFF-D2A584A0A032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CC59192-B6FD-44FB-ADFF-D2A584A0A032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CC59192-B6FD-44FB-ADFF-D2A584A0A032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CC59192-B6FD-44FB-ADFF-D2A584A0A032}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
