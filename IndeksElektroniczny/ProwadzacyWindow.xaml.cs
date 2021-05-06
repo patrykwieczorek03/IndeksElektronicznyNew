@@ -330,7 +330,7 @@ namespace IndeksElektroniczny
 
         private void ZapiszZmiany_Click(object sender, RoutedEventArgs e)
         {
-
+            ChangeUserData();
         }
 
         private void Szukaj_Click(object sender, RoutedEventArgs e)
@@ -386,6 +386,85 @@ namespace IndeksElektroniczny
         {
             lecturerStudentsDatas = DbService.DataBaseShowLecturerStudents(signInUser);
             contentDataGrid.ItemsSource = lecturerStudentsDatas.ToList();
+        }
+
+        private void ChangeUserData()
+        {
+            ChangeDataProcedure user = new ChangeDataProcedure();
+            string errorMessage = "";
+
+            if (!DataValidation.DataValidation.ValidName(tableRowContentList[1].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSurname(tableRowContentList[2].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSex(tableRowContentList[4].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidContactNumber(tableRowContentList[5].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidCountry(tableRowContentList[6].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidCity(tableRowContentList[7].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidStreet(tableRowContentList[8].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidHouseNumber(tableRowContentList[9].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidApartmentNumber(tableRowContentList[10].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidPostalCode(tableRowContentList[11].Text, out errorMessage))
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            user.Name = tableRowContentList[1].Text;
+            user.Surname = tableRowContentList[2].Text;
+            user.Sex = tableRowContentList[4].Text;
+            user.ContactNumber = tableRowContentList[5].Text;
+            user.Country = tableRowContentList[6].Text;
+            user.City = tableRowContentList[7].Text;
+            user.Street = tableRowContentList[8].Text;
+            user.HouseNumber = tableRowContentList[9].Text;
+            user.ApartmentNumber = tableRowContentList[10].Text;
+            user.PostalCode = tableRowContentList[11].Text;
+            user.CurrentUser = signInUser.UserID;
+            DbService.DataBaseChangeUserData(user);
         }
     }
 }

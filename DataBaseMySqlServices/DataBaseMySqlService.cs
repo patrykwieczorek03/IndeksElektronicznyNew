@@ -274,6 +274,59 @@ namespace DataBaseMySqlServices
             command.Dispose();
         }
 
+        public void DataBaseChangeUserData(ChangeDataProcedure user)
+        {
+            command = new MySqlCommand($"call zmien_imie('{user.Name}', {user.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+
+            command = new MySqlCommand($"call zmien_kod_pocztowy('{user.PostalCode}', {user.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+
+            command = new MySqlCommand($"call zmien_kraj_zamieszkania('{user.Country}', {user.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+
+            command = new MySqlCommand($"call zmien_miasto('{user.City}', {user.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+
+            command = new MySqlCommand($"call zmien_nazwisko('{user.Surname}', {user.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+
+            command = new MySqlCommand($"call zmien_numer_domu('{user.HouseNumber}', {user.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+
+            command = new MySqlCommand($"call zmien_numer_kontaktowy('{user.ContactNumber}', {user.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+
+            command = new MySqlCommand($"call zmien_numer_lokalu('{user.ApartmentNumber}', {user.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+
+            command = new MySqlCommand($"call zmien_plec('{user.Sex}', {user.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+
+            command = new MySqlCommand($"call zmien_ulice('{user.Street}', {user.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+        }
+
         ~DataBaseMySqlService()
         {
             this.conection.Close();

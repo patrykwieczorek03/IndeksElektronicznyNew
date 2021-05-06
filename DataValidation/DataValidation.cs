@@ -75,7 +75,7 @@ namespace DataValidation
 
             if (pesel.Length > 11 || pesel.Length < 11)
             {
-                errorMessage = "Niepoprawna ilość znaków. Wymagana ilość znaków: 11";
+                errorMessage = "Pesel - niepoprawna ilość znaków. Wymagana ilość znaków: 11";
                 return false;
             }
 
@@ -127,9 +127,9 @@ namespace DataValidation
                 return false;
             }
 
-            if (sex.Length > 1 || sex.Length < 1)
+            if (sex.Length > 1)
             {
-                errorMessage = "Niepoprawna ilość znaków. Wymagana ilość znaków: 1";
+                errorMessage = "Płeć - niepoprawna ilość znaków. Wymagana ilość znaków: 1";
                 return false;
             }
 
@@ -156,7 +156,7 @@ namespace DataValidation
 
             if (number.Length > 9 || number.Length < 9)
             {
-                errorMessage = "Niepoprawna ilość znaków. Wymagana ilość znaków: 9";
+                errorMessage = "Numer kontaktowy - niepoprawna ilość znaków. Wymagana ilość znaków: 9";
                 return false;
             }
 
@@ -268,7 +268,7 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[0-9]*[A-Za-z]$";
+            string expression = "^[0-9]+[A-Za-z]*$";
 
             if (Regex.IsMatch(houseNumber, expression))
             {
@@ -283,11 +283,11 @@ namespace DataValidation
         {
             errorMessage = "";
             
-            if (apartment.Length == 0)
-            {
-                errorMessage = "Numer lokalu wymagany.";
-                return false;
-            }
+            //if (apartment.Length == 0)
+            //{
+            //    errorMessage = "Numer lokalu wymagany.";
+            //    return false;
+            //}
 
             if (apartment.Length > 10)
             {
@@ -405,7 +405,7 @@ namespace DataValidation
 
             if (role.Length > 1)
             {
-                errorMessage = "Niepoprawna ilość znaków. Wymagana ilość znaków: 1";
+                errorMessage = "Rola - niepoprawna ilość znaków. Wymagana ilość znaków: 1";
                 return false;
             }
 
