@@ -41,6 +41,7 @@ namespace IndeksElektroniczny
         private StudentDataView studentDate;
         List<StudentGradesDataView> studentGradesDatas;
         List<StudentTimeTableDataView> studentTimeTableDatas;
+        List<BrowseGroupsDataView> browseGroupsDatas;
 
         public StudentWindow(Window loginWindow, User signInUser_a, DataBaseMySqlService DbService_a)
         {
@@ -420,6 +421,8 @@ namespace IndeksElektroniczny
             Grid.SetRow(contentDataGrid, 1);
             Grid.SetRowSpan(contentDataGrid, rows - 1);
             contentGrid.Children.Add(contentDataGrid);
+
+            UpdateBrowseGroupsData();
         }
 
         private void Clear_Content()
@@ -556,6 +559,12 @@ namespace IndeksElektroniczny
         {
             studentTimeTableDatas = DbService.DataBaseShowStudentTimeTable(signInUser);
             contentDataGrid.ItemsSource = studentTimeTableDatas.ToList();
+        }
+
+        private void UpdateBrowseGroupsData()
+        {
+            browseGroupsDatas = DbService.DataBaseShowBrowseGroups();
+            contentDataGrid.ItemsSource = browseGroupsDatas.ToList();
         }
     }
 }

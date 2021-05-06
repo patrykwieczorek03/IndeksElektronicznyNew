@@ -138,6 +138,34 @@ namespace DataBaseMySqlServices
             return studentTimeTableDatas;
         }
 
+        public List<BrowseGroupsDataView> DataBaseShowBrowseGroups()
+        {
+            command = new MySqlCommand("SELECT * FROM przegladanie_grup_view", this.conection);
+            reader = command.ExecuteReader();
+            List<BrowseGroupsDataView> browseGroupsDatas = new List<BrowseGroupsDataView>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    BrowseGroupsDataView browseGroupsData = new BrowseGroupsDataView();
+                    browseGroupsData.Name = reader.GetValue(0).ToString();
+                    browseGroupsData.Surname = reader.GetValue(1).ToString();
+                    browseGroupsData.NameOfCoure = reader.GetValue(2).ToString();
+                    browseGroupsData.Ects = int.Parse(reader.GetValue(3).ToString());
+                    browseGroupsData.GroupID = int.Parse(reader.GetValue(4).ToString());
+                    browseGroupsData.Building = reader.GetValue(5).ToString();
+                    browseGroupsData.Room = int.Parse(reader.GetValue(6).ToString());
+                    browseGroupsData.DayOfWeek = int.Parse(reader.GetValue(7).ToString());
+                    browseGroupsData.TypeOfClasses = char.Parse(reader.GetValue(8).ToString());
+                    browseGroupsData.StartTime = DateTime.Parse(reader.GetValue(9).ToString());
+                    browseGroupsData.FinishTime = DateTime.Parse(reader.GetValue(10).ToString());
+                    browseGroupsDatas.Add(browseGroupsData);
+                }
+            }
+            reader.Close();
+            return browseGroupsDatas;
+        }
+
         public void DataBaseRead()
         {
             command = new MySqlCommand("SELECT * FROM student", this.conection);
