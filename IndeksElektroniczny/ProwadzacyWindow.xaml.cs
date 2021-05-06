@@ -35,6 +35,9 @@ namespace IndeksElektroniczny
         private User signInUser;
         private DataBaseMySqlService DbService;
         private UserDataView userDate;
+        List<LecturerGroupsDataView> lecturerGroupsDatas;
+        List<LecturerCursesDataView> lecturerCursesDatas;
+        List<LecturerStudentsDataView> lecturerStudentsDatas;
 
         public ProwadzacyWindow(Window loginWindow, User signInUser_a, DataBaseMySqlService DbService_a)
         {
@@ -134,7 +137,7 @@ namespace IndeksElektroniczny
             saveChangesButton.Content = "Zapisz zmiany";
             saveChangesButton.Click += new RoutedEventHandler(this.ZapiszZmiany_Click);
 
-            UpdateTheData();
+            UpdateUserData();
         }
 
         public void CreateZajeciaProwadzonekursy()
@@ -169,6 +172,8 @@ namespace IndeksElektroniczny
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows);
             contentGrid.Children.Add(contentDataGrid);
+
+            UpdateLecturerCourses();
         }
 
         public void CreateZajeciaPrzegladanieGrup()
@@ -203,6 +208,8 @@ namespace IndeksElektroniczny
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows);
             contentGrid.Children.Add(contentDataGrid);
+
+            UpdateLecturerGroups();
         }
 
         public void CreateOcenianie()
@@ -259,6 +266,8 @@ namespace IndeksElektroniczny
             Grid.SetRow(contentDataGrid, 1);
             Grid.SetRowSpan(contentDataGrid, rows - 1);
             contentGrid.Children.Add(contentDataGrid);
+
+            UpdateLecturerStudents();
         }
 
         private void Clear_Content()
@@ -344,9 +353,9 @@ namespace IndeksElektroniczny
             CreateZajeciaPrzegladanieGrup();
         }
 
-        private void UpdateTheData()
+        private void UpdateUserData()
         {
-            userDate = DbService.DataBaseShowUserDate(signInUser);
+            userDate = DbService.DataBaseShowUserData(signInUser);
             tableRowContentList[0].Text = userDate.Pesel;
             tableRowContentList[1].Text = userDate.Name;
             tableRowContentList[2].Text = userDate.Surname;
@@ -359,6 +368,24 @@ namespace IndeksElektroniczny
             tableRowContentList[9].Text = userDate.HouseNumber;
             tableRowContentList[10].Text = userDate.ApartmentNumber;
             tableRowContentList[11].Text = userDate.PostalCode;
+        }
+
+        private void UpdateLecturerCourses()
+        {
+            lecturerCursesDatas = DbService.DataBaseShowLecturerCurses(signInUser);
+            contentDataGrid.ItemsSource = lecturerCursesDatas.ToList();
+        }
+
+        private void UpdateLecturerGroups()
+        {
+            lecturerGroupsDatas = DbService.DataBaseShowLecturerGroups(signInUser);
+            contentDataGrid.ItemsSource = lecturerGroupsDatas.ToList();
+        }
+
+        private void UpdateLecturerStudents()
+        {
+            lecturerStudentsDatas = DbService.DataBaseShowLecturerStudents(signInUser);
+            contentDataGrid.ItemsSource = lecturerStudentsDatas.ToList();
         }
     }
 }

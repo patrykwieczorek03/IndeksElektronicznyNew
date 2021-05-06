@@ -137,7 +137,7 @@ namespace IndeksElektroniczny
             saveChangesButton.Content = "Zapisz zmiany";
             saveChangesButton.Click += new RoutedEventHandler(this.ZapiszZmiany_Click);
 
-            UpdateTheData();
+            UpdateUserData();
         }
 
         public void CreateStudenciLista()
@@ -410,9 +410,9 @@ namespace IndeksElektroniczny
 
         }
 
-        private void UpdateTheData()
+        private void UpdateUserData()
         {
-            userDate = DbService.DataBaseShowUserDate(signInUser);
+            userDate = DbService.DataBaseShowUserData(signInUser);
             tableRowContentList[0].Text = userDate.Pesel;
             tableRowContentList[1].Text = userDate.Name;
             tableRowContentList[2].Text = userDate.Surname;
@@ -426,6 +426,8 @@ namespace IndeksElektroniczny
             tableRowContentList[10].Text = userDate.ApartmentNumber;
             tableRowContentList[11].Text = userDate.PostalCode;
         }
+
+
     }
 }
 

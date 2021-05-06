@@ -137,7 +137,7 @@ namespace IndeksElektroniczny
             saveChangesButton.Content = "Zapisz zmiany";
             saveChangesButton.Click += new RoutedEventHandler(this.ZapiszZmiany_Click);
 
-            UpdateTheData();
+            UpdateUserData();
         }
 
         public void CreateUzytkownicyLista()
@@ -181,6 +181,7 @@ namespace IndeksElektroniczny
 
             addUserButton.Content = "Dodaj Użytkownika";
             addUserButton.Click += new RoutedEventHandler(this.DodajUzytkownika_Click);
+
         }
 
         public void CreateUzytkownicyUser()
@@ -411,9 +412,9 @@ namespace IndeksElektroniczny
 
         }
 
-        private void UpdateTheData()
+        private void UpdateUserData()
         {
-            userDate = DbService.DataBaseShowUserDate(signInUser);
+            userDate = DbService.DataBaseShowUserData(signInUser);
             tableRowContentList[0].Text = userDate.Pesel;
             tableRowContentList[1].Text = userDate.Name;
             tableRowContentList[2].Text = userDate.Surname;
