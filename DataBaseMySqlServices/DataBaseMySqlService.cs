@@ -139,9 +139,9 @@ namespace DataBaseMySqlServices
             return studentTimeTableDatas;
         }
 
-        public List<LecturerGroupsDataView> DataBaseShowLecturerGroups(User user)
+        public List<LecturerGroupsDataView> DataBaseShowLecturerGroups(User user, int IndexCourse)
         {
-            command = new MySqlCommand($"CALL wyswietl_grupy_kursu_prowadzacego('{user.UserID}')", this.conection);
+            command = new MySqlCommand($"CALL wyswietl_grupy_kursu_prowadzacego('{user.UserID}', {IndexCourse})", this.conection);
             reader = command.ExecuteReader();
             List<LecturerGroupsDataView> lecturerGroupsDatas = new List<LecturerGroupsDataView>();
             if (reader.HasRows)
@@ -151,10 +151,11 @@ namespace DataBaseMySqlServices
                     LecturerGroupsDataView lecturerGroupsData = new LecturerGroupsDataView();
                     lecturerGroupsData.GroupID = int.Parse(reader.GetValue(0).ToString());
                     lecturerGroupsData.Building = reader.GetValue(1).ToString();
-                    lecturerGroupsData.DayOfWeek = int.Parse(reader.GetValue(2).ToString());
-                    lecturerGroupsData.TypeOfClasses = char.Parse(reader.GetValue(3).ToString());
-                    lecturerGroupsData.StartTime = DateTime.Parse(reader.GetValue(4).ToString());
-                    lecturerGroupsData.FinishTime = DateTime.Parse(reader.GetValue(5).ToString());
+                    lecturerGroupsData.Room = reader.GetValue(2).ToString();
+                    lecturerGroupsData.DayOfWeek = int.Parse(reader.GetValue(3).ToString());
+                    lecturerGroupsData.TypeOfClasses = char.Parse(reader.GetValue(4).ToString());
+                    lecturerGroupsData.StartTime = DateTime.Parse(reader.GetValue(5).ToString());
+                    lecturerGroupsData.FinishTime = DateTime.Parse(reader.GetValue(6).ToString());
                     lecturerGroupsDatas.Add(lecturerGroupsData);
                 }
             }
@@ -172,8 +173,9 @@ namespace DataBaseMySqlServices
                 while (reader.Read())
                 {
                     LecturerCursesDataView lecturerCursesData = new LecturerCursesDataView();
-                    lecturerCursesData.NameOfCoure = reader.GetValue(0).ToString();
-                    lecturerCursesData.Ects = int.Parse(reader.GetValue(1).ToString());
+                    lecturerCursesData.IndexCourse = int.Parse(reader.GetValue(0).ToString());
+                    lecturerCursesData.NameOfCourse = reader.GetValue(1).ToString();
+                    lecturerCursesData.Ects = int.Parse(reader.GetValue(2).ToString());
                     lecturerCursesDatas.Add(lecturerCursesData);
                 }
             }
@@ -236,7 +238,6 @@ namespace DataBaseMySqlServices
             reader.Close();
             return studentPreviewData;
         }
-
 
         public UserPreviewDataView DataBaseShowUserPreview(int userID)
         {
@@ -327,14 +328,15 @@ namespace DataBaseMySqlServices
                 while (reader.Read())
                 {
                     StudentsList studentListData = new StudentsList();
-                    studentListData.IndexNumber = int.Parse(reader.GetValue(0).ToString());
-                    studentListData.Name = reader.GetValue(1).ToString();
-                    studentListData.Surname = reader.GetValue(2).ToString();
-                    studentListData.Pesel = reader.GetValue(3).ToString();
-                    studentListData.StudyFiled = reader.GetValue(4).ToString();
-                    studentListData.Degree = int.Parse(reader.GetValue(5).ToString());
-                    studentListData.Semestr = int.Parse(reader.GetValue(6).ToString());
-                    studentListData.ContactNumber = reader.GetValue(7).ToString();
+                    studentListData.UserID = int.Parse(reader.GetValue(0).ToString());
+                    studentListData.IndexNumber = int.Parse(reader.GetValue(1).ToString());
+                    studentListData.Name = reader.GetValue(2).ToString();
+                    studentListData.Surname = reader.GetValue(3).ToString();
+                    studentListData.Pesel = reader.GetValue(4).ToString();
+                    studentListData.StudyFiled = reader.GetValue(5).ToString();
+                    studentListData.Degree = int.Parse(reader.GetValue(6).ToString());
+                    studentListData.Semestr = int.Parse(reader.GetValue(7).ToString());
+                    studentListData.ContactNumber = reader.GetValue(8).ToString();
                     studentListDatas.Add(studentListData);
                 }
             }

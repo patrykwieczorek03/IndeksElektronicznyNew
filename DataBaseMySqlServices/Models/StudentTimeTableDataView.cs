@@ -18,6 +18,6 @@ namespace DataBaseMySqlServices.Models
         public int DayOfWeek { get; set; }
         public char TypeOfClasses { get; set; }
         public DateTime StartTime { get; set; }
-        public DateTime FinishTime{ get; set; }
+        public DateTime FinishTime { get; set; }
     }
 }

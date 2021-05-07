@@ -40,6 +40,8 @@ namespace IndeksElektroniczny
         List<LecturerGroupsDataView> lecturerGroupsDatas;
         List<LecturerCursesDataView> lecturerCursesDatas;
         List<LecturerStudentsDataView> lecturerStudentsDatas;
+        int choosenCourseID;
+        string choosenCourseName;
 
         public ProwadzacyWindow(Window loginWindow, User signInUser_a, DataBaseMySqlService DbService_a)
         {
@@ -282,6 +284,7 @@ namespace IndeksElektroniczny
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows);
             contentGrid.Children.Add(contentDataGrid);
+            contentDataGrid.MouseDoubleClick += new MouseButtonEventHandler(this.WybierzUzytkownika_SelectionChanged);
 
             UpdateLecturerCourses();
         }
@@ -295,7 +298,7 @@ namespace IndeksElektroniczny
             int rows = 4;
             int columns = 5;
 
-            titleTextBlock.Text = "Grupy kursu: ............";
+            titleTextBlock.Text = "Grupy kursu: " + choosenCourseName;
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
@@ -473,13 +476,25 @@ namespace IndeksElektroniczny
             CreateZajeciaPrzegladanieGrup();
         }
 
+        private void WybierzUzytkownika_SelectionChanged(object sender, MouseButtonEventArgs e)
+        {
+            if (this.contentDataGrid.SelectedIndex >= 0 && this.contentDataGrid.AlternationCount >= 0)
+            {
+                LecturerCursesDataView course = (LecturerCursesDataView)this.contentDataGrid.SelectedItems[0];
+
+                choosenCourseID = course.IndexCourse;
+                choosenCourseName = course.NameOfCourse;
+                CreateZajeciaPrzegladanieGrup();
+            }
+        }
+
         private void UpdateUserData()
         {
             userDate = DbService.DataBaseShowUserData(signInUser);
             tableRowContentList[0].Text = userDate.Pesel;
             tableRowContentList[1].Text = userDate.Name;
             tableRowContentList[2].Text = userDate.Surname;
-            tableRowContentList[3].Text = userDate.DateOfBirth.ToString();
+            tableRowContentList[3].Text = userDate.DateOfBirth.ToString("MM/dd/yyyy");
             tableRowContentList[4].Text = userDate.Sex.ToString();
             tableRowContentList[5].Text = userDate.ContactNumber;
             tableRowContentList[6].Text = userDate.Country;
@@ -498,7 +513,7 @@ namespace IndeksElektroniczny
 
         private void UpdateLecturerGroups()
         {
-            lecturerGroupsDatas = DbService.DataBaseShowLecturerGroups(signInUser);
+            lecturerGroupsDatas = DbService.DataBaseShowLecturerGroups(signInUser, choosenCourseID);
             contentDataGrid.ItemsSource = lecturerGroupsDatas.ToList();
         }
 
