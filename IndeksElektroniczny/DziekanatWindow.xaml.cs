@@ -26,6 +26,8 @@ namespace IndeksElektroniczny
         public List<TextBlock> tableRowTitleList { get; set; }
         public Button buttonSearch { get; set; }
         public Button saveChangesButton { get; set; }
+        public Button dropChangesButton { get; set; }
+        public Button editDataButton { get; set; }
         public Button saveStudentChangesButton { get; set; }
         public Button addStudentButton { get; set; }
         public Button deleteStudentButton { get; set; }
@@ -121,6 +123,100 @@ namespace IndeksElektroniczny
             {
                 TextBox tableRowContent = new TextBox();
                 tableRowContent.Margin = margin;
+                tableRowContent.IsEnabled = false;
+                Grid.SetColumn(tableRowContent, 1);
+                Grid.SetColumnSpan(tableRowContent, columns - 1);
+                Grid.SetRow(tableRowContent, j);
+                tableRowContentList.Add(tableRowContent);
+                contentGrid.Children.Add(tableRowContentList[j]);
+            }
+
+            editDataButton = new Button();
+            editDataButton.Margin = margin;
+            Grid.SetColumn(editDataButton, columns - 1);
+            Grid.SetRow(editDataButton, all_rows - 1);
+            contentGrid.Children.Add(editDataButton);
+
+            editDataButton.Content = "Edytuj";
+
+            editDataButton.Click += new RoutedEventHandler(this.Edytuj_Click);
+
+            UpdateUserData();
+        }
+
+        public void CreateDaneOsoboweEdycja()
+        {
+            Clear_Content();
+
+            ManageMainButtons(1);
+
+            int all_rows = 13;
+            int rows = all_rows - 1;
+            int columns = 6;
+
+            titleTextBlock.Text = "Dane osobowe";
+
+            tableRowContentList = new List<TextBox>();
+            tableRowTitleList = new List<TextBlock>();
+
+            Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
+
+            for (int i = 0; i < columns; i++)
+            {
+                contentGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+
+            for (int i = 0; i < all_rows; i++)
+            {
+                contentGrid.RowDefinitions.Add(new RowDefinition());
+            }
+
+
+            for (int j = 0; j < rows; j++)
+            {
+                Border infoBorder = new Border();
+                infoBorder.Style = borderStyle;
+                Grid.SetColumn(infoBorder, 0);
+                Grid.SetRow(infoBorder, j);
+                contentGrid.Children.Add(infoBorder);
+            }
+
+            for (int j = 0; j < rows; j++)
+            {
+                Border infoBorder = new Border();
+                infoBorder.Style = borderStyle;
+                Grid.SetColumn(infoBorder, 1);
+                Grid.SetColumnSpan(infoBorder, columns - 1);
+                Grid.SetRow(infoBorder, j);
+                contentGrid.Children.Add(infoBorder);
+            }
+
+            for (int j = 0; j < rows; j++)
+            {
+                TextBlock tableRowTitle = new TextBlock();
+                Grid.SetColumn(tableRowTitle, 0);
+                Grid.SetRow(tableRowTitle, j);
+                tableRowTitleList.Add(tableRowTitle);
+                contentGrid.Children.Add(tableRowTitleList[j]);
+            }
+
+            tableRowTitleList[0].Text = "Pesel";
+            tableRowTitleList[1].Text = "Imie";
+            tableRowTitleList[2].Text = "Nazwisko";
+            tableRowTitleList[3].Text = "Data urodzenia";
+            tableRowTitleList[4].Text = "Płeć";
+            tableRowTitleList[5].Text = "Numer kontaktowy";
+            tableRowTitleList[6].Text = "Kraj zamieszkania";
+            tableRowTitleList[7].Text = "Miasto";
+            tableRowTitleList[8].Text = "Ulica";
+            tableRowTitleList[9].Text = "Numer domu";
+            tableRowTitleList[10].Text = "Numer lokalu";
+            tableRowTitleList[11].Text = "Kod pocztowy";
+
+            for (int j = 0; j < rows; j++)
+            {
+                TextBox tableRowContent = new TextBox();
+                tableRowContent.Margin = margin;
                 Grid.SetColumn(tableRowContent, 1);
                 Grid.SetColumnSpan(tableRowContent, columns - 1);
                 Grid.SetRow(tableRowContent, j);
@@ -139,7 +235,18 @@ namespace IndeksElektroniczny
             contentGrid.Children.Add(saveChangesButton);
 
             saveChangesButton.Content = "Zapisz zmiany";
+
             saveChangesButton.Click += new RoutedEventHandler(this.ZapiszZmiany_Click);
+
+            dropChangesButton = new Button();
+            dropChangesButton.Margin = margin;
+            Grid.SetColumn(dropChangesButton, columns - 2);
+            Grid.SetRow(dropChangesButton, all_rows - 1);
+            contentGrid.Children.Add(dropChangesButton);
+
+            dropChangesButton.Content = "Anuluj";
+
+            dropChangesButton.Click += new RoutedEventHandler(this.Anuluj_Click);
 
             UpdateUserData();
         }
@@ -397,6 +504,16 @@ namespace IndeksElektroniczny
         private void ZapiszZmiany_Click(object sender, RoutedEventArgs e)
         {
             ChangeUserData();
+        }
+
+        private void Edytuj_Click(object sender, RoutedEventArgs e)
+        {
+            CreateDaneOsoboweEdycja();
+        }
+
+        private void Anuluj_Click(object sender, RoutedEventArgs e)
+        {
+            CreateDaneOsobowe();
         }
 
         private void ZapiszZmianyStudenta_Click(object sender, RoutedEventArgs e)
@@ -681,6 +798,7 @@ namespace IndeksElektroniczny
             user.PostalCode = tableRowContentList[11].Text;
             user.CurrentUser = signInUser.UserID;
             DbService.DataBaseChangeUserData(user);
+            CreateDaneOsobowe();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[A-Z][a-z]*$";
+            string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*$";
 
             if (Regex.IsMatch(name, expression))
             {
@@ -52,7 +52,7 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[A-Z][a-z]*$";
+            string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*$";
 
             if (Regex.IsMatch(surname, expression))
             {
@@ -187,7 +187,7 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[A-Z][a-z]*$";
+            string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*(\\s{1}[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń])*$";
 
             if (Regex.IsMatch(country, expression))
             {
@@ -214,7 +214,7 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[A-Z][a-z]*$";
+            string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*(\\s{1}[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń])*$";
 
             if (Regex.IsMatch(city, expression))
             {
@@ -241,7 +241,7 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[A-Z][a-z]*$";
+            string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*(\\s{1}[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń])*$";
 
             if (Regex.IsMatch(street, expression))
             {
@@ -316,20 +316,20 @@ namespace DataValidation
                 return false;
             }
 
-            if (code.Length > 5)
+            if (code.Length > 6)
             {
-                errorMessage = "Kod pocztowy za długi. Maksymalna ilość znaków: 5";
+                errorMessage = "Kod pocztowy za długi. Maksymalna ilość znaków: 6";
                 return false;
             }
 
-            string expression = "^[0-9]*$";
+            string expression = "^\\d{2}-\\d{3}$";
 
             if (Regex.IsMatch(code, expression))
             {
                 return true;
             }
 
-            errorMessage = "Kod pocztowy powinien mieć odpowiedni format.\n" + "Na przykład: '45820'";
+            errorMessage = "Kod pocztowy powinien mieć odpowiedni format.\n" + "Na przykład: '45-820'";
             return false;
         }
 
@@ -436,7 +436,7 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[A-Z][a-z]*$";
+            string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*(\\s{1}[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń])*$";
 
             if (Regex.IsMatch(field, expression))
             {

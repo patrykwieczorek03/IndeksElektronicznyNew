@@ -16,7 +16,7 @@
                     <ColumnDefinition Width="300*"/>
                     <ColumnDefinition Width="62*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Style="{StaticResource TitleBarTextBlock}" Text="Logowanie" Grid.Column="0"/>
+                <TextBlock Style="{StaticResource TitleBarTextBlock}" Text="Alert" Grid.Column="0"/>
                 <Button Style="{StaticResource TitleBarButton}" Click="Close_Click" Grid.Column="2"/>
             </Grid>
         </StackPanel>
