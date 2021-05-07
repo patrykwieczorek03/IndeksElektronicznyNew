@@ -402,7 +402,42 @@ namespace IndeksElektroniczny
             Grid.SetRowSpan(contentDataGrid, rows);
             contentGrid.Children.Add(contentDataGrid);
 
+            ////////////////////////////////////////////////
+            //contentDataGrid.Columns.Counts = columns;
+
+            //DataGridTextColumn name = new DataGridTextColumn();
+            //name.Header = "ID";
+            //contentDataGrid.Columns[0].Header = name.Header;
+
+            //DataGridTemplateColumn button = new DataGridTemplateColumn();
+            //button.Header = "Button";
+            //button.
+            //contentDataGrid.CanUserAddRows = false;
+            //contentDataGrid.CanUserDeleteRows = false;
+
+            //contentDataGrid.AlternatingRowBackground = Brushes.Gray;
+
+            //DataGridBu button = new DataGridViewButtonColumn();
+            //button.HeaderText = "Podgląd użytkownika";
+
+            //contentDataGrid.FrozenColumnCount = 0;
+            //contentDataGrid.Columns[0].Header = "ID";
+            //contentDataGrid.AutoGenerateColumns = false;
+
             UpdateStudentGradesData();
+            //DataGridColumn item = new DataGridColumn();
+            //contentDataGrid.Columns.Add("Text");
+            
+            //contentDataGrid.Columns.Count();
+            //DataGridColumn kolumna = new DataGrid;
+            //kolumna.Header = "ID";
+            //DataGridColumn item;
+            //item.Header = "AAA";
+            //contentDataGrid.AutoGenerateColumns = true;
+            //contentDataGrid.Columns.Add(item);
+            //contentDataGrid.ItemsSource = "{Binding}";
+            //contentDataGrid.Columns[0].Header = "ID";
+            //contentDataGrid.Columns[1].ClipboardContentBinding = "ID";
         }
 
         public void CreateZajeciaPlanZajec()
