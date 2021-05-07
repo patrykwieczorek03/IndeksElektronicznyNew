@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataBaseMySqlServices.Models
 {
-    public class DeleteStudentProcedure
+    public class DeleteUserProcedure
     {
-        public int StudentID { get; set; }
+        public int UserToDrop { get; set; }
         public int CurrentUser { get; set; }
     }
 }

@@ -307,7 +307,7 @@ namespace IndeksElektroniczny
             int rows = all_rows - 1;
             int columns = 6;
 
-            titleTextBlock.Text = "Dane nowego użytkownika";
+            titleTextBlock.Text = "Dane użytkownika";
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
@@ -382,6 +382,7 @@ namespace IndeksElektroniczny
 
             tableRowContentList[0].IsEnabled = false;
             tableRowContentList[3].IsEnabled = false;
+            tableRowContentList[14].IsEnabled = false;
 
             saveUserChangesButton = new Button();
             saveUserChangesButton.Margin = margin;
@@ -391,6 +392,15 @@ namespace IndeksElektroniczny
 
             saveUserChangesButton.Content = "Zapisz Zmiany";
             saveUserChangesButton.Click += new RoutedEventHandler(this.ZapiszZmianyUzytkownika_Click);
+
+            dropChangesButton = new Button();
+            dropChangesButton.Margin = margin;
+            Grid.SetColumn(dropChangesButton, columns - 2);
+            Grid.SetRow(dropChangesButton, all_rows - 1);
+            contentGrid.Children.Add(dropChangesButton);
+
+            dropChangesButton.Content = "Anuluj";
+            dropChangesButton.Click += new RoutedEventHandler(this.AnulujDaneUzytkownika_Click);
 
             ShowChoosenUserData();
         }
@@ -564,9 +574,15 @@ namespace IndeksElektroniczny
             CreateDaneOsobowe();
         }
 
+        private void AnulujDaneUzytkownika_Click(object sender, RoutedEventArgs e)
+        {
+            CreateUzytkownicyLista();
+        }
+
         private void ZapiszZmianyUzytkownika_Click(object sender, RoutedEventArgs e)
         {
-
+            ChangeOtherUserData();
+            CreateUzytkownicyLista();
         }
 
         private void ZapiszUzytkownika_Click(object sender, RoutedEventArgs e)
@@ -883,6 +899,126 @@ namespace IndeksElektroniczny
             AlertWindow alertWindow2 = new AlertWindow("Zmiana danych przebiegła pomyślnie.");
             alertWindow2.ShowDialog();
             CreateDaneOsobowe();
+        }
+
+        private void ChangeOtherUserData()
+        {
+            ChangeDataProcedure user = new ChangeDataProcedure();
+            ChangeLoginPasswordProcedure loginPassword = new ChangeLoginPasswordProcedure();
+            string errorMessage = "";
+
+            if (!DataValidation.DataValidation.ValidName(tableRowContentList[1].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSurname(tableRowContentList[2].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSex(tableRowContentList[4].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidContactNumber(tableRowContentList[5].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidCountry(tableRowContentList[6].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidCity(tableRowContentList[7].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidStreet(tableRowContentList[8].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidHouseNumber(tableRowContentList[9].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidApartmentNumber(tableRowContentList[10].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidPostalCode(tableRowContentList[11].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidLogin(tableRowContentList[12].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidPassword(tableRowContentList[13].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidRole(tableRowContentList[14].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            user.Name = tableRowContentList[1].Text;
+            user.Surname = tableRowContentList[2].Text;
+            user.Sex = tableRowContentList[4].Text;
+            user.ContactNumber = tableRowContentList[5].Text;
+            user.Country = tableRowContentList[6].Text;
+            user.City = tableRowContentList[7].Text;
+            user.Street = tableRowContentList[8].Text;
+            user.HouseNumber = tableRowContentList[9].Text;
+            user.ApartmentNumber = tableRowContentList[10].Text;
+            user.PostalCode = tableRowContentList[11].Text;
+            user.CurrentUser = choosenUserID;
+
+            loginPassword.UserToChangeLoginPassword = choosenUserID;
+            loginPassword.Login = tableRowContentList[12].Text;
+            loginPassword.Password = tableRowContentList[13].Text;
+            loginPassword.CurrentUser = signInUser.UserID;
+
+            DbService.DataBaseChangeUserData(user);
+            DbService.DataBaseChangeLoginPassword(loginPassword);
+            AlertWindow alertWindow2 = new AlertWindow("Zmiana danych przebiegła pomyślnie.");
+            alertWindow2.ShowDialog();
         }
     }
 }

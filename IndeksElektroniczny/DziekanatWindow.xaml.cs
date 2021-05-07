@@ -395,6 +395,15 @@ namespace IndeksElektroniczny
             Grid.SetRow(saveStudentButton, all_rows - 1);
             contentGrid.Children.Add(saveStudentButton);
 
+
+            dropChangesButton = new Button();
+            dropChangesButton.Margin = margin;
+            Grid.SetColumn(dropChangesButton, columns - 3);
+            Grid.SetRow(dropChangesButton, rows);
+            contentGrid.Children.Add(dropChangesButton);
+            dropChangesButton.Content = "Anuluj";
+            dropChangesButton.Click += new RoutedEventHandler(this.AnulujZmianyStudenta_Click);
+
             deleteStudentButton = new Button();
             deleteStudentButton.Margin = margin;
             Grid.SetColumn(deleteStudentButton, columns - 2);
@@ -408,7 +417,6 @@ namespace IndeksElektroniczny
             Grid.SetColumn(saveStudentChangesButton, columns - 1);
             Grid.SetRow(saveStudentChangesButton, rows);
             contentGrid.Children.Add(saveStudentChangesButton);
-
             saveStudentChangesButton.Content = "Zapisz zmiany";
             saveStudentChangesButton.Click += new RoutedEventHandler(this.ZapiszZmianyStudenta_Click);
 
@@ -583,6 +591,11 @@ namespace IndeksElektroniczny
         private void Anuluj_Click(object sender, RoutedEventArgs e)
         {
             CreateDaneOsobowe();
+        }
+
+        private void AnulujZmianyStudenta_Click(object sender, RoutedEventArgs e)
+        {
+            CreateStudenciLista();
         }
 
         private void ZapiszZmianyStudenta_Click(object sender, RoutedEventArgs e)
@@ -920,10 +933,10 @@ namespace IndeksElektroniczny
 
         private void DeleteStudent()
         {
-            DeleteStudentProcedure student = new DeleteStudentProcedure();
-            student.StudentID = int.Parse(tableRowContentList[0].Text);
-            student.CurrentUser = signInUser.UserID;
-            DbService.DataBaseDeleteStudent(student);
+            DeleteUserProcedure user = new DeleteUserProcedure();
+            user.UserToDrop = choosenUserID;
+            user.CurrentUser = signInUser.UserID;
+            DbService.DataBaseDeleteUser(user);
         }
 
         private void ChangeStudentData()
@@ -1033,13 +1046,12 @@ namespace IndeksElektroniczny
             changedStudent.HouseNumber = tableRowContentList[10].Text;
             changedStudent.ApartmentNumber = tableRowContentList[11].Text;
             changedStudent.PostalCode = tableRowContentList[12].Text;
-            changedStudent.CurrentUser = signInUser.UserID;
+            changedStudent.CurrentUser = choosenUserID;
 
             changedFieldOfStudy.StudentID = int.Parse(tableRowContentList[0].Text);
             changedFieldOfStudy.StudyField = tableRowContentList[13].Text;
-            changedFieldOfStudy.StudyField = tableRowContentList[13].Text;
-            changedFieldOfStudy.Degree = int.Parse(tableRowContentList[14].Text);
-            changedFieldOfStudy.Semestr = int.Parse(tableRowContentList[15].Text);
+            changedFieldOfStudy.Semestr = int.Parse(tableRowContentList[14].Text);
+            changedFieldOfStudy.Degree = int.Parse(tableRowContentList[15].Text);
             changedFieldOfStudy.CurrentUser = signInUser.UserID;
 
             DbService.DataBaseChangeUserData(changedStudent);
