@@ -39,6 +39,7 @@ namespace IndeksElektroniczny
         private User signInUser;
         private DataBaseMySqlService DbService;
         private UserDataView userDate;
+        List<StudentsList> studentListDatas;
         public DziekanatWindow(Window loginWindow, User signInUser_a, DataBaseMySqlService DbService_a)
         {
             signInUser = signInUser_a;
@@ -181,6 +182,8 @@ namespace IndeksElektroniczny
 
             addStudentButton.Content = "Dodaj studenta";
             addStudentButton.Click += new RoutedEventHandler(this.DodajStudenta_Click);
+
+            UpdateStudentsList();
         }
 
         public void CreateStudenciStudent()
@@ -427,7 +430,11 @@ namespace IndeksElektroniczny
             tableRowContentList[11].Text = userDate.PostalCode;
         }
 
-
+        private void UpdateStudentsList()
+        {
+            studentListDatas = DbService.DataBaseShowStudentsList();
+            contentDataGrid.ItemsSource = studentListDatas.ToList();
+        }
     }
 }
 

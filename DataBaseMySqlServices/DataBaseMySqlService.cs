@@ -254,15 +254,29 @@ namespace DataBaseMySqlServices
             return userListDatas;
         }
 
-        public void DataBaseRead()
+        public List<StudentsList> DataBaseShowStudentsList()
         {
-            command = new MySqlCommand("SELECT * FROM student", this.conection);
+            command = new MySqlCommand("SELECT * FROM dane_studentow_view", this.conection);
             reader = command.ExecuteReader();
-            string Output = "";
-            while (reader.Read())
+            List<StudentsList> studentListDatas = new List<StudentsList>();
+            if (reader.HasRows)
             {
-                Output = Output + reader.GetValue(0) + reader.GetValue(1) + reader.GetValue(2) + reader.GetValue(3);
+                while (reader.Read())
+                {
+                    StudentsList studentListData = new StudentsList();
+                    studentListData.IndexNumber = int.Parse(reader.GetValue(0).ToString());
+                    studentListData.Name = reader.GetValue(1).ToString();
+                    studentListData.Surname = reader.GetValue(2).ToString();
+                    studentListData.Pesel = reader.GetValue(3).ToString();
+                    studentListData.StudyFiled = reader.GetValue(4).ToString();
+                    studentListData.Degree = int.Parse(reader.GetValue(5).ToString());
+                    studentListData.Semestr = int.Parse(reader.GetValue(6).ToString());
+                    studentListData.ContactNumber = reader.GetValue(7).ToString();
+                    studentListDatas.Add(studentListData);
+                }
             }
+            reader.Close();
+            return studentListDatas;
         }
 
         ~DataBaseMySqlService()
