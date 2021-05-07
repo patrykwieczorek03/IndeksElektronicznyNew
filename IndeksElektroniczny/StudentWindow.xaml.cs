@@ -775,6 +775,8 @@ namespace IndeksElektroniczny
             user.PostalCode = tableRowContentList[11].Text;
             user.CurrentUser = signInUser.UserID;
             DbService.DataBaseChangeUserData(user);
+            AlertWindow alertWindow2 = new AlertWindow("Zmiana danych przebiegła pomyślnie.");
+            alertWindow2.ShowDialog();
             CreateDaneOsobowe();
         }
     }

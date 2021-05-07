@@ -60,36 +60,42 @@ namespace IndeksElektroniczny
             {
                 if(SignInUser.Role == 'a')
                 {
-                    MessageBox.Show("Zalogowałeś się jako admin");
+                    AlertWindow alertWindow = new AlertWindow("Zalogowałeś się jako administrator.");
+                    alertWindow.ShowDialog();
                     AdministratorWindow Administrator = new AdministratorWindow(this, SignInUser, DbService);
                     Administrator.ShowDialog();
                 }
                 else if (SignInUser.Role == 'd')
                 {
-                    MessageBox.Show("Zalogowałeś się jako pracownik dziekanatu");
+                    AlertWindow alertWindow = new AlertWindow("Zalogowałeś się jako pracownik dziekanatu.");
+                    alertWindow.ShowDialog();
                     DziekanatWindow PracownikDziekanatu = new DziekanatWindow(this, SignInUser, DbService);
                     PracownikDziekanatu.ShowDialog();
                 }
                 else if(SignInUser.Role == 'p')
                 {
-                    MessageBox.Show("Zalogowałeś się jako prowadzacy");
+                    AlertWindow alertWindow = new AlertWindow("Zalogowałeś się jako prowadzacy.");
+                    alertWindow.ShowDialog();
                     ProwadzacyWindow Prowadzacy = new ProwadzacyWindow(this, SignInUser, DbService);
                     Prowadzacy.ShowDialog();
                 }
                 else if (SignInUser.Role == 's')
                 {
-                    MessageBox.Show("Zalogowałeś się jako student");
+                    AlertWindow alertWindow = new AlertWindow("Zalogowałeś się jako student.");
+                    alertWindow.ShowDialog();
                     StudentWindow Student = new StudentWindow(this, SignInUser, DbService);
                     Student.ShowDialog();
                 }
                 else
                 {
-                    MessageBox.Show("Błąd");
+                    AlertWindow alertWindow = new AlertWindow("Błąd.");
+                    alertWindow.ShowDialog();
                 }
             }
             else
             {
-                MessageBox.Show("Nie poprawny login lub hasło");
+                AlertWindow alertWindow = new AlertWindow("Nie poprawny login lub hasło.");
+                alertWindow.ShowDialog();
             }
         }
 
