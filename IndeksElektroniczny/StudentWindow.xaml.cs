@@ -228,6 +228,9 @@ namespace IndeksElektroniczny
                 contentGrid.Children.Add(tableRowContentList[j]);
             }
 
+            tableRowContentList[0].IsEnabled = false;
+            tableRowContentList[3].IsEnabled = false;
+
             saveChangesButton = new Button();
             saveChangesButton.Margin = margin;
             Grid.SetColumn(saveChangesButton, columns - 1);

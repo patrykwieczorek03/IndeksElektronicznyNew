@@ -403,6 +403,22 @@ namespace DataBaseMySqlServices
             command.Dispose();
         }
 
+        public void DataBaseDeleteStudent(DeleteStudentProcedure studentToDrop)
+        {
+            command = new MySqlCommand($"call usun_studenta({studentToDrop.StudentID}, {studentToDrop.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+        }
+
+        public void DataBaseChangeFieldOfStudyStudent(ChangeStudentDataProcedure studentFieldOfStudy)
+        {
+            command = new MySqlCommand($"zmien_kierunek_semestr_stopien({studentFieldOfStudy.StudentID}, '{studentFieldOfStudy.StudyField}', {studentFieldOfStudy.Semestr}, {studentFieldOfStudy.Degree}, {studentFieldOfStudy.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+        }
+
         ~DataBaseMySqlService()
         {
             this.conection.Close();

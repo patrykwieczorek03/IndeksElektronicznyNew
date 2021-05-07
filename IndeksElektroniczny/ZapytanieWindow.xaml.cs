@@ -19,10 +19,18 @@ namespace IndeksElektroniczny
     /// </summary>
     public partial class ZapytanieWindow : Window
     {
+        private bool decision;
         public ZapytanieWindow(string question)
         {
             InitializeComponent();
             questionTextBlock.Text = question;
+            decision = false;
+        }
+
+        public bool ShowDialog(bool customShowDialog)
+        {
+            this.ShowDialog();
+            return decision;
         }
 
         // The metod close the window after click on button
@@ -38,12 +46,14 @@ namespace IndeksElektroniczny
 
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            decision = true;
+            this.Close();
         }
 
         private void NoButton_Click(object sender, RoutedEventArgs e)
         {
-
+            decision = false;
+            this.Close();
         }
 
         // A method that allows change the position of the window

@@ -381,15 +381,16 @@ namespace IndeksElektroniczny
             }
 
             tableRowContentList[0].IsEnabled = false;
+            tableRowContentList[3].IsEnabled = false;
 
-            saveUserButton = new Button();
-            saveUserButton.Margin = margin;
-            Grid.SetColumn(saveUserButton, columns - 1);
-            Grid.SetRow(saveUserButton, all_rows - 1);
-            contentGrid.Children.Add(saveUserButton);
+            saveUserChangesButton = new Button();
+            saveUserChangesButton.Margin = margin;
+            Grid.SetColumn(saveUserChangesButton, columns - 1);
+            Grid.SetRow(saveUserChangesButton, all_rows - 1);
+            contentGrid.Children.Add(saveUserChangesButton);
 
-            saveUserButton.Content = "Zapisz Użytkownika";
-            saveUserButton.Click += new RoutedEventHandler(this.ZapiszUzytkownika_Click);
+            saveUserChangesButton.Content = "Zapisz Zmiany";
+            saveUserChangesButton.Click += new RoutedEventHandler(this.ZapiszZmianyUzytkownika_Click);
 
             ShowChoosenUserData();
         }

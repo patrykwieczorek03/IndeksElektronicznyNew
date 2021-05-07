@@ -24,7 +24,7 @@
         <StackPanel>
             <Border Padding="5" Grid.Column="0">
                 <StackPanel>
-                    <TextBlock x:Name="questionTextBlock" Text="Czy na pewno usunąć użytkownika?" Style="{StaticResource UniversityTextBlock}"/>
+                    <TextBlock x:Name="questionTextBlock" Style="{StaticResource UniversityTextBlock}"/>
                     <fa:ImageAwesome Icon="Question"/>
                 </StackPanel>
             </Border>
