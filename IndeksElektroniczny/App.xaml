@@ -114,7 +114,10 @@
         </Style>
 
         <Style TargetType="DataGrid">
-            <Setter Property="AutoGenerateColumns" Value="true"/>
+            <Setter Property="AlternatingRowBackground" Value="Gray"/>
+            <Setter Property="CanUserAddRows" Value="false"/>
+            <Setter Property="CanUserDeleteRows" Value="false"/>
+            <Setter Property="IsReadOnly" Value="true"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Background" Value="DarkGray"/>
