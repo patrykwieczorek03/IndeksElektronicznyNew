@@ -681,7 +681,7 @@ namespace IndeksElektroniczny
             tableRowContentList[0].Text = userDate.Pesel;
             tableRowContentList[1].Text = userDate.Name;
             tableRowContentList[2].Text = userDate.Surname;
-            tableRowContentList[3].Text = userDate.DateOfBirth.ToString();
+            tableRowContentList[3].Text = userDate.DateOfBirth.ToString("MM/dd/yyyy");
             tableRowContentList[4].Text = userDate.Sex.ToString();
             tableRowContentList[5].Text = userDate.ContactNumber;
             tableRowContentList[6].Text = userDate.Country;
