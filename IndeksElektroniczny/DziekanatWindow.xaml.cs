@@ -230,7 +230,6 @@ namespace IndeksElektroniczny
 
             tableRowContentList[0].IsEnabled = false;
             tableRowContentList[3].IsEnabled = false;
-            tableRowContentList[4].IsEnabled = false;
 
             saveChangesButton = new Button();
             saveChangesButton.Margin = margin;
@@ -384,6 +383,10 @@ namespace IndeksElektroniczny
                 tableRowContentList.Add(tableRowContent);
                 contentGrid.Children.Add(tableRowContentList[j]);
             }
+
+            tableRowContentList[0].IsEnabled = false;
+            tableRowContentList[1].IsEnabled = false;
+            tableRowContentList[4].IsEnabled = false;
 
             saveStudentButton = new Button();
             saveStudentButton.Margin = margin;

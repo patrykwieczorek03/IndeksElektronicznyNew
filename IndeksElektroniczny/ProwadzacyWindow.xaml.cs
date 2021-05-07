@@ -226,7 +226,6 @@ namespace IndeksElektroniczny
 
             tableRowContentList[0].IsEnabled = false;
             tableRowContentList[3].IsEnabled = false;
-            tableRowContentList[4].IsEnabled = false;
 
             saveChangesButton = new Button();
             saveChangesButton.Margin = margin;
