@@ -39,6 +39,10 @@ namespace IndeksElektroniczny
         private DataBaseMySqlService DbService;
         private UserDataView userDate;
         List<UsersList> userListDatas;
+        UserPreviewDataView userPreviewData;
+        private int choosenUserID;
+
+
         public AdministratorWindow(Window loginWindow, User signInUser_a, DataBaseMySqlService DbService_a)
         {
             signInUser = signInUser_a;
@@ -169,22 +173,20 @@ namespace IndeksElektroniczny
             {
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
-
             contentDataGrid = new DataGrid();
             Grid.SetColumn(contentDataGrid, 0);
             Grid.SetColumnSpan(contentDataGrid, columns);
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows - 1);
             contentGrid.Children.Add(contentDataGrid);
-
             addUserButton = new Button();
             addUserButton.Margin = margin;
             Grid.SetColumn(addUserButton, columns - 1);
             Grid.SetRow(addUserButton, rows);
             contentGrid.Children.Add(addUserButton);
-
             addUserButton.Content = "Dodaj Użytkownika";
             addUserButton.Click += new RoutedEventHandler(this.DodajUzytkownika_Click);
+            contentDataGrid.MouseDoubleClick += new MouseButtonEventHandler(this.WybierzUzytkownika_SelectionChanged);
 
             UpdateUsersList();
         }
@@ -195,10 +197,11 @@ namespace IndeksElektroniczny
 
             ManageMainButtons(3);
 
-            int rows = 12;
-            int columns = 5;
+            int all_rows = 16;
+            int rows = all_rows - 1;
+            int columns = 6;
 
-            titleTextBlock.Text = "Dane Użytkownika";
+            titleTextBlock.Text = "Dane nowego użytkownika";
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
@@ -210,39 +213,78 @@ namespace IndeksElektroniczny
                 contentGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < all_rows; i++)
             {
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            contentDataGrid = new DataGrid();
-            Grid.SetColumn(contentDataGrid, 0);
-            Grid.SetColumnSpan(contentDataGrid, columns);
-            Grid.SetRow(contentDataGrid, 0);
-            Grid.SetRowSpan(contentDataGrid, rows - 1);
-            contentGrid.Children.Add(contentDataGrid);
 
-            deleteUserButton = new Button();
-            deleteUserButton.Margin = margin;
-            Grid.SetColumn(deleteUserButton, columns - 2);
-            Grid.SetRow(deleteUserButton, rows);
-            contentGrid.Children.Add(deleteUserButton);
+            for (int j = 0; j < rows; j++)
+            {
+                Border infoBorder = new Border();
+                infoBorder.Style = borderStyle;
+                Grid.SetColumn(infoBorder, 0);
+                Grid.SetRow(infoBorder, j);
+                contentGrid.Children.Add(infoBorder);
+            }
 
-            deleteUserButton.Content = "Usuń Użytkownika";
-            deleteUserButton.Click += new RoutedEventHandler(this.UsunUzytkownika_Click);
+            for (int j = 0; j < rows; j++)
+            {
+                Border infoBorder = new Border();
+                infoBorder.Style = borderStyle;
+                Grid.SetColumn(infoBorder, 1);
+                Grid.SetColumnSpan(infoBorder, columns - 1);
+                Grid.SetRow(infoBorder, j);
+                contentGrid.Children.Add(infoBorder);
+            }
 
-            saveUserChangesButton = new Button();
-            saveUserChangesButton.Margin = margin;
-            Grid.SetColumn(saveUserChangesButton, columns - 1);
-            Grid.SetRow(saveUserChangesButton, rows);
-            contentGrid.Children.Add(saveUserChangesButton);
+            for (int j = 0; j < rows; j++)
+            {
+                TextBlock tableRowTitle = new TextBlock();
+                Grid.SetColumn(tableRowTitle, 0);
+                Grid.SetRow(tableRowTitle, j);
+                tableRowTitleList.Add(tableRowTitle);
+                contentGrid.Children.Add(tableRowTitleList[j]);
+            }
 
-            saveUserChangesButton.Content = "Zapisz zmiany";
-            saveUserChangesButton.Click += new RoutedEventHandler(this.ZapiszZmianyUzytkownika_Click);
+            tableRowTitleList[0].Text = "Pesel";
+            tableRowTitleList[1].Text = "Imie";
+            tableRowTitleList[2].Text = "Nazwisko";
+            tableRowTitleList[3].Text = "Data urodzenia";
+            tableRowTitleList[4].Text = "Płeć";
+            tableRowTitleList[5].Text = "Numer kontaktowy";
+            tableRowTitleList[6].Text = "Kraj zamieszkania";
+            tableRowTitleList[7].Text = "Miasto";
+            tableRowTitleList[8].Text = "Ulica";
+            tableRowTitleList[9].Text = "Numer domu";
+            tableRowTitleList[10].Text = "Numer lokalu";
+            tableRowTitleList[11].Text = "Kod pocztowy";
+            tableRowTitleList[12].Text = "Login";
+            tableRowTitleList[13].Text = "Hasło";
+            tableRowTitleList[14].Text = "Rola";
 
-            
+            for (int j = 0; j < rows; j++)
+            {
+                TextBox tableRowContent = new TextBox();
+                tableRowContent.Margin = margin;
+                Grid.SetColumn(tableRowContent, 1);
+                Grid.SetColumnSpan(tableRowContent, columns - 1);
+                Grid.SetRow(tableRowContent, j);
+                tableRowContentList.Add(tableRowContent);
+                contentGrid.Children.Add(tableRowContentList[j]);
+            }
+
+            saveUserButton = new Button();
+            saveUserButton.Margin = margin;
+            Grid.SetColumn(saveUserButton, columns - 1);
+            Grid.SetRow(saveUserButton, all_rows - 1);
+            contentGrid.Children.Add(saveUserButton);
+
+            saveUserButton.Content = "Zapisz Użytkownika";
+            saveUserButton.Click += new RoutedEventHandler(this.ZapiszUzytkownika_Click);
+
+            ShowChoosenUserData();
         }
-
 
         public void CreateNowyUzytkownik()
         {
@@ -419,6 +461,17 @@ namespace IndeksElektroniczny
 
         }
 
+        private void WybierzUzytkownika_SelectionChanged(object sender, MouseButtonEventArgs e)
+        {
+            if (this.contentDataGrid.SelectedIndex >= 0 && this.contentDataGrid.AlternationCount >= 0)
+            {
+                UsersList user = (UsersList)this.contentDataGrid.SelectedItems[0];
+                choosenUserID = user.UserID;
+                CreateUzytkownicyUser();
+            }
+
+        }
+
         private void UpdateUserData()
         {
             userDate = DbService.DataBaseShowUserData(signInUser);
@@ -440,6 +493,26 @@ namespace IndeksElektroniczny
         {
             userListDatas = DbService.DataBaseShowUsersList();
             contentDataGrid.ItemsSource = userListDatas.ToList();
+        }
+
+        private void ShowChoosenUserData()
+        {
+            userPreviewData = DbService.DataBaseShowUserPreview(choosenUserID);
+            tableRowContentList[0].Text = userPreviewData.Pesel;
+            tableRowContentList[1].Text = userPreviewData.Name;
+            tableRowContentList[2].Text = userPreviewData.Surname;
+            tableRowContentList[3].Text = userPreviewData.DateOfBirth.ToString();
+            tableRowContentList[4].Text = userPreviewData.Sex.ToString();
+            tableRowContentList[5].Text = userPreviewData.ContactNumber;
+            tableRowContentList[6].Text = userPreviewData.Country;
+            tableRowContentList[7].Text = userPreviewData.City;
+            tableRowContentList[8].Text = userPreviewData.Street;
+            tableRowContentList[9].Text = userPreviewData.HouseNumber;
+            tableRowContentList[10].Text = userPreviewData.ApartmentNumber;
+            tableRowContentList[11].Text = userPreviewData.PostalCode;
+            tableRowContentList[12].Text = userPreviewData.Login;
+            tableRowContentList[13].Text = userPreviewData.Password;
+            tableRowContentList[14].Text = userPreviewData.Role.ToString(); ;
         }
 
         private void AddNewUser()

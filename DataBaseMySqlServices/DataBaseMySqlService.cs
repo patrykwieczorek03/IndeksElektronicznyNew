@@ -206,6 +206,36 @@ namespace DataBaseMySqlServices
             return lecturerStudentsDatas;
         }
 
+        public UserPreviewDataView DataBaseShowUserPreview(int userID)
+        {
+            command = new MySqlCommand($"CALL wyswietl_dane_uzytkownika_podglad('{userID}')", this.conection);
+            reader = command.ExecuteReader();
+            UserPreviewDataView userPreviewData = new UserPreviewDataView();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    userPreviewData.Pesel = reader.GetValue(0).ToString();
+                    userPreviewData.Name = reader.GetValue(1).ToString();
+                    userPreviewData.Surname = reader.GetValue(2).ToString();
+                    userPreviewData.DateOfBirth = DateTime.Parse(reader.GetValue(3).ToString());
+                    userPreviewData.Sex = char.Parse(reader.GetValue(4).ToString());
+                    userPreviewData.ContactNumber = reader.GetValue(5).ToString();
+                    userPreviewData.Country = reader.GetValue(6).ToString();
+                    userPreviewData.City = reader.GetValue(7).ToString();
+                    userPreviewData.Street = reader.GetValue(8).ToString();
+                    userPreviewData.HouseNumber = reader.GetValue(9).ToString();
+                    userPreviewData.ApartmentNumber = reader.GetValue(10).ToString();
+                    userPreviewData.PostalCode = reader.GetValue(11).ToString();
+                    userPreviewData.Login = reader.GetValue(12).ToString();
+                    userPreviewData.Password = reader.GetValue(13).ToString();
+                    userPreviewData.Role = char.Parse(reader.GetValue(14).ToString());
+                }
+            }
+            reader.Close();
+            return userPreviewData;
+        }
+
         public List<BrowseGroupsDataView> DataBaseShowBrowseGroups()
         {
             command = new MySqlCommand("SELECT * FROM przegladanie_grup_view", this.conection);

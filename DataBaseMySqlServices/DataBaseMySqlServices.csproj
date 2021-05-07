@@ -75,6 +75,7 @@
     <Compile Include="Models\StudentTimeTableDataView.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserDataView.cs" />
+    <Compile Include="Models\UserPreviewDataView.cs" />
     <Compile Include="Models\UsersList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

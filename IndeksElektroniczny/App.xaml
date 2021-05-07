@@ -136,8 +136,6 @@
             <Setter Property="Margin" Value="5"/>
         </Style>
 
-
-
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="Height" Value="30"/>
             <Setter Property="Background" Value="#333"/>
