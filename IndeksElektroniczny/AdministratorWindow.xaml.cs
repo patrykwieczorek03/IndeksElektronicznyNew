@@ -585,7 +585,6 @@ namespace IndeksElektroniczny
                 choosenUserID = user.UserID;
                 CreateUzytkownicyUser();
             }
-
         }
 
         private void UpdateUserData()

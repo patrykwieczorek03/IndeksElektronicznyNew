@@ -9,11 +9,8 @@ namespace DataBaseMySqlServices.Models
     public class StudentDataView
     {
         public string StudyFiled { get; set; }
-
         public int Degree { get; set; }
-
         public int Semestr { get; set; }
-
         public int IndexNumber { get; set; }
     }
 }

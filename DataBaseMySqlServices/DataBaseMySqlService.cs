@@ -206,6 +206,38 @@ namespace DataBaseMySqlServices
             return lecturerStudentsDatas;
         }
 
+        public StudentPreviewDataView DataBaseShowStudentPreview(int indexNumber)
+        {
+            command = new MySqlCommand($"CALL wyswietl_dane_studenta_podglad('{indexNumber}')", this.conection);
+            reader = command.ExecuteReader();
+            StudentPreviewDataView studentPreviewData = new StudentPreviewDataView();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    studentPreviewData.IndexNumber = int.Parse(reader.GetValue(0).ToString());
+                    studentPreviewData.Pesel = reader.GetValue(1).ToString();
+                    studentPreviewData.Name = reader.GetValue(2).ToString();
+                    studentPreviewData.Surname = reader.GetValue(3).ToString();
+                    studentPreviewData.DateOfBirth = DateTime.Parse(reader.GetValue(4).ToString());
+                    studentPreviewData.Sex = char.Parse(reader.GetValue(5).ToString());
+                    studentPreviewData.ContactNumber = reader.GetValue(6).ToString();
+                    studentPreviewData.Country = reader.GetValue(7).ToString();
+                    studentPreviewData.City = reader.GetValue(8).ToString();
+                    studentPreviewData.Street = reader.GetValue(9).ToString();
+                    studentPreviewData.HouseNumber = reader.GetValue(10).ToString();
+                    studentPreviewData.ApartmentNumber = reader.GetValue(11).ToString();
+                    studentPreviewData.PostalCode = reader.GetValue(12).ToString();
+                    studentPreviewData.StudyFiled = reader.GetValue(13).ToString();
+                    studentPreviewData.Degree = int.Parse(reader.GetValue(14).ToString());
+                    studentPreviewData.Semestr = int.Parse(reader.GetValue(15).ToString());
+                }
+            }
+            reader.Close();
+            return studentPreviewData;
+        }
+
+
         public UserPreviewDataView DataBaseShowUserPreview(int userID)
         {
             command = new MySqlCommand($"CALL wyswietl_dane_uzytkownika_podglad('{userID}')", this.conection);

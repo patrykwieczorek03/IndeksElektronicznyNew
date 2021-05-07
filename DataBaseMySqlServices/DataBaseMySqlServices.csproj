@@ -71,6 +71,7 @@
     <Compile Include="Models\LecturerStudentsDataView.cs" />
     <Compile Include="Models\StudentDataView.cs" />
     <Compile Include="Models\StudentGradesDataView.cs" />
+    <Compile Include="Models\StudentPreviewDataView.cs" />
     <Compile Include="Models\StudentsList.cs" />
     <Compile Include="Models\StudentTimeTableDataView.cs" />
     <Compile Include="Models\User.cs" />

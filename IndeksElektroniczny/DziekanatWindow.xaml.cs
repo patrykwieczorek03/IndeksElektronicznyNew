@@ -42,6 +42,9 @@ namespace IndeksElektroniczny
         private DataBaseMySqlService DbService;
         private UserDataView userDate;
         List<StudentsList> studentListDatas;
+        StudentPreviewDataView studentPreviewData;
+        private int choosenIndexNumber;
+
         public DziekanatWindow(Window loginWindow, User signInUser_a, DataBaseMySqlService DbService_a)
         {
             signInUser = signInUser_a;
@@ -293,6 +296,7 @@ namespace IndeksElektroniczny
 
             addStudentButton.Content = "Dodaj studenta";
             addStudentButton.Click += new RoutedEventHandler(this.DodajStudenta_Click);
+            contentDataGrid.MouseDoubleClick += new MouseButtonEventHandler(this.WybierzUzytkownika_SelectionChanged);
 
             UpdateStudentsList();
         }
@@ -303,10 +307,11 @@ namespace IndeksElektroniczny
 
             ManageMainButtons(3);
 
-            int rows = 12;
-            int columns = 5;
+            int all_rows = 17;
+            int rows = all_rows - 1;
+            int columns = 6;
 
-            titleTextBlock.Text = "Dane studenta";
+            titleTextBlock.Text = "Dane nowego studenta";
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
@@ -318,24 +323,79 @@ namespace IndeksElektroniczny
                 contentGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < all_rows; i++)
             {
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            contentDataGrid = new DataGrid();
-            Grid.SetColumn(contentDataGrid, 0);
-            Grid.SetColumnSpan(contentDataGrid, columns);
-            Grid.SetRow(contentDataGrid, 0);
-            Grid.SetRowSpan(contentDataGrid, rows - 1);
-            contentGrid.Children.Add(contentDataGrid);
+
+            for (int j = 0; j < rows; j++)
+            {
+                Border infoBorder = new Border();
+                infoBorder.Style = borderStyle;
+                Grid.SetColumn(infoBorder, 0);
+                Grid.SetRow(infoBorder, j);
+                contentGrid.Children.Add(infoBorder);
+            }
+
+            for (int j = 0; j < rows; j++)
+            {
+                Border infoBorder = new Border();
+                infoBorder.Style = borderStyle;
+                Grid.SetColumn(infoBorder, 1);
+                Grid.SetColumnSpan(infoBorder, columns - 1);
+                Grid.SetRow(infoBorder, j);
+                contentGrid.Children.Add(infoBorder);
+            }
+
+            for (int j = 0; j < rows; j++)
+            {
+                TextBlock tableRowTitle = new TextBlock();
+                Grid.SetColumn(tableRowTitle, 0);
+                Grid.SetRow(tableRowTitle, j);
+                tableRowTitleList.Add(tableRowTitle);
+                contentGrid.Children.Add(tableRowTitleList[j]);
+            }
+
+            tableRowTitleList[0].Text = "Numer indeksu";
+            tableRowTitleList[1].Text = "Pesel";
+            tableRowTitleList[2].Text = "Imie";
+            tableRowTitleList[3].Text = "Nazwisko";
+            tableRowTitleList[4].Text = "Data urodzenia";
+            tableRowTitleList[5].Text = "Płeć";
+            tableRowTitleList[6].Text = "Numer kontaktowy";
+            tableRowTitleList[7].Text = "Kraj zamieszkania";
+            tableRowTitleList[8].Text = "Miasto";
+            tableRowTitleList[9].Text = "Ulica";
+            tableRowTitleList[10].Text = "Numer domu";
+            tableRowTitleList[11].Text = "Numer lokalu";
+            tableRowTitleList[12].Text = "Kod pocztowy";
+            tableRowTitleList[13].Text = "Kierunek";
+            tableRowTitleList[14].Text = "Semestr";
+            tableRowTitleList[15].Text = "Stopień";
+
+            for (int j = 0; j < rows; j++)
+            {
+                TextBox tableRowContent = new TextBox();
+                tableRowContent.Margin = margin;
+                Grid.SetColumn(tableRowContent, 1);
+                Grid.SetColumnSpan(tableRowContent, columns - 1);
+                Grid.SetRow(tableRowContent, j);
+                tableRowContentList.Add(tableRowContent);
+                contentGrid.Children.Add(tableRowContentList[j]);
+            }
+
+            saveStudentButton = new Button();
+            saveStudentButton.Margin = margin;
+            Grid.SetColumn(saveStudentButton, columns - 1);
+            Grid.SetRow(saveStudentButton, all_rows - 1);
+            contentGrid.Children.Add(saveStudentButton);
 
             deleteStudentButton = new Button();
             deleteStudentButton.Margin = margin;
             Grid.SetColumn(deleteStudentButton, columns - 2);
             Grid.SetRow(deleteStudentButton, rows);
             contentGrid.Children.Add(deleteStudentButton);
-
             deleteStudentButton.Content = "Usuń studenta";
             deleteStudentButton.Click += new RoutedEventHandler(this.UsunStudenta_Click);
 
@@ -347,8 +407,9 @@ namespace IndeksElektroniczny
 
             saveStudentChangesButton.Content = "Zapisz zmiany";
             saveStudentChangesButton.Click += new RoutedEventHandler(this.ZapiszZmianyStudenta_Click);
-        }
 
+            ShowChoosenStudentData();
+        }
 
         public void CreateNowyStudent()
         {
@@ -356,7 +417,7 @@ namespace IndeksElektroniczny
 
             ManageMainButtons(3);
 
-            int all_rows = 18;
+            int all_rows = 19;
             int rows = all_rows - 1;
             int columns = 6;
 
@@ -416,13 +477,14 @@ namespace IndeksElektroniczny
             tableRowTitleList[7].Text = "Miasto";
             tableRowTitleList[8].Text = "Ulica";
             tableRowTitleList[9].Text = "Numer domu";
-            tableRowTitleList[10].Text = "Kod pocztowy";
-            tableRowTitleList[11].Text = "Login";
-            tableRowTitleList[12].Text = "Hasło";
-            tableRowTitleList[13].Text = "Rola";
-            tableRowTitleList[14].Text = "Kierunek";
-            tableRowTitleList[15].Text = "Semestr";
-            tableRowTitleList[16].Text = "Stopień";
+            tableRowTitleList[10].Text = "Numer lokalu";
+            tableRowTitleList[11].Text = "Kod pocztowy";
+            tableRowTitleList[12].Text = "Login";
+            tableRowTitleList[13].Text = "Hasło";
+            tableRowTitleList[14].Text = "Rola";
+            tableRowTitleList[15].Text = "Kierunek";
+            tableRowTitleList[16].Text = "Semestr";
+            tableRowTitleList[17].Text = "Stopień";
 
             for (int j = 0; j < rows; j++)
             {
@@ -534,6 +596,16 @@ namespace IndeksElektroniczny
 
         }
 
+        private void WybierzUzytkownika_SelectionChanged(object sender, MouseButtonEventArgs e)
+        {
+            if (this.contentDataGrid.SelectedIndex >= 0 && this.contentDataGrid.AlternationCount >= 0)
+            {
+                StudentsList student = (StudentsList)this.contentDataGrid.SelectedItems[0];
+                choosenIndexNumber = student.IndexNumber;
+                CreateStudenciStudent();
+            }
+        }
+
         private void UpdateUserData()
         {
             userDate = DbService.DataBaseShowUserData(signInUser);
@@ -556,6 +628,29 @@ namespace IndeksElektroniczny
             studentListDatas = DbService.DataBaseShowStudentsList();
             contentDataGrid.ItemsSource = studentListDatas.ToList();
         }
+
+        private void ShowChoosenStudentData()
+        {
+            studentPreviewData = DbService.DataBaseShowStudentPreview(choosenIndexNumber);
+            tableRowContentList[0].Text = studentPreviewData.IndexNumber.ToString();
+            tableRowContentList[1].Text = studentPreviewData.Pesel;
+            tableRowContentList[2].Text = studentPreviewData.Name;
+            tableRowContentList[3].Text = studentPreviewData.Surname;
+            tableRowContentList[4].Text = studentPreviewData.DateOfBirth.ToString();
+            tableRowContentList[5].Text = studentPreviewData.Sex.ToString();
+            tableRowContentList[6].Text = studentPreviewData.ContactNumber;
+            tableRowContentList[7].Text = studentPreviewData.Country;
+            tableRowContentList[8].Text = studentPreviewData.City;
+            tableRowContentList[9].Text = studentPreviewData.Street;
+            tableRowContentList[10].Text = studentPreviewData.HouseNumber;
+            tableRowContentList[11].Text = studentPreviewData.ApartmentNumber;
+            tableRowContentList[12].Text = studentPreviewData.PostalCode;
+            tableRowContentList[13].Text = studentPreviewData.StudyFiled;
+            tableRowContentList[14].Text = studentPreviewData.Degree.ToString();
+            tableRowContentList[15].Text = studentPreviewData.Semestr.ToString();
+        }
+
+
         private void AddNewStudent()
         {
             AddUserProcedure newUser = new AddUserProcedure();
