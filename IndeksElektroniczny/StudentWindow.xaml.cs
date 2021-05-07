@@ -24,6 +24,8 @@ namespace IndeksElektroniczny
         public List<TextBox> tableRowContentList { get; set; }
         public List<TextBlock> tableRowTitleList { get; set; }
         public Button saveChangesButton { get; set; }
+        public Button dropChangesButton { get; set; }
+        public Button editDataButton { get; set; }
         public Button buttonSearch { get; set; }
         public Button buttonStudentData { get; set; }
         public Button buttonGrades { get; set; }
@@ -53,6 +55,100 @@ namespace IndeksElektroniczny
         }
 
         public void CreateDaneOsobowe()
+        {
+            Clear_Content();
+
+            ManageMainButtons(1);
+
+            int all_rows = 13;
+            int rows = all_rows - 1;
+            int columns = 6;
+
+            titleTextBlock.Text = "Dane osobowe";
+
+            tableRowContentList = new List<TextBox>();
+            tableRowTitleList = new List<TextBlock>();
+
+            Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
+
+            for (int i = 0; i < columns; i++)
+            {
+                contentGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+
+            for (int i = 0; i < all_rows; i++)
+            {
+                contentGrid.RowDefinitions.Add(new RowDefinition());
+            }
+
+
+            for (int j = 0; j < rows; j++)
+            {
+                Border infoBorder = new Border();
+                infoBorder.Style = borderStyle;
+                Grid.SetColumn(infoBorder, 0);
+                Grid.SetRow(infoBorder, j);
+                contentGrid.Children.Add(infoBorder);
+            }
+
+            for (int j = 0; j < rows; j++)
+            {
+                Border infoBorder = new Border();
+                infoBorder.Style = borderStyle;
+                Grid.SetColumn(infoBorder, 1);
+                Grid.SetColumnSpan(infoBorder, columns - 1);
+                Grid.SetRow(infoBorder, j);
+                contentGrid.Children.Add(infoBorder);
+            }
+
+            for (int j = 0; j < rows; j++)
+            {
+                TextBlock tableRowTitle = new TextBlock();
+                Grid.SetColumn(tableRowTitle, 0);
+                Grid.SetRow(tableRowTitle, j);
+                tableRowTitleList.Add(tableRowTitle);
+                contentGrid.Children.Add(tableRowTitleList[j]);
+            }
+
+            tableRowTitleList[0].Text = "Pesel";
+            tableRowTitleList[1].Text = "Imie";
+            tableRowTitleList[2].Text = "Nazwisko";
+            tableRowTitleList[3].Text = "Data urodzenia";
+            tableRowTitleList[4].Text = "Płeć";
+            tableRowTitleList[5].Text = "Numer kontaktowy";
+            tableRowTitleList[6].Text = "Kraj zamieszkania";
+            tableRowTitleList[7].Text = "Miasto";
+            tableRowTitleList[8].Text = "Ulica";
+            tableRowTitleList[9].Text = "Numer domu";
+            tableRowTitleList[10].Text = "Numer lokalu";
+            tableRowTitleList[11].Text = "Kod pocztowy";
+
+            for (int j = 0; j < rows; j++)
+            {
+                TextBox tableRowContent = new TextBox();
+                tableRowContent.Margin = margin;
+                tableRowContent.IsEnabled = false;
+                Grid.SetColumn(tableRowContent, 1);
+                Grid.SetColumnSpan(tableRowContent, columns - 1);
+                Grid.SetRow(tableRowContent, j);
+                tableRowContentList.Add(tableRowContent);
+                contentGrid.Children.Add(tableRowContentList[j]);
+            }
+
+            editDataButton = new Button();
+            editDataButton.Margin = margin;
+            Grid.SetColumn(editDataButton, columns - 1);
+            Grid.SetRow(editDataButton, all_rows - 1);
+            contentGrid.Children.Add(editDataButton);
+
+            editDataButton.Content = "Edytuj";
+
+            editDataButton.Click += new RoutedEventHandler(this.Edytuj_Click);
+
+            UpdateUserData();
+        }
+
+        public void CreateDaneOsoboweEdycja()
         {
             Clear_Content();
 
@@ -145,6 +241,16 @@ namespace IndeksElektroniczny
             saveChangesButton.Content = "Zapisz zmiany";
 
             saveChangesButton.Click += new RoutedEventHandler(this.ZapiszZmiany_Click);
+
+            dropChangesButton = new Button();
+            dropChangesButton.Margin = margin;
+            Grid.SetColumn(dropChangesButton, columns - 2);
+            Grid.SetRow(dropChangesButton, all_rows - 1);
+            contentGrid.Children.Add(dropChangesButton);
+
+            dropChangesButton.Content = "Anuluj";
+
+            dropChangesButton.Click += new RoutedEventHandler(this.Anuluj_Click);
 
             UpdateUserData();
         }
@@ -296,7 +402,42 @@ namespace IndeksElektroniczny
             Grid.SetRowSpan(contentDataGrid, rows);
             contentGrid.Children.Add(contentDataGrid);
 
+            ////////////////////////////////////////////////
+            //contentDataGrid.Columns.Counts = columns;
+
+            //DataGridTextColumn name = new DataGridTextColumn();
+            //name.Header = "ID";
+            //contentDataGrid.Columns[0].Header = name.Header;
+
+            //DataGridTemplateColumn button = new DataGridTemplateColumn();
+            //button.Header = "Button";
+            //button.
+            //contentDataGrid.CanUserAddRows = false;
+            //contentDataGrid.CanUserDeleteRows = false;
+
+            //contentDataGrid.AlternatingRowBackground = Brushes.Gray;
+
+            //DataGridBu button = new DataGridViewButtonColumn();
+            //button.HeaderText = "Podgląd użytkownika";
+
+            //contentDataGrid.FrozenColumnCount = 0;
+            //contentDataGrid.Columns[0].Header = "ID";
+            //contentDataGrid.AutoGenerateColumns = false;
+
             UpdateStudentGradesData();
+            //DataGridColumn item = new DataGridColumn();
+            //contentDataGrid.Columns.Add("Text");
+            
+            //contentDataGrid.Columns.Count();
+            //DataGridColumn kolumna = new DataGrid;
+            //kolumna.Header = "ID";
+            //DataGridColumn item;
+            //item.Header = "AAA";
+            //contentDataGrid.AutoGenerateColumns = true;
+            //contentDataGrid.Columns.Add(item);
+            //contentDataGrid.ItemsSource = "{Binding}";
+            //contentDataGrid.Columns[0].Header = "ID";
+            //contentDataGrid.Columns[1].ClipboardContentBinding = "ID";
         }
 
         public void CreateZajeciaPlanZajec()
@@ -482,6 +623,16 @@ namespace IndeksElektroniczny
             CreateIndeksDaneStudenta();
         }
 
+        private void Edytuj_Click(object sender, RoutedEventArgs e)
+        {
+            CreateDaneOsoboweEdycja();
+        }
+
+        private void Anuluj_Click(object sender, RoutedEventArgs e)
+        {
+            CreateDaneOsobowe();
+        }
+
         private void Zajecia_Click(object sender, RoutedEventArgs e)
         {
             CreateZajeciaPrzegladanieGrup();
@@ -659,6 +810,9 @@ namespace IndeksElektroniczny
             user.PostalCode = tableRowContentList[11].Text;
             user.CurrentUser = signInUser.UserID;
             DbService.DataBaseChangeUserData(user);
+            AlertWindow alertWindow2 = new AlertWindow("Zmiana danych przebiegła pomyślnie.");
+            alertWindow2.ShowDialog();
+            CreateDaneOsobowe();
         }
     }
 }
