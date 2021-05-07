@@ -63,7 +63,9 @@
   <ItemGroup>
     <Compile Include="DataBaseMySqlConnection.cs" />
     <Compile Include="DataBaseMySqlService.cs" />
+    <Compile Include="Models\AddUserProcedure.cs" />
     <Compile Include="Models\BrowseGroupsDataView.cs" />
+    <Compile Include="Models\ChangeDataProcedure.cs" />
     <Compile Include="Models\LecturerCursesDataView.cs" />
     <Compile Include="Models\LecturerGroupsDataView.cs" />
     <Compile Include="Models\LecturerStudentsDataView.cs" />

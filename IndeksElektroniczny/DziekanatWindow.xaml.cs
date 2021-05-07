@@ -129,6 +129,10 @@ namespace IndeksElektroniczny
                 contentGrid.Children.Add(tableRowContentList[j]);
             }
 
+            tableRowContentList[0].IsEnabled = false;
+            tableRowContentList[3].IsEnabled = false;
+            tableRowContentList[4].IsEnabled = false;
+
             saveChangesButton = new Button();
             saveChangesButton.Margin = margin;
             Grid.SetColumn(saveChangesButton, columns - 1);
@@ -395,7 +399,7 @@ namespace IndeksElektroniczny
 
         private void ZapiszZmiany_Click(object sender, RoutedEventArgs e)
         {
-
+            ChangeUserData();
         }
 
         private void ZapiszZmianyStudenta_Click(object sender, RoutedEventArgs e)
@@ -405,7 +409,7 @@ namespace IndeksElektroniczny
 
         private void ZapiszStudenta_Click(object sender, RoutedEventArgs e)
         {
-
+            AddNewStudent();
         }
 
         private void UsunStudenta_Click(object sender, RoutedEventArgs e)
@@ -434,6 +438,257 @@ namespace IndeksElektroniczny
         {
             studentListDatas = DbService.DataBaseShowStudentsList();
             contentDataGrid.ItemsSource = studentListDatas.ToList();
+        }
+        private void AddNewStudent()
+        {
+            AddUserProcedure newUser = new AddUserProcedure();
+            string errorMessage = "";
+
+            if (!DataValidation.DataValidation.ValidPesel(tableRowContentList[0].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidName(tableRowContentList[1].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSurname(tableRowContentList[2].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidDateOfBirth(tableRowContentList[3].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSex(tableRowContentList[4].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidContactNumber(tableRowContentList[5].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidCountry(tableRowContentList[6].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidCity(tableRowContentList[7].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidStreet(tableRowContentList[8].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidHouseNumber(tableRowContentList[9].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidApartmentNumber(tableRowContentList[10].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidPostalCode(tableRowContentList[11].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidLogin(tableRowContentList[12].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidPassword(tableRowContentList[13].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidRole(tableRowContentList[14].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (tableRowContentList[14].Text == "s")
+            {
+                if (!DataValidation.DataValidation.ValidStudyField(tableRowContentList[15].Text, out errorMessage))
+                {
+                    AlertWindow alertWindow = new AlertWindow(errorMessage);
+                    alertWindow.ShowDialog();
+                    return;
+                }
+
+                if (!DataValidation.DataValidation.ValidDegree(tableRowContentList[16].Text, out errorMessage))
+                {
+                    AlertWindow alertWindow = new AlertWindow(errorMessage);
+                    alertWindow.ShowDialog();
+                    return;
+                }
+
+                if (!DataValidation.DataValidation.ValidSemestr(tableRowContentList[17].Text, out errorMessage))
+                {
+                    AlertWindow alertWindow = new AlertWindow(errorMessage);
+                    alertWindow.ShowDialog();
+                    return;
+                }
+                newUser.StudyField = tableRowContentList[15].Text;
+                newUser.Degree = int.Parse(tableRowContentList[16].Text);
+                newUser.Semestr = int.Parse(tableRowContentList[17].Text);
+            }
+            else
+            {
+                errorMessage = "Jako pracownik dziekanatu możesz dodać tylko studenta.\n" + "Jako rola użytkownika musisz więc wpisać 's'";
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            newUser.Pesel = tableRowContentList[0].Text;
+            newUser.Name = tableRowContentList[1].Text;
+            newUser.Surname = tableRowContentList[2].Text;
+            newUser.DateOfBirth = tableRowContentList[3].Text;
+            newUser.Sex = tableRowContentList[4].Text.ToCharArray()[0];
+            newUser.ContactNumber = tableRowContentList[5].Text;
+            newUser.Country = tableRowContentList[6].Text;
+            newUser.City = tableRowContentList[7].Text;
+            newUser.Street = tableRowContentList[8].Text;
+            newUser.HouseNumber = tableRowContentList[9].Text;
+            newUser.ApartmentNumber = tableRowContentList[10].Text;
+            newUser.PostalCode = tableRowContentList[11].Text;
+            newUser.Login = tableRowContentList[12].Text;
+            newUser.Password = tableRowContentList[13].Text;
+            newUser.Role = tableRowContentList[14].Text;
+            newUser.CurrentUser = signInUser.UserID;
+            DbService.DataBaseAddUser(newUser);
+        }
+
+        private void ChangeUserData()
+        {
+            ChangeDataProcedure user = new ChangeDataProcedure();
+            string errorMessage = "";
+
+            if (!DataValidation.DataValidation.ValidName(tableRowContentList[1].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSurname(tableRowContentList[2].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSex(tableRowContentList[4].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidContactNumber(tableRowContentList[5].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidCountry(tableRowContentList[6].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidCity(tableRowContentList[7].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidStreet(tableRowContentList[8].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidHouseNumber(tableRowContentList[9].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidApartmentNumber(tableRowContentList[10].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidPostalCode(tableRowContentList[11].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            user.Name = tableRowContentList[1].Text;
+            user.Surname = tableRowContentList[2].Text;
+            user.Sex = tableRowContentList[4].Text;
+            user.ContactNumber = tableRowContentList[5].Text;
+            user.Country = tableRowContentList[6].Text;
+            user.City = tableRowContentList[7].Text;
+            user.Street = tableRowContentList[8].Text;
+            user.HouseNumber = tableRowContentList[9].Text;
+            user.ApartmentNumber = tableRowContentList[10].Text;
+            user.PostalCode = tableRowContentList[11].Text;
+            user.CurrentUser = signInUser.UserID;
+            DbService.DataBaseChangeUserData(user);
         }
     }
 }

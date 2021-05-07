@@ -61,6 +61,9 @@
     <Compile Include="AdministratorWindow.xaml.cs">
       <DependentUpon>AdministratorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AlertWindow.xaml.cs">
+      <DependentUpon>AlertWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DziekanatWindow.xaml.cs">
       <DependentUpon>DziekanatWindow.xaml</DependentUpon>
     </Compile>
@@ -74,6 +77,10 @@
       <DependentUpon>ZapytanieWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AdministratorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AlertWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,6 +144,10 @@
     <ProjectReference Include="..\DataBaseMySqlServices\DataBaseMySqlServices.csproj">
       <Project>{851B7853-C52F-468D-A323-ECAB86DD8F4E}</Project>
       <Name>DataBaseMySqlServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataValidation\DataValidation.csproj">
+      <Project>{3cc59192-b6fd-44fb-adff-d2a584a0a032}</Project>
+      <Name>DataValidation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
