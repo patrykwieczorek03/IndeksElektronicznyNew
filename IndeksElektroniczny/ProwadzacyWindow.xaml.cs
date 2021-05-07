@@ -399,61 +399,71 @@ namespace IndeksElektroniczny
 
             if (!DataValidation.DataValidation.ValidName(tableRowContentList[1].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidSurname(tableRowContentList[2].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidSex(tableRowContentList[4].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidContactNumber(tableRowContentList[5].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidCountry(tableRowContentList[6].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidCity(tableRowContentList[7].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidStreet(tableRowContentList[8].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidHouseNumber(tableRowContentList[9].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidApartmentNumber(tableRowContentList[10].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidPostalCode(tableRowContentList[11].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 

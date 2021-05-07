@@ -1,0 +1,42 @@
+﻿<Window x:Class="IndeksElektroniczny.AlertWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:local="clr-namespace:IndeksElektroniczny"
+        mc:Ignorable="d"
+        Style="{StaticResource SmallWindowStyle}"
+        Title="AlertWindow" Height="230" Width="800">
+    <StackPanel>
+        <StackPanel  Background="#333">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200*"/>
+                    <ColumnDefinition Width="300*"/>
+                    <ColumnDefinition Width="62*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource TitleBarTextBlock}" Text="Logowanie" Grid.Column="0"/>
+                <Button Style="{StaticResource TitleBarButton}" Click="Close_Click" Grid.Column="2"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel>
+            <Border Padding="5" Grid.Column="0">
+                <StackPanel>
+                    <TextBlock x:Name="alertTextBlock" Style="{StaticResource UniversityTextBlock}"/>
+                    <fa:ImageAwesome Icon="Exclamation"/>
+                </StackPanel>
+            </Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Padding="20" Grid.Column="1">
+                    <Button x:Name="OkButton" Click="OkButton_Click" Content="Ok"/>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+</Window>

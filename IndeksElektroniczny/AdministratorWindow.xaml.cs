@@ -448,91 +448,106 @@ namespace IndeksElektroniczny
             string errorMessage = "";
             if (!DataValidation.DataValidation.ValidPesel(tableRowContentList[0].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidName(tableRowContentList[1].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidSurname(tableRowContentList[2].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidDateOfBirth(tableRowContentList[3].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidSex(tableRowContentList[4].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidContactNumber(tableRowContentList[5].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidCountry(tableRowContentList[6].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidCity(tableRowContentList[7].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidStreet(tableRowContentList[8].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidHouseNumber(tableRowContentList[9].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidApartmentNumber(tableRowContentList[10].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidPostalCode(tableRowContentList[11].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidLogin(tableRowContentList[12].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidPassword(tableRowContentList[13].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidRole(tableRowContentList[14].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
@@ -540,19 +555,22 @@ namespace IndeksElektroniczny
             {
                 if (!DataValidation.DataValidation.ValidStudyField(tableRowContentList[15].Text, out errorMessage))
                 {
-                    MessageBox.Show(errorMessage);
+                    AlertWindow alertWindow = new AlertWindow(errorMessage);
+                    alertWindow.ShowDialog();
                     return;
                 }
 
                 if (!DataValidation.DataValidation.ValidDegree(tableRowContentList[16].Text, out errorMessage))
                 {
-                    MessageBox.Show(errorMessage);
+                    AlertWindow alertWindow = new AlertWindow(errorMessage);
+                    alertWindow.ShowDialog();
                     return;
                 }
 
                 if (!DataValidation.DataValidation.ValidSemestr(tableRowContentList[17].Text, out errorMessage))
                 {
-                    MessageBox.Show(errorMessage);
+                    AlertWindow alertWindow = new AlertWindow(errorMessage);
+                    alertWindow.ShowDialog();
                     return;
                 }
                 newUser.StudyField = tableRowContentList[15].Text;
@@ -592,61 +610,71 @@ namespace IndeksElektroniczny
 
             if (!DataValidation.DataValidation.ValidName(tableRowContentList[1].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidSurname(tableRowContentList[2].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidSex(tableRowContentList[4].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidContactNumber(tableRowContentList[5].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidCountry(tableRowContentList[6].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidCity(tableRowContentList[7].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidStreet(tableRowContentList[8].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidHouseNumber(tableRowContentList[9].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidApartmentNumber(tableRowContentList[10].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
             if (!DataValidation.DataValidation.ValidPostalCode(tableRowContentList[11].Text, out errorMessage))
             {
-                MessageBox.Show(errorMessage);
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
                 return;
             }
 
