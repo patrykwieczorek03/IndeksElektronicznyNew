@@ -13,7 +13,7 @@ namespace DataBaseMySqlServices
         public MySqlConnection conection;
         public DataBaseMySqlConnection()
         {
-            this.connetionString = @"server=localhost;Uid=root;database=elektroniczny_indeks;Pwd=Prosba1998rok;";
+            this.connetionString = @"server=localhost;Uid=root;database=elektroniczny_indeks;Pwd=root;";
             this.conection = new MySqlConnection(this.connetionString);
             this.conection.Open();
         }

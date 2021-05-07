@@ -628,7 +628,7 @@ namespace IndeksElektroniczny
             tableRowContentList[11].Text = userPreviewData.PostalCode;
             tableRowContentList[12].Text = userPreviewData.Login;
             tableRowContentList[13].Text = userPreviewData.Password;
-            tableRowContentList[14].Text = userPreviewData.Role.ToString(); ;
+            tableRowContentList[14].Text = userPreviewData.Role.ToString();
         }
 
         private void AddNewUser()
