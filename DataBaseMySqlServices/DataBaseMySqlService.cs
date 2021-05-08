@@ -95,14 +95,15 @@ namespace DataBaseMySqlServices
                 while (reader.Read())
                 {
                     StudentGradesDataView studentGradesData = new StudentGradesDataView();
-                    studentGradesData.Name = reader.GetValue(0).ToString();
-                    studentGradesData.Surname = reader.GetValue(1).ToString();
-                    studentGradesData.NameOfCoure = reader.GetValue(2).ToString();
-                    studentGradesData.Ects = int.Parse(reader.GetValue(3).ToString());
-                    studentGradesData.GroupID = int.Parse(reader.GetValue(4).ToString());
-                    if (!DBNull.Value.Equals(reader.GetValue(5))) studentGradesData.Grade = float.Parse(reader.GetValue(5).ToString());
+                    studentGradesData.MembershipID = int.Parse(reader.GetValue(0).ToString());
+                    studentGradesData.Name = reader.GetValue(1).ToString();
+                    studentGradesData.Surname = reader.GetValue(2).ToString();
+                    studentGradesData.NameOfCoure = reader.GetValue(3).ToString();
+                    studentGradesData.Ects = int.Parse(reader.GetValue(4).ToString());
+                    studentGradesData.GroupID = int.Parse(reader.GetValue(5).ToString());
+                    if (!DBNull.Value.Equals(reader.GetValue(6))) studentGradesData.Grade = float.Parse(reader.GetValue(6).ToString());
                     else studentGradesData.Grade = 0.0F;
-                    if (!DBNull.Value.Equals(reader.GetValue(6))) studentGradesData.GradeStatus = char.Parse(reader.GetValue(6).ToString());
+                    if (!DBNull.Value.Equals(reader.GetValue(7))) studentGradesData.GradeStatus = char.Parse(reader.GetValue(7).ToString());
                     else studentGradesData.GradeStatus = 'E';
                     studentGradesDatas.Add(studentGradesData);
                 }
