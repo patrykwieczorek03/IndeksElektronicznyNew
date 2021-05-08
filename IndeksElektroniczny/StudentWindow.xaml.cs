@@ -45,6 +45,12 @@ namespace IndeksElektroniczny
         List<StudentTimeTableDataView> studentTimeTableDatas;
         List<BrowseGroupsDataView> browseGroupsDatas;
 
+
+        /// <summary>
+        /// ////////////////////
+        /// </summary>
+        public DataGrid testDataGrid { get; set; }
+
         public StudentWindow(Window loginWindow, User signInUser_a, DataBaseMySqlService DbService_a)
         {
             signInUser = signInUser_a;
@@ -396,7 +402,16 @@ namespace IndeksElektroniczny
             Grid.SetColumnSpan(contentDataGrid, columns - 1);
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows);
-            contentGrid.Children.Add(contentDataGrid);
+
+            //DataGridTextColumn c = new DataGridTextColumn();
+            //c.Header = "ID";
+            //contentDataGrid.Columns.Add(c);
+
+            //contentDataGrid.Name = "contentDataGrid123";
+
+            //contentGrid.Children.Add(contentDataGrid);
+
+            //contentDataGrid123.ColumnCount = 4;
 
             ////////////////////////////////////////////////
             //contentDataGrid.Columns.Counts = columns;
@@ -488,6 +503,49 @@ namespace IndeksElektroniczny
             Grid.SetRowSpan(contentDataGrid, rows);
             contentGrid.Children.Add(contentDataGrid);
 
+
+
+
+
+            //// Set the column header style.
+            //DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
+
+            //columnHeaderStyle.BackColor = Color.Beige;
+            //columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
+            //dataGridView1.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+
+            //// Set the column header names.
+            //dataGridView1.Columns[0].Name = "Recipe";
+            //dataGridView1.Columns[1].Name = "Category";
+            //dataGridView1.Columns[2].Name = "Main Ingredients";
+            //dataGridView1.Columns[3].Name = "Rating";
+
+
+            //contentDataGrid.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+
+            //// Set the column header names.
+            //dataGridView1.Columns[0].Name = "Recipe";
+            //dataGridView1.Columns[1].Name = "Category";
+            //dataGridView1.Columns[2].Name = "Main Ingredients";
+            //dataGridView1.Columns[3].Name = "Rating";
+
+
+            //DateTime dtStart = new DateTime(2012, 11, 1);
+            //DateTime dtEnd = new DateTime(2012, 11, 7);
+
+            //for (int i = 0; i < dtEnd.Subtract(dtStart).Days; i++)
+            //{
+            //    TimeSpan counter = new TimeSpan(i, 0, 0, 0);
+
+            //    DataGridColumn column = new DataGridColumn(string.Format("col{0}", i));
+            //    //contentDataGrid.Columns.Add(string.Format("col{0}", i));
+            //}
+            //this.dataGridView1.Columns["your database column name"].HeaderText = " preferred name";
+
+
+            //contentDataGrid.Columns.Add("COS");
+            //contentDataGrid.Columns["Column with time"].DefaultCellStyle.Format = "HH:mm:ss";
+            //contentGrid.Columns[1].DefaultCellStyle.Format = "HH:mm";
             UpdateStudentTimeTableData();
         }
 
