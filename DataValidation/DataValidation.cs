@@ -500,5 +500,59 @@ namespace DataValidation
             errorMessage = "Semestr powinien mieć odpowiedni format.\n" + "Na przykład: '1'";
             return false;
         }
+
+        public static bool ValidStudentGradeStatus(string role, out string errorMessage)
+        {
+            errorMessage = "";
+
+            if (role.Length == 0)
+            {
+                errorMessage = "Status oceny wymagany.";
+                return false;
+            }
+
+            if (role.Length > 1)
+            {
+                errorMessage = "Status oceny - niepoprawna ilość znaków. Wymagana ilość znaków: 1";
+                return false;
+            }
+
+            string expression = "^[tn]$";
+
+            if (Regex.IsMatch(role, expression))
+            {
+                return true;
+            }
+
+            errorMessage = "Status oceny powinien mieć odpowiedni format.\n" + "Na przykład:\n" + "'t' - akceptacja oceny\n" + "'n' - reklamacja oceny";
+            return false;
+        }
+
+        public static bool ValidLecturerGradeStatus(string role, out string errorMessage)
+        {
+            errorMessage = "";
+
+            if (role.Length == 0)
+            {
+                errorMessage = "Status oceny wymagany.";
+                return false;
+            }
+
+            if (role.Length > 1)
+            {
+                errorMessage = "Status oceny - niepoprawna ilość znaków. Wymagana ilość znaków: 1";
+                return false;
+            }
+
+            string expression = "^[opw]$";
+
+            if (Regex.IsMatch(role, expression))
+            {
+                return true;
+            }
+
+            errorMessage = "Status oceny powinien mieć odpowiedni format.\n" + "Na przykład:\n" + "'o' - odrzucenie reklamacja\n" + "'p' - poprawa oceny\n" + "'w' - wprowadzenie oceny\n";
+            return false;
+        }
     }
 }

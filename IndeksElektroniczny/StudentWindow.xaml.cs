@@ -439,6 +439,190 @@ namespace IndeksElektroniczny
             //contentDataGrid.Columns[1].ClipboardContentBinding = "ID";
         }
 
+        public void CreateIndeksOcena()
+        {
+            Clear_Content();
+
+            ManageMainButtons(2);
+
+            int all_rows = 8;
+            int rows = all_rows - 1;
+            int columns = 6;
+
+            titleTextBlock.Text = "Kurs:... Grupa:...";
+
+            tableRowContentList = new List<TextBox>();
+            tableRowTitleList = new List<TextBlock>();
+
+            Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
+
+            for (int i = 0; i < columns; i++)
+            {
+                contentGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+
+            for (int i = 0; i < all_rows; i++)
+            {
+                contentGrid.RowDefinitions.Add(new RowDefinition());
+            }
+
+
+            for (int j = 0; j < rows; j++)
+            {
+                Border infoBorder = new Border();
+                infoBorder.Style = borderStyle;
+                Grid.SetColumn(infoBorder, 0);
+                Grid.SetRow(infoBorder, j);
+                contentGrid.Children.Add(infoBorder);
+            }
+
+            for (int j = 0; j < rows; j++)
+            {
+                Border infoBorder = new Border();
+                infoBorder.Style = borderStyle;
+                Grid.SetColumn(infoBorder, 1);
+                Grid.SetColumnSpan(infoBorder, columns - 1);
+                Grid.SetRow(infoBorder, j);
+                contentGrid.Children.Add(infoBorder);
+            }
+
+            for (int j = 0; j < rows; j++)
+            {
+                TextBlock tableRowTitle = new TextBlock();
+                Grid.SetColumn(tableRowTitle, 0);
+                Grid.SetRow(tableRowTitle, j);
+                tableRowTitleList.Add(tableRowTitle);
+                contentGrid.Children.Add(tableRowTitleList[j]);
+            }
+
+            tableRowTitleList[0].Text = "Imie Prowadzącego";
+            tableRowTitleList[1].Text = "Nazwisko Prowadzącego";
+            tableRowTitleList[2].Text = "Kurs";
+            tableRowTitleList[3].Text = "ECTS";
+            tableRowTitleList[4].Text = "Grupa";
+            tableRowTitleList[5].Text = "Ocena";
+            tableRowTitleList[6].Text = "Status oceny";
+
+            for (int j = 0; j < rows; j++)
+            {
+                TextBox tableRowContent = new TextBox();
+                tableRowContent.Margin = margin;
+                tableRowContent.IsEnabled = false;
+                Grid.SetColumn(tableRowContent, 1);
+                Grid.SetColumnSpan(tableRowContent, columns - 1);
+                Grid.SetRow(tableRowContent, j);
+                tableRowContentList.Add(tableRowContent);
+                contentGrid.Children.Add(tableRowContentList[j]);
+            }
+
+            editDataButton = new Button();
+            editDataButton.Margin = margin;
+            Grid.SetColumn(editDataButton, columns - 1);
+            Grid.SetRow(editDataButton, all_rows - 1);
+            contentGrid.Children.Add(editDataButton);
+
+            editDataButton.Content = "Edytuj";
+
+            editDataButton.Click += new RoutedEventHandler(this.EdytujOcene_Click);
+        }
+
+        public void CreateIndeksOcenaEdycja()
+        {
+            Clear_Content();
+
+            ManageMainButtons(2);
+
+            int all_rows = 8;
+            int rows = all_rows - 1;
+            int columns = 6;
+
+            titleTextBlock.Text = "Kurs:... Grupa:...";
+
+            tableRowContentList = new List<TextBox>();
+            tableRowTitleList = new List<TextBlock>();
+
+            Style borderStyle = Application.Current.FindResource("TableBorder") as Style;
+
+            for (int i = 0; i < columns; i++)
+            {
+                contentGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+
+            for (int i = 0; i < all_rows; i++)
+            {
+                contentGrid.RowDefinitions.Add(new RowDefinition());
+            }
+
+
+            for (int j = 0; j < rows; j++)
+            {
+                Border infoBorder = new Border();
+                infoBorder.Style = borderStyle;
+                Grid.SetColumn(infoBorder, 0);
+                Grid.SetRow(infoBorder, j);
+                contentGrid.Children.Add(infoBorder);
+            }
+
+            for (int j = 0; j < rows; j++)
+            {
+                Border infoBorder = new Border();
+                infoBorder.Style = borderStyle;
+                Grid.SetColumn(infoBorder, 1);
+                Grid.SetColumnSpan(infoBorder, columns - 1);
+                Grid.SetRow(infoBorder, j);
+                contentGrid.Children.Add(infoBorder);
+            }
+
+            for (int j = 0; j < rows; j++)
+            {
+                TextBlock tableRowTitle = new TextBlock();
+                Grid.SetColumn(tableRowTitle, 0);
+                Grid.SetRow(tableRowTitle, j);
+                tableRowTitleList.Add(tableRowTitle);
+                contentGrid.Children.Add(tableRowTitleList[j]);
+            }
+
+            tableRowTitleList[0].Text = "Imie Prowadzącego";
+            tableRowTitleList[1].Text = "Nazwisko Prowadzącego";
+            tableRowTitleList[2].Text = "Kurs";
+            tableRowTitleList[3].Text = "ECTS";
+            tableRowTitleList[4].Text = "Grupa";
+            tableRowTitleList[5].Text = "Ocena";
+            tableRowTitleList[6].Text = "Status oceny";
+
+            for (int j = 0; j < rows; j++)
+            {
+                TextBox tableRowContent = new TextBox();
+                tableRowContent.Margin = margin;
+                tableRowContent.IsEnabled = false;
+                Grid.SetColumn(tableRowContent, 1);
+                Grid.SetColumnSpan(tableRowContent, columns - 1);
+                Grid.SetRow(tableRowContent, j);
+                tableRowContentList.Add(tableRowContent);
+                contentGrid.Children.Add(tableRowContentList[j]);
+            }
+
+            tableRowContentList[6].IsEnabled = true;
+
+            saveChangesButton = new Button();
+            saveChangesButton.Margin = margin;
+            Grid.SetColumn(saveChangesButton, columns - 1);
+            Grid.SetRow(saveChangesButton, all_rows - 1);
+            contentGrid.Children.Add(saveChangesButton);
+            saveChangesButton.Content = "Zapisz";
+            saveChangesButton.Click += new RoutedEventHandler(this.EdytujStatusOceny_Click);
+
+            dropChangesButton = new Button();
+            dropChangesButton.Margin = margin;
+            Grid.SetColumn(dropChangesButton, columns - 2);
+            Grid.SetRow(dropChangesButton, all_rows - 1);
+            contentGrid.Children.Add(dropChangesButton);
+            dropChangesButton.Content = "Anuluj";
+            dropChangesButton.Click += new RoutedEventHandler(this.AnulujEdycjeOceny_Click);
+        }
+
+
+
         public void CreateZajeciaPlanZajec()
         {
             Clear_Content();
@@ -627,9 +811,24 @@ namespace IndeksElektroniczny
             CreateDaneOsoboweEdycja();
         }
 
+        private void EdytujOcene_Click(object sender, RoutedEventArgs e)
+        {
+            CreateIndeksOcenaEdycja();
+        }
+
+        private void EdytujStatusOceny_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
         private void Anuluj_Click(object sender, RoutedEventArgs e)
         {
             CreateDaneOsobowe();
+        }
+        
+        private void AnulujEdycjeOceny_Click(object sender, RoutedEventArgs e)
+        {
+            CreateIndeksOceny();
         }
 
         private void Zajecia_Click(object sender, RoutedEventArgs e)
