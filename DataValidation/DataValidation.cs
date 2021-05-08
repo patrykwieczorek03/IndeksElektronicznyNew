@@ -555,17 +555,17 @@ namespace DataValidation
             return false;
         }
 
-        public static bool ValidGrade(string role, out string errorMessage)
+        public static bool ValidGrade(string grade, out string errorMessage)
         {
             errorMessage = "";
 
-            if (role.Length == 0)
+            if (grade.Length == 0)
             {
                 errorMessage = "Ocena wymagana.";
                 return false;
             }
 
-            if (role.Length > 3 || role.Length < 3)
+            if (grade.Length > 3 || grade.Length < 3)
             {
                 errorMessage = "Ocena - niepoprawna ilość znaków. Wymagana ilość znaków: 3";
                 return false;
@@ -573,7 +573,7 @@ namespace DataValidation
 
             string expression = "^[2345].[05]$";
 
-            if (Regex.IsMatch(role, expression))
+            if (Regex.IsMatch(grade, expression))
             {
                 return true;
             }

@@ -412,51 +412,6 @@ namespace IndeksElektroniczny
             contentDataGrid.MouseDoubleClick += new MouseButtonEventHandler(this.WybierzOcene_SelectionChanged);
 
             UpdateStudentGradesData();
-
-            //DataGridTextColumn c = new DataGridTextColumn();
-            //c.Header = "ID";
-            //contentDataGrid.Columns.Add(c);
-
-            //contentDataGrid.Name = "contentDataGrid123";
-
-            contentGrid.Children.Add(contentDataGrid);
-
-            //contentDataGrid123.ColumnCount = 4;
-
-            ////////////////////////////////////////////////
-            //contentDataGrid.Columns.Counts = columns;
-
-            //DataGridTextColumn name = new DataGridTextColumn();
-            //name.Header = "ID";
-            //contentDataGrid.Columns[0].Header = name.Header;
-
-            //DataGridTemplateColumn button = new DataGridTemplateColumn();
-            //button.Header = "Button";
-            //button.
-            //contentDataGrid.CanUserAddRows = false;
-            //contentDataGrid.CanUserDeleteRows = false;
-
-            //contentDataGrid.AlternatingRowBackground = Brushes.Gray;
-
-            //DataGridBu button = new DataGridViewButtonColumn();
-            //button.HeaderText = "Podgląd użytkownika";
-
-            //contentDataGrid.FrozenColumnCount = 0;
-            //contentDataGrid.Columns[0].Header = "ID";
-            //contentDataGrid.AutoGenerateColumns = false;
-            //DataGridColumn item = new DataGridColumn();
-            //contentDataGrid.Columns.Add("Text");
-
-            //contentDataGrid.Columns.Count();
-            //DataGridColumn kolumna = new DataGrid;
-            //kolumna.Header = "ID";
-            //DataGridColumn item;
-            //item.Header = "AAA";
-            //contentDataGrid.AutoGenerateColumns = true;
-            //contentDataGrid.Columns.Add(item);
-            //contentDataGrid.ItemsSource = "{Binding}";
-            //contentDataGrid.Columns[0].Header = "ID";
-            //contentDataGrid.Columns[1].ClipboardContentBinding = "ID";
         }
 
         public void CreateIndeksOcena()
@@ -624,25 +579,40 @@ namespace IndeksElektroniczny
                 contentGrid.Children.Add(tableRowContentList[j]);
             }
 
-            tableRowContentList[6].IsEnabled = true;
-
-            saveChangesButton = new Button();
-            saveChangesButton.Margin = margin;
-            Grid.SetColumn(saveChangesButton, columns - 1);
-            Grid.SetRow(saveChangesButton, all_rows - 1);
-            contentGrid.Children.Add(saveChangesButton);
-            saveChangesButton.Content = "Zapisz";
-            saveChangesButton.Click += new RoutedEventHandler(this.EdytujStatusOceny_Click);
-
-            dropChangesButton = new Button();
-            dropChangesButton.Margin = margin;
-            Grid.SetColumn(dropChangesButton, columns - 2);
-            Grid.SetRow(dropChangesButton, all_rows - 1);
-            contentGrid.Children.Add(dropChangesButton);
-            dropChangesButton.Content = "Anuluj";
-            dropChangesButton.Click += new RoutedEventHandler(this.AnulujEdycjeOceny_Click);
+            
 
             UpdateStudentGradeData();
+
+            if ( (!(tableRowContentList[5].Text == "0")) && (tableRowContentList[6].Text == "w")  )
+            {
+                tableRowContentList[6].IsEnabled = true;
+
+                saveChangesButton = new Button();
+                saveChangesButton.Margin = margin;
+                Grid.SetColumn(saveChangesButton, columns - 1);
+                Grid.SetRow(saveChangesButton, all_rows - 1);
+                contentGrid.Children.Add(saveChangesButton);
+                saveChangesButton.Content = "Zapisz";
+                saveChangesButton.Click += new RoutedEventHandler(this.EdytujStatusOceny_Click);
+
+                dropChangesButton = new Button();
+                dropChangesButton.Margin = margin;
+                Grid.SetColumn(dropChangesButton, columns - 2);
+                Grid.SetRow(dropChangesButton, all_rows - 1);
+                contentGrid.Children.Add(dropChangesButton);
+                dropChangesButton.Content = "Anuluj";
+                dropChangesButton.Click += new RoutedEventHandler(this.AnulujEdycjeOceny_Click);
+            }
+            else
+            {
+                dropChangesButton = new Button();
+                dropChangesButton.Margin = margin;
+                Grid.SetColumn(dropChangesButton, columns - 1);
+                Grid.SetRow(dropChangesButton, all_rows - 1);
+                contentGrid.Children.Add(dropChangesButton);
+                dropChangesButton.Content = "Anuluj";
+                dropChangesButton.Click += new RoutedEventHandler(this.AnulujEdycjeOceny_Click);
+            }
         }
 
 
@@ -699,49 +669,6 @@ namespace IndeksElektroniczny
             Grid.SetRowSpan(contentDataGrid, rows);
             contentGrid.Children.Add(contentDataGrid);
 
-
-
-
-
-            //// Set the column header style.
-            //DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
-
-            //columnHeaderStyle.BackColor = Color.Beige;
-            //columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
-            //dataGridView1.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
-
-            //// Set the column header names.
-            //dataGridView1.Columns[0].Name = "Recipe";
-            //dataGridView1.Columns[1].Name = "Category";
-            //dataGridView1.Columns[2].Name = "Main Ingredients";
-            //dataGridView1.Columns[3].Name = "Rating";
-
-
-            //contentDataGrid.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
-
-            //// Set the column header names.
-            //dataGridView1.Columns[0].Name = "Recipe";
-            //dataGridView1.Columns[1].Name = "Category";
-            //dataGridView1.Columns[2].Name = "Main Ingredients";
-            //dataGridView1.Columns[3].Name = "Rating";
-
-
-            //DateTime dtStart = new DateTime(2012, 11, 1);
-            //DateTime dtEnd = new DateTime(2012, 11, 7);
-
-            //for (int i = 0; i < dtEnd.Subtract(dtStart).Days; i++)
-            //{
-            //    TimeSpan counter = new TimeSpan(i, 0, 0, 0);
-
-            //    DataGridColumn column = new DataGridColumn(string.Format("col{0}", i));
-            //    //contentDataGrid.Columns.Add(string.Format("col{0}", i));
-            //}
-            //this.dataGridView1.Columns["your database column name"].HeaderText = " preferred name";
-
-
-            //contentDataGrid.Columns.Add("COS");
-            //contentDataGrid.Columns["Column with time"].DefaultCellStyle.Format = "HH:mm:ss";
-            //contentGrid.Columns[1].DefaultCellStyle.Format = "HH:mm";
             UpdateStudentTimeTableData();
         }
 

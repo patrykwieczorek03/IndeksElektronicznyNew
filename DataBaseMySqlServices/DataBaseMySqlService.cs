@@ -471,6 +471,14 @@ namespace DataBaseMySqlServices
             return false;
         }
 
+        public void DataBaseAddGrade(AddGradeProcedure grade)
+        {
+            command = new MySqlCommand($"call wprowadz_ocene({grade.NewGrade}, {grade.StudentID}, {grade.GroupID}, {grade.currentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+        }
+
         ~DataBaseMySqlService()
         {
             this.conection.Close();
