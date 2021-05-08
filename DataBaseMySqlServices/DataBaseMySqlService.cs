@@ -348,7 +348,7 @@ namespace DataBaseMySqlServices
 
         public void DataBaseAddUser(AddUserProcedure newUser)
         {
-            command = new MySqlCommand($"call dodaj_uzytkownika('{newUser.Pesel}', '{newUser.Name}', '{newUser.Surname}', '{newUser.DateOfBirth}', '{newUser.Sex}', '{newUser.ContactNumber}', '{newUser.Country}', '{newUser.City}', '{newUser.Street}', '{newUser.HouseNumber}', '{newUser.ApartmentNumber}', '{newUser.PostalCode}', '{newUser.Login}', '{newUser.Password}', '{newUser.Role}', '{newUser.StudyField}', {newUser.Degree}, {newUser.Semestr}, {newUser.CurrentUser});", this.conection);
+            command = new MySqlCommand($"call dodaj_uzytkownika('{newUser.Pesel}', '{newUser.Name}', '{newUser.Surname}', '{newUser.DateOfBirth}', '{newUser.Sex}', '{newUser.ContactNumber}', '{newUser.Country}', '{newUser.City}', '{newUser.Street}', '{newUser.HouseNumber}', '{newUser.ApartmentNumber}', '{newUser.PostalCode}', '{newUser.Login}', '{newUser.Password}', '{newUser.Role}', '{newUser.StudyField}', {newUser.Semestr}, {newUser.Degree}, {newUser.CurrentUser});", this.conection);
             adapter.InsertCommand = command;
             adapter.InsertCommand.ExecuteNonQuery();
             command.Dispose();
@@ -429,6 +429,45 @@ namespace DataBaseMySqlServices
             adapter.InsertCommand = command;
             adapter.InsertCommand.ExecuteNonQuery();
             command.Dispose();
+        }
+
+        public bool DataBaseCheckFieldOfStudy(FieldOfStudyCheckProcedure field)
+        {
+            command = new MySqlCommand($"CALL czy_kierunek_istnieje('{field.StudyField}', {field.Semestr}, {field.Degree})", this.conection);
+            reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Close();
+                return true;
+            }
+            reader.Close();
+            return false;
+        }
+
+        public bool DataBaseCheckPesel(string pesel_n)
+        {
+            command = new MySqlCommand($"SELECT * FROM dane_osobowe_i_kontaktowe where pesel='{pesel_n}'", this.conection);
+            reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Close();
+                return true;
+            }
+            reader.Close();
+            return false;
+        }
+
+        public bool DataBaseCheckLogin(string login_n)
+        {
+            command = new MySqlCommand($"SELECT * FROM uzytkownicy where login='{login_n}'", this.conection);
+            reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Close();
+                return true;
+            }
+            reader.Close();
+            return false;
         }
 
         ~DataBaseMySqlService()

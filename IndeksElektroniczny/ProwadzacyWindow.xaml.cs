@@ -676,7 +676,6 @@ namespace IndeksElektroniczny
         private void TwojeDane_Click(object sender, RoutedEventArgs e)
         {
             CreateDaneOsobowe();
-            //CreateOcenianieOcena();
         }
 
         private void Zajecia_Click(object sender, RoutedEventArgs e)

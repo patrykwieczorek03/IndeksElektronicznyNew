@@ -582,7 +582,6 @@ namespace IndeksElektroniczny
         private void ZapiszZmianyUzytkownika_Click(object sender, RoutedEventArgs e)
         {
             ChangeOtherUserData();
-            CreateUzytkownicyLista();
         }
 
         private void ZapiszUzytkownika_Click(object sender, RoutedEventArgs e)
@@ -651,6 +650,7 @@ namespace IndeksElektroniczny
         private void AddNewUser()
         {
             AddUserProcedure newUser = new AddUserProcedure();
+            FieldOfStudyCheckProcedure field = new FieldOfStudyCheckProcedure();
             string errorMessage = "";
             if (!DataValidation.DataValidation.ValidPesel(tableRowContentList[0].Text, out errorMessage))
             {
@@ -766,28 +766,57 @@ namespace IndeksElektroniczny
                     return;
                 }
 
-                if (!DataValidation.DataValidation.ValidDegree(tableRowContentList[16].Text, out errorMessage))
+                if (!DataValidation.DataValidation.ValidSemestr(tableRowContentList[16].Text, out errorMessage))
                 {
                     AlertWindow alertWindow = new AlertWindow(errorMessage);
                     alertWindow.ShowDialog();
                     return;
                 }
 
-                if (!DataValidation.DataValidation.ValidSemestr(tableRowContentList[17].Text, out errorMessage))
+                if (!DataValidation.DataValidation.ValidDegree(tableRowContentList[17].Text, out errorMessage))
                 {
                     AlertWindow alertWindow = new AlertWindow(errorMessage);
                     alertWindow.ShowDialog();
                     return;
                 }
+
+                field.StudyField = tableRowContentList[15].Text;
+                field.Semestr = int.Parse(tableRowContentList[16].Text);
+                field.Degree = int.Parse(tableRowContentList[17].Text);
+
+                if (!DbService.DataBaseCheckFieldOfStudy(field))
+                {
+                    errorMessage = "Nie istnieje kierunek lub nie ma takiego semestru na danym stopniu studiów.";
+                    AlertWindow alertWindow = new AlertWindow(errorMessage);
+                    alertWindow.ShowDialog();
+                    return;
+                }
+
                 newUser.StudyField = tableRowContentList[15].Text;
-                newUser.Degree = int.Parse(tableRowContentList[16].Text);
-                newUser.Semestr = int.Parse(tableRowContentList[17].Text);
+                newUser.Semestr = int.Parse(tableRowContentList[16].Text);
+                newUser.Degree = int.Parse(tableRowContentList[17].Text);
             }
             else
             {
                 newUser.StudyField = "";
                 newUser.Degree = 0;
                 newUser.Semestr = 0;
+            }
+
+            if (DbService.DataBaseCheckPesel(tableRowContentList[0].Text))
+            {
+                errorMessage = "Taki pesel już istnieje w bazie danych.";
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (DbService.DataBaseCheckLogin(tableRowContentList[12].Text))
+            {
+                errorMessage = "Taki login już istnieje w bazie danych.";
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
             }
 
             newUser.Pesel = tableRowContentList[0].Text;
@@ -807,6 +836,10 @@ namespace IndeksElektroniczny
             newUser.Role = tableRowContentList[14].Text;
             newUser.CurrentUser = signInUser.UserID;
             DbService.DataBaseAddUser(newUser);
+
+            errorMessage = "Dodano użytkownika.";
+            AlertWindow alertWindow2 = new AlertWindow(errorMessage);
+            alertWindow2.ShowDialog();
         }
 
         private void ChangeUserData()
@@ -998,6 +1031,14 @@ namespace IndeksElektroniczny
                 return;
             }
 
+            if (DbService.DataBaseCheckLogin(tableRowContentList[12].Text))
+            {
+                errorMessage = "Taki login już istnieje w bazie danych.";
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
             user.Name = tableRowContentList[1].Text;
             user.Surname = tableRowContentList[2].Text;
             user.Sex = tableRowContentList[4].Text;
@@ -1019,6 +1060,7 @@ namespace IndeksElektroniczny
             DbService.DataBaseChangeLoginPassword(loginPassword);
             AlertWindow alertWindow2 = new AlertWindow("Zmiana danych przebiegła pomyślnie.");
             alertWindow2.ShowDialog();
+            CreateUzytkownicyLista();
         }
     }
 }

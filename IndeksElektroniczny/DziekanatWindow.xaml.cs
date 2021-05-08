@@ -679,6 +679,7 @@ namespace IndeksElektroniczny
         private void AddNewStudent()
         {
             AddUserProcedure newUser = new AddUserProcedure();
+            FieldOfStudyCheckProcedure field = new FieldOfStudyCheckProcedure();
             string errorMessage = "";
 
             if (!DataValidation.DataValidation.ValidPesel(tableRowContentList[0].Text, out errorMessage))
@@ -795,26 +796,55 @@ namespace IndeksElektroniczny
                     return;
                 }
 
-                if (!DataValidation.DataValidation.ValidDegree(tableRowContentList[16].Text, out errorMessage))
+                if (!DataValidation.DataValidation.ValidSemestr(tableRowContentList[16].Text, out errorMessage))
                 {
                     AlertWindow alertWindow = new AlertWindow(errorMessage);
                     alertWindow.ShowDialog();
                     return;
                 }
 
-                if (!DataValidation.DataValidation.ValidSemestr(tableRowContentList[17].Text, out errorMessage))
+                if (!DataValidation.DataValidation.ValidDegree(tableRowContentList[17].Text, out errorMessage))
                 {
                     AlertWindow alertWindow = new AlertWindow(errorMessage);
                     alertWindow.ShowDialog();
                     return;
                 }
+
+                field.StudyField = tableRowContentList[15].Text;
+                field.Semestr = int.Parse(tableRowContentList[16].Text);
+                field.Degree = int.Parse(tableRowContentList[17].Text);
+
+                if (!DbService.DataBaseCheckFieldOfStudy(field))
+                {
+                    errorMessage = "Nie istnieje kierunek lub nie ma takiego semestru na danym stopniu studiów.";
+                    AlertWindow alertWindow = new AlertWindow(errorMessage);
+                    alertWindow.ShowDialog();
+                    return;
+                }
+
                 newUser.StudyField = tableRowContentList[15].Text;
-                newUser.Degree = int.Parse(tableRowContentList[16].Text);
-                newUser.Semestr = int.Parse(tableRowContentList[17].Text);
+                newUser.Semestr = int.Parse(tableRowContentList[16].Text);
+                newUser.Degree = int.Parse(tableRowContentList[17].Text);
             }
             else
             {
                 errorMessage = "Jako pracownik dziekanatu możesz dodać tylko studenta.\n" + "Jako rola użytkownika musisz więc wpisać 's'";
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (DbService.DataBaseCheckPesel(tableRowContentList[0].Text))
+            {
+                errorMessage = "Taki pesel już istnieje w bazie danych.";
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (DbService.DataBaseCheckLogin(tableRowContentList[12].Text))
+            {
+                errorMessage = "Taki login już istnieje w bazie danych.";
                 AlertWindow alertWindow = new AlertWindow(errorMessage);
                 alertWindow.ShowDialog();
                 return;
@@ -837,6 +867,10 @@ namespace IndeksElektroniczny
             newUser.Role = tableRowContentList[14].Text;
             newUser.CurrentUser = signInUser.UserID;
             DbService.DataBaseAddUser(newUser);
+
+            errorMessage = "Dodano studenta.";
+            AlertWindow alertWindow2 = new AlertWindow(errorMessage);
+            alertWindow2.ShowDialog();
         }
 
         private void ChangeUserData()
@@ -943,6 +977,7 @@ namespace IndeksElektroniczny
         {
             ChangeStudentDataProcedure changedFieldOfStudy = new ChangeStudentDataProcedure();
             ChangeDataProcedure changedStudent = new ChangeDataProcedure();
+            FieldOfStudyCheckProcedure field = new FieldOfStudyCheckProcedure();
             string errorMessage = "";
 
             if (!DataValidation.DataValidation.ValidName(tableRowContentList[2].Text, out errorMessage))
@@ -1022,15 +1057,27 @@ namespace IndeksElektroniczny
                 return;
             }
 
-            if (!DataValidation.DataValidation.ValidDegree(tableRowContentList[14].Text, out errorMessage))
+            if (!DataValidation.DataValidation.ValidSemestr(tableRowContentList[14].Text, out errorMessage))
             {
                 AlertWindow alertWindow = new AlertWindow(errorMessage);
                 alertWindow.ShowDialog();
                 return;
             }
 
-            if (!DataValidation.DataValidation.ValidSemestr(tableRowContentList[15].Text, out errorMessage))
+            if (!DataValidation.DataValidation.ValidDegree(tableRowContentList[15].Text, out errorMessage))
             {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            field.StudyField = tableRowContentList[13].Text;
+            field.Semestr = int.Parse(tableRowContentList[14].Text);
+            field.Degree = int.Parse(tableRowContentList[15].Text);
+
+            if (!DbService.DataBaseCheckFieldOfStudy(field))
+            {
+                errorMessage = "Nie istnieje kierunek lub nie ma takiego semestru na danym stopniu studiów.";
                 AlertWindow alertWindow = new AlertWindow(errorMessage);
                 alertWindow.ShowDialog();
                 return;

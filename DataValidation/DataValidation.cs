@@ -463,14 +463,14 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[0-9]$";
+            string expression = "^[12]$";
 
             if (Regex.IsMatch(degree, expression))
             {
                 return true;
             }
 
-            errorMessage = "Stopień studiów powinien mieć odpowiedni format.\n" + "Na przykład: '1'";
+            errorMessage = "Stopień studiów powinien mieć odpowiedni format i być z zakresu 1-2.\n" + "Na przykład: '1'";
             return false;
         }
 
@@ -490,14 +490,14 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[0-9]$";
+            string expression = "^[1-7]$";
 
             if (Regex.IsMatch(semestr, expression))
             {
                 return true;
             }
 
-            errorMessage = "Semestr powinien mieć odpowiedni format.\n" + "Na przykład: '1'";
+            errorMessage = "Semestr powinien mieć odpowiedni format i być z zakresu 1-7.\n" + "Na przykład: '1'";
             return false;
         }
 
@@ -552,6 +552,33 @@ namespace DataValidation
             }
 
             errorMessage = "Status oceny powinien mieć odpowiedni format.\n" + "Na przykład:\n" + "'o' - odrzucenie reklamacja\n" + "'p' - poprawa oceny\n" + "'w' - wprowadzenie oceny\n";
+            return false;
+        }
+
+        public static bool ValidGrade(string role, out string errorMessage)
+        {
+            errorMessage = "";
+
+            if (role.Length == 0)
+            {
+                errorMessage = "Ocena wymagana.";
+                return false;
+            }
+
+            if (role.Length > 3 || role.Length < 3)
+            {
+                errorMessage = "Ocena - niepoprawna ilość znaków. Wymagana ilość znaków: 3";
+                return false;
+            }
+
+            string expression = "^[2345].[05]$";
+
+            if (Regex.IsMatch(role, expression))
+            {
+                return true;
+            }
+
+            errorMessage = "Ocena powinna mieć odpowiedni format.\n" + "Na przykład: '4.5'";
             return false;
         }
     }

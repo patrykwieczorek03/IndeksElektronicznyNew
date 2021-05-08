@@ -412,7 +412,7 @@ namespace IndeksElektroniczny
 
             //contentDataGrid.Name = "contentDataGrid123";
 
-            //contentGrid.Children.Add(contentDataGrid);
+            contentGrid.Children.Add(contentDataGrid);
 
             //contentDataGrid123.ColumnCount = 4;
 
