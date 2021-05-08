@@ -130,8 +130,10 @@ namespace DataBaseMySqlServices
                     studentTimeTableData.Room = int.Parse(reader.GetValue(6).ToString());
                     studentTimeTableData.DayOfWeek = int.Parse(reader.GetValue(7).ToString());
                     studentTimeTableData.TypeOfClasses = char.Parse(reader.GetValue(8).ToString());
-                    studentTimeTableData.StartTime = DateTime.Parse(reader.GetValue(9).ToString());
-                    studentTimeTableData.FinishTime = DateTime.Parse(reader.GetValue(10).ToString());
+                    DateTime arg1 = DateTime.Parse(reader.GetValue(9).ToString());
+                    DateTime arg2 = DateTime.Parse(reader.GetValue(10).ToString());
+                    studentTimeTableData.StartTime = TimeSpan.Parse(arg1.Hour.ToString() + ":" + arg1.Minute.ToString());
+                    studentTimeTableData.FinishTime = TimeSpan.Parse(arg2.Hour.ToString() + ":" + arg2.Minute.ToString());
                     studentTimeTableDatas.Add(studentTimeTableData);
                 }
             }
