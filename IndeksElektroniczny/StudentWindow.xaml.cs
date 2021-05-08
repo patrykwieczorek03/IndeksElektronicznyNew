@@ -44,6 +44,8 @@ namespace IndeksElektroniczny
         List<StudentGradesDataView> studentGradesDatas;
         List<StudentTimeTableDataView> studentTimeTableDatas;
         List<BrowseGroupsDataView> browseGroupsDatas;
+        int choosenMembershipID;
+        StudentGradesDataView choosenStudentGrade;
 
 
         /// <summary>
@@ -405,6 +407,11 @@ namespace IndeksElektroniczny
             Grid.SetColumnSpan(contentDataGrid, columns - 1);
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows);
+            contentGrid.Children.Add(contentDataGrid);
+
+            contentDataGrid.MouseDoubleClick += new MouseButtonEventHandler(this.WybierzOcene_SelectionChanged);
+
+            UpdateStudentGradesData();
 
             //DataGridTextColumn c = new DataGridTextColumn();
             //c.Header = "ID";
@@ -412,7 +419,6 @@ namespace IndeksElektroniczny
 
             //contentDataGrid.Name = "contentDataGrid123";
 
-            //contentGrid.Children.Add(contentDataGrid);
 
             //contentDataGrid123.ColumnCount = 4;
 
@@ -437,11 +443,9 @@ namespace IndeksElektroniczny
             //contentDataGrid.FrozenColumnCount = 0;
             //contentDataGrid.Columns[0].Header = "ID";
             //contentDataGrid.AutoGenerateColumns = false;
-
-            UpdateStudentGradesData();
             //DataGridColumn item = new DataGridColumn();
             //contentDataGrid.Columns.Add("Text");
-            
+
             //contentDataGrid.Columns.Count();
             //DataGridColumn kolumna = new DataGrid;
             //kolumna.Header = "ID";
@@ -539,6 +543,8 @@ namespace IndeksElektroniczny
             editDataButton.Content = "Edytuj";
 
             editDataButton.Click += new RoutedEventHandler(this.EdytujOcene_Click);
+
+            UpdateStudentGradeData();
         }
 
         public void CreateIndeksOcenaEdycja()
@@ -634,6 +640,8 @@ namespace IndeksElektroniczny
             contentGrid.Children.Add(dropChangesButton);
             dropChangesButton.Content = "Anuluj";
             dropChangesButton.Click += new RoutedEventHandler(this.AnulujEdycjeOceny_Click);
+
+            UpdateStudentGradeData();
         }
 
 
@@ -935,6 +943,16 @@ namespace IndeksElektroniczny
             CreateZajeciaPlanZajec();
         }
 
+        private void WybierzOcene_SelectionChanged(object sender, MouseButtonEventArgs e)
+        {
+            if (this.contentDataGrid.SelectedIndex >= 0 && this.contentDataGrid.AlternationCount >= 0)
+            {
+                choosenStudentGrade = (StudentGradesDataView)this.contentDataGrid.SelectedItems[0];
+                choosenMembershipID = choosenStudentGrade.MembershipID;
+                CreateIndeksOcena();
+            }
+        }
+
         private void UpdateUserData()
         {
             userDate = DbService.DataBaseShowUserData(signInUser);
@@ -965,6 +983,17 @@ namespace IndeksElektroniczny
         {
             studentGradesDatas = DbService.DataBaseShowStudentGradesData(signInUser);
             contentDataGrid.ItemsSource = studentGradesDatas.ToList();
+        }
+
+        private void UpdateStudentGradeData()
+        {
+            tableRowContentList[0].Text = choosenStudentGrade.Name;
+            tableRowContentList[1].Text = choosenStudentGrade.Surname;
+            tableRowContentList[2].Text = choosenStudentGrade.NameOfCoure;
+            tableRowContentList[3].Text = choosenStudentGrade.Ects.ToString();
+            tableRowContentList[4].Text = choosenStudentGrade.GroupID.ToString();
+            tableRowContentList[5].Text = choosenStudentGrade.Grade.ToString();
+            tableRowContentList[6].Text = choosenStudentGrade.GradeStatus.ToString();
         }
 
         private void UpdateStudentTimeTableData()

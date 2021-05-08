@@ -43,6 +43,10 @@ namespace IndeksElektroniczny
         List<LecturerStudentsDataView> lecturerStudentsDatas;
         int choosenCourseID;
         string choosenCourseName;
+        int choosenStudentIndexNumber;
+        int choosenStudentGroupID;
+        LecturerStudentsDataView choosenStudent;
+
 
         public ProwadzacyWindow(Window loginWindow, User signInUser_a, DataBaseMySqlService DbService_a)
         {
@@ -391,6 +395,8 @@ namespace IndeksElektroniczny
             Grid.SetRowSpan(contentDataGrid, rows - 1);
             contentGrid.Children.Add(contentDataGrid);
 
+            contentDataGrid.MouseDoubleClick += new MouseButtonEventHandler(this.WybierzStudenta_SelectionChanged);
+
             UpdateLecturerStudents();
         }
 
@@ -478,6 +484,8 @@ namespace IndeksElektroniczny
             editDataButton.Content = "Edytuj";
 
             editDataButton.Click += new RoutedEventHandler(this.EdytujOcene_Click);
+
+            UpdateStudentGradeData();
         }
 
         public void CreateOcenianieOcenaEdycja()
@@ -573,6 +581,8 @@ namespace IndeksElektroniczny
             contentGrid.Children.Add(dropChangesButton);
             dropChangesButton.Content = "Anuluj";
             dropChangesButton.Click += new RoutedEventHandler(this.AnulujEdycjeOceny_Click);
+
+            UpdateStudentGradeData();
         }
 
         private void Clear_Content()
@@ -689,6 +699,17 @@ namespace IndeksElektroniczny
             CreateZajeciaPrzegladanieGrup();
         }
 
+        private void WybierzStudenta_SelectionChanged(object sender, MouseButtonEventArgs e)
+        {
+            if (this.contentDataGrid.SelectedIndex >= 0 && this.contentDataGrid.AlternationCount >= 0)
+            {
+                choosenStudent = (LecturerStudentsDataView)this.contentDataGrid.SelectedItems[0];
+                choosenStudentIndexNumber = choosenStudent.IndexNumber;
+                choosenStudentGroupID = choosenStudent.GroupID;
+                CreateOcenianieOcena();
+            }
+        }
+
         private void WybierzUzytkownika_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
             if (this.contentDataGrid.SelectedIndex >= 0 && this.contentDataGrid.AlternationCount >= 0)
@@ -734,6 +755,16 @@ namespace IndeksElektroniczny
         {
             lecturerStudentsDatas = DbService.DataBaseShowLecturerStudents(signInUser);
             contentDataGrid.ItemsSource = lecturerStudentsDatas.ToList();
+        }
+
+        private void UpdateStudentGradeData()
+        {
+            tableRowContentList[0].Text = choosenStudent.IndexNumber.ToString();
+            tableRowContentList[1].Text = choosenStudent.NameOfCoure;
+            tableRowContentList[2].Text = choosenStudent.GroupID.ToString();
+            tableRowContentList[3].Text = choosenStudent.TypeOfClasses.ToString();
+            tableRowContentList[4].Text = choosenStudent.Grade.ToString();
+            tableRowContentList[5].Text = choosenStudent.GradeStatus.ToString();
         }
 
         private void ChangeUserData()

@@ -8,6 +8,7 @@ namespace DataBaseMySqlServices.Models
 {
     public class StudentGradesDataView
     {
+        public int MembershipID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string NameOfCoure { get; set; }
