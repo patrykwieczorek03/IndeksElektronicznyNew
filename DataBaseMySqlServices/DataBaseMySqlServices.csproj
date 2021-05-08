@@ -66,6 +66,9 @@
     <Compile Include="Models\AddUserProcedure.cs" />
     <Compile Include="Models\BrowseGroupsDataView.cs" />
     <Compile Include="Models\ChangeDataProcedure.cs" />
+    <Compile Include="Models\ChangeLoginPasswordProcedure.cs" />
+    <Compile Include="Models\ChangeStudentDataProcedure.cs" />
+    <Compile Include="Models\DeleteUserProcedure.cs" />
     <Compile Include="Models\LecturerCursesDataView.cs" />
     <Compile Include="Models\LecturerGroupsDataView.cs" />
     <Compile Include="Models\LecturerStudentsDataView.cs" />

@@ -407,6 +407,30 @@ namespace DataBaseMySqlServices
             command.Dispose();
         }
 
+        public void DataBaseDeleteUser(DeleteUserProcedure userToDrop)
+        {
+            command = new MySqlCommand($"call usun_uzytkownika({userToDrop.UserToDrop}, {userToDrop.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+        }
+
+        public void DataBaseChangeFieldOfStudyStudent(ChangeStudentDataProcedure studentFieldOfStudy)
+        {
+            command = new MySqlCommand($"call zmien_kierunek_semestr_stopien({studentFieldOfStudy.StudentID}, '{studentFieldOfStudy.StudyField}', {studentFieldOfStudy.Semestr}, {studentFieldOfStudy.Degree}, {studentFieldOfStudy.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+        }
+
+        public void DataBaseChangeLoginPassword(ChangeLoginPasswordProcedure user)
+        {
+            command = new MySqlCommand($"call zmien_login_haslo({user.UserToChangeLoginPassword}, '{user.Login}', '{user.Password}', {user.CurrentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+        }
+
         ~DataBaseMySqlService()
         {
             this.conection.Close();

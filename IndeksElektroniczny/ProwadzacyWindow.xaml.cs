@@ -25,6 +25,7 @@ namespace IndeksElektroniczny
         public List<TextBox> tableRowContentList { get; set; }
         public List<TextBlock> tableRowTitleList { get; set; }
         public Button buttonSearch { get; set; }
+        public Button goBackButton { get; set; }
         public Button saveChangesButton { get; set; }
         public Button dropChangesButton { get; set; }
         public Button editDataButton { get; set; }
@@ -295,7 +296,7 @@ namespace IndeksElektroniczny
 
             ManageMainButtons(4);
 
-            int rows = 4;
+            int rows = 5;
             int columns = 5;
 
             titleTextBlock.Text = "Grupy kursu: " + choosenCourseName;
@@ -319,8 +320,18 @@ namespace IndeksElektroniczny
             Grid.SetColumn(contentDataGrid, 0);
             Grid.SetColumnSpan(contentDataGrid, columns);
             Grid.SetRow(contentDataGrid, 0);
-            Grid.SetRowSpan(contentDataGrid, rows);
+            Grid.SetRowSpan(contentDataGrid, rows-1);
             contentGrid.Children.Add(contentDataGrid);
+
+            goBackButton = new Button();
+            goBackButton.Margin = margin;
+            Grid.SetColumn(goBackButton, columns - 1);
+            Grid.SetRow(goBackButton, rows);
+            contentGrid.Children.Add(goBackButton);
+
+            goBackButton.Content = "Powrót";
+
+            goBackButton.Click += new RoutedEventHandler(this.Powrot_Click);
 
             UpdateLecturerGroups();
         }
@@ -454,6 +465,11 @@ namespace IndeksElektroniczny
         private void Anuluj_Click(object sender, RoutedEventArgs e)
         {
             CreateDaneOsobowe();
+        }
+
+        private void Powrot_Click(object sender, RoutedEventArgs e)
+        {
+            CreateZajeciaProwadzonekursy();
         }
 
         private void Szukaj_Click(object sender, RoutedEventArgs e)

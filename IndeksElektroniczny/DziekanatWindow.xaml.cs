@@ -311,7 +311,7 @@ namespace IndeksElektroniczny
             int rows = all_rows - 1;
             int columns = 6;
 
-            titleTextBlock.Text = "Dane nowego studenta";
+            titleTextBlock.Text = "Dane studenta";
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
@@ -395,6 +395,15 @@ namespace IndeksElektroniczny
             Grid.SetRow(saveStudentButton, all_rows - 1);
             contentGrid.Children.Add(saveStudentButton);
 
+
+            dropChangesButton = new Button();
+            dropChangesButton.Margin = margin;
+            Grid.SetColumn(dropChangesButton, columns - 3);
+            Grid.SetRow(dropChangesButton, rows);
+            contentGrid.Children.Add(dropChangesButton);
+            dropChangesButton.Content = "Anuluj";
+            dropChangesButton.Click += new RoutedEventHandler(this.AnulujZmianyStudenta_Click);
+
             deleteStudentButton = new Button();
             deleteStudentButton.Margin = margin;
             Grid.SetColumn(deleteStudentButton, columns - 2);
@@ -408,7 +417,6 @@ namespace IndeksElektroniczny
             Grid.SetColumn(saveStudentChangesButton, columns - 1);
             Grid.SetRow(saveStudentChangesButton, rows);
             contentGrid.Children.Add(saveStudentChangesButton);
-
             saveStudentChangesButton.Content = "Zapisz zmiany";
             saveStudentChangesButton.Click += new RoutedEventHandler(this.ZapiszZmianyStudenta_Click);
 
@@ -585,9 +593,14 @@ namespace IndeksElektroniczny
             CreateDaneOsobowe();
         }
 
+        private void AnulujZmianyStudenta_Click(object sender, RoutedEventArgs e)
+        {
+            CreateStudenciLista();
+        }
+
         private void ZapiszZmianyStudenta_Click(object sender, RoutedEventArgs e)
         {
-
+            ChangeStudentData();
         }
 
         private void ZapiszStudenta_Click(object sender, RoutedEventArgs e)
@@ -597,7 +610,14 @@ namespace IndeksElektroniczny
 
         private void UsunStudenta_Click(object sender, RoutedEventArgs e)
         {
-
+            bool answer = false;
+            ZapytanieWindow question = new ZapytanieWindow("Czy na pewno chcesz usunąć studenta?");
+            answer = question.ShowDialog(true);
+            if (answer)
+            {
+                DeleteStudent();
+                CreateStudenciLista();
+            }
         }
 
         private void WybierzUzytkownika_SelectionChanged(object sender, MouseButtonEventArgs e)
@@ -909,6 +929,135 @@ namespace IndeksElektroniczny
             AlertWindow alertWindow2 = new AlertWindow("Zmiana danych przebiegła pomyślnie.");
             alertWindow2.ShowDialog();
             CreateDaneOsobowe();
+        }
+
+        private void DeleteStudent()
+        {
+            DeleteUserProcedure user = new DeleteUserProcedure();
+            user.UserToDrop = choosenUserID;
+            user.CurrentUser = signInUser.UserID;
+            DbService.DataBaseDeleteUser(user);
+        }
+
+        private void ChangeStudentData()
+        {
+            ChangeStudentDataProcedure changedFieldOfStudy = new ChangeStudentDataProcedure();
+            ChangeDataProcedure changedStudent = new ChangeDataProcedure();
+            string errorMessage = "";
+
+            if (!DataValidation.DataValidation.ValidName(tableRowContentList[2].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSurname(tableRowContentList[3].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSex(tableRowContentList[5].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidContactNumber(tableRowContentList[6].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidCountry(tableRowContentList[7].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidCity(tableRowContentList[8].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidStreet(tableRowContentList[9].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidHouseNumber(tableRowContentList[10].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidApartmentNumber(tableRowContentList[11].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidPostalCode(tableRowContentList[12].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidStudyField(tableRowContentList[13].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidDegree(tableRowContentList[14].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidSemestr(tableRowContentList[15].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            changedStudent.Name = tableRowContentList[2].Text;
+            changedStudent.Surname = tableRowContentList[3].Text;
+            changedStudent.Sex = tableRowContentList[5].Text;
+            changedStudent.ContactNumber = tableRowContentList[6].Text;
+            changedStudent.Country = tableRowContentList[7].Text;
+            changedStudent.City = tableRowContentList[8].Text;
+            changedStudent.Street = tableRowContentList[9].Text;
+            changedStudent.HouseNumber = tableRowContentList[10].Text;
+            changedStudent.ApartmentNumber = tableRowContentList[11].Text;
+            changedStudent.PostalCode = tableRowContentList[12].Text;
+            changedStudent.CurrentUser = choosenUserID;
+
+            changedFieldOfStudy.StudentID = int.Parse(tableRowContentList[0].Text);
+            changedFieldOfStudy.StudyField = tableRowContentList[13].Text;
+            changedFieldOfStudy.Semestr = int.Parse(tableRowContentList[14].Text);
+            changedFieldOfStudy.Degree = int.Parse(tableRowContentList[15].Text);
+            changedFieldOfStudy.CurrentUser = signInUser.UserID;
+
+            DbService.DataBaseChangeUserData(changedStudent);
+            DbService.DataBaseChangeFieldOfStudyStudent(changedFieldOfStudy);
+            AlertWindow alertWindow2 = new AlertWindow("Zmiana danych przebiegła pomyślnie.");
+            alertWindow2.ShowDialog();
         }
     }
 }
