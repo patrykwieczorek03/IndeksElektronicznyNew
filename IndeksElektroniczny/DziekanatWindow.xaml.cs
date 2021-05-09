@@ -509,6 +509,9 @@ namespace IndeksElektroniczny
                 contentGrid.Children.Add(tableRowContentList[j]);
             }
 
+            tableRowContentList[14].Text = "s";
+            tableRowContentList[14].IsEnabled = false;
+
             saveStudentButton = new Button();
             saveStudentButton.Margin = margin;
             Grid.SetColumn(saveStudentButton, columns - 1);

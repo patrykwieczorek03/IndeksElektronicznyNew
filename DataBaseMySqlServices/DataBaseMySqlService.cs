@@ -200,9 +200,9 @@ namespace DataBaseMySqlServices
                     lecturerStudentsData.NameOfCoure = reader.GetValue(1).ToString();
                     lecturerStudentsData.GroupID = int.Parse(reader.GetValue(2).ToString());
                     lecturerStudentsData.TypeOfClasses = char.Parse(reader.GetValue(3).ToString());
-                    if (!DBNull.Value.Equals(reader.GetValue(4))) lecturerStudentsData.Grade = float.Parse(reader.GetValue(5).ToString());
+                    if (!DBNull.Value.Equals(reader.GetValue(4))) lecturerStudentsData.Grade = float.Parse(reader.GetValue(4).ToString());
                     else lecturerStudentsData.Grade = 0.0F;
-                    if (!DBNull.Value.Equals(reader.GetValue(5))) lecturerStudentsData.GradeStatus = char.Parse(reader.GetValue(6).ToString());
+                    if (!DBNull.Value.Equals(reader.GetValue(5))) lecturerStudentsData.GradeStatus = char.Parse(reader.GetValue(5).ToString());
                     else lecturerStudentsData.GradeStatus = 'E';
                     lecturerStudentsDatas.Add(lecturerStudentsData);
                 }
@@ -473,7 +473,22 @@ namespace DataBaseMySqlServices
 
         public void DataBaseAddGrade(AddGradeProcedure grade)
         {
-            command = new MySqlCommand($"call wprowadz_ocene({grade.NewGrade}, {grade.StudentID}, {grade.GroupID}, {grade.currentUser});", this.conection);
+            command = new MySqlCommand($"call wprowadz_ocene('{grade.NewGrade}', {grade.StudentID}, {grade.GroupID}, {grade.currentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+        }
+
+        public void DataBaseChangeGrade(ChangeGradeProcedure grade)
+        {
+            if (grade.GradeStatus == "o")
+            {
+                command = new MySqlCommand($"odrzuc_reklamacje({grade.StudentID}, {grade.GroupID}, {grade.currentUser});", this.conection);
+            }
+            else if (grade.GradeStatus == "p")
+            {
+                command = new MySqlCommand($"popraw_ocene('{grade.NewGrade}' ,{grade.StudentID}, {grade.GroupID}, {grade.currentUser});", this.conection);
+            }
             adapter.InsertCommand = command;
             adapter.InsertCommand.ExecuteNonQuery();
             command.Dispose();

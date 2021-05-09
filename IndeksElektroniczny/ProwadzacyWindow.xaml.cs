@@ -405,7 +405,7 @@ namespace IndeksElektroniczny
         {
             Clear_Content();
 
-            ManageMainButtons(2);
+            ManageMainButtons(4);
 
             int all_rows = 7;
             int rows = all_rows - 1;
@@ -476,24 +476,45 @@ namespace IndeksElektroniczny
                 contentGrid.Children.Add(tableRowContentList[j]);
             }
 
-            editDataButton = new Button();
-            editDataButton.Margin = margin;
-            Grid.SetColumn(editDataButton, columns - 1);
-            Grid.SetRow(editDataButton, all_rows - 1);
-            contentGrid.Children.Add(editDataButton);
-
-            editDataButton.Content = "Edytuj";
-
-            editDataButton.Click += new RoutedEventHandler(this.EdytujOcene_Click);
-
             UpdateStudentGradeData();
+
+            if (tableRowContentList[5].Text == "E" || tableRowContentList[5].Text == "n")
+            {
+                editDataButton = new Button();
+                editDataButton.Margin = margin;
+                Grid.SetColumn(editDataButton, columns - 1);
+                Grid.SetRow(editDataButton, all_rows - 1);
+                contentGrid.Children.Add(editDataButton);
+                editDataButton.Content = "Edytuj";
+                editDataButton.Click += new RoutedEventHandler(this.EdytujOcene_Click);
+
+                dropChangesButton = new Button();
+                dropChangesButton.Margin = margin;
+                Grid.SetColumn(dropChangesButton, columns - 2);
+                Grid.SetRow(dropChangesButton, all_rows - 1);
+                contentGrid.Children.Add(dropChangesButton);
+
+                dropChangesButton.Content = "Powrót";
+
+                dropChangesButton.Click += new RoutedEventHandler(this.Ocenianie_Click);
+            }
+            else
+            {
+                dropChangesButton = new Button();
+                dropChangesButton.Margin = margin;
+                Grid.SetColumn(dropChangesButton, columns - 1);
+                Grid.SetRow(dropChangesButton, all_rows - 1);
+                contentGrid.Children.Add(dropChangesButton);
+                dropChangesButton.Content = "Powrót";
+                dropChangesButton.Click += new RoutedEventHandler(this.Ocenianie_Click);
+            }
         }
 
         public void CreateOcenianieOcenaEdycja()
         {
             Clear_Content();
 
-            ManageMainButtons(2);
+            ManageMainButtons(4);
 
             int all_rows = 7;
             int rows = all_rows - 1;
@@ -567,37 +588,27 @@ namespace IndeksElektroniczny
             UpdateStudentGradeData();
             currentGradeStatus = tableRowContentList[5].Text;
 
-            if ((tableRowContentList[5].Text == "E") || (tableRowContentList[5].Text == "n"))
-            {
-                tableRowContentList[4].IsEnabled = true;
-                tableRowContentList[5].IsEnabled = true;
 
-                saveChangesButton = new Button();
-                saveChangesButton.Margin = margin;
-                Grid.SetColumn(saveChangesButton, columns - 1);
-                Grid.SetRow(saveChangesButton, all_rows - 1);
-                contentGrid.Children.Add(saveChangesButton);
-                saveChangesButton.Content = "Zapisz";
-                saveChangesButton.Click += new RoutedEventHandler(this.EdytujStatusOceny_Click);
+            tableRowContentList[4].IsEnabled = true;
+            tableRowContentList[5].IsEnabled = true;
 
-                dropChangesButton = new Button();
-                dropChangesButton.Margin = margin;
-                Grid.SetColumn(dropChangesButton, columns - 2);
-                Grid.SetRow(dropChangesButton, all_rows - 1);
-                contentGrid.Children.Add(dropChangesButton);
-                dropChangesButton.Content = "Anuluj";
-                dropChangesButton.Click += new RoutedEventHandler(this.AnulujEdycjeOceny_Click);
-            }
-            else
-            {
-                dropChangesButton = new Button();
-                dropChangesButton.Margin = margin;
-                Grid.SetColumn(dropChangesButton, columns - 1);
-                Grid.SetRow(dropChangesButton, all_rows - 1);
-                contentGrid.Children.Add(dropChangesButton);
-                dropChangesButton.Content = "Anuluj";
-                dropChangesButton.Click += new RoutedEventHandler(this.AnulujEdycjeOceny_Click);
-            }
+            saveChangesButton = new Button();
+            saveChangesButton.Margin = margin;
+            Grid.SetColumn(saveChangesButton, columns - 1);
+            Grid.SetRow(saveChangesButton, all_rows - 1);
+            contentGrid.Children.Add(saveChangesButton);
+            saveChangesButton.Content = "Zapisz";
+            saveChangesButton.Click += new RoutedEventHandler(this.EdytujStatusOceny_Click);
+
+            dropChangesButton = new Button();
+            dropChangesButton.Margin = margin;
+            Grid.SetColumn(dropChangesButton, columns - 2);
+            Grid.SetRow(dropChangesButton, all_rows - 1);
+            contentGrid.Children.Add(dropChangesButton);
+            dropChangesButton.Content = "Anuluj";
+            dropChangesButton.Click += new RoutedEventHandler(this.AnulujEdycjeOceny_Click);
+
+
         }
 
         private void Clear_Content()
@@ -911,14 +922,46 @@ namespace IndeksElektroniczny
             grade.currentUser = signInUser.UserID;
 
             DbService.DataBaseAddGrade(grade);
-            AlertWindow alertWindow2 = new AlertWindow("Zmiana oceny przebiegła pomyślnie.");
+            AlertWindow alertWindow2 = new AlertWindow("Wprowadzenie oceny przebiegło pomyślnie.");
             alertWindow2.ShowDialog();
-            CreateOcenianieOcenaEdycja();
+            CreateOcenianieOcena();
         }
 
         private void ChangeGrade()
         {
+            string errorMessage = "";
+            if (!DataValidation.DataValidation.ValidLecturerGradeStatus(tableRowContentList[5].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
 
+            if (tableRowContentList[5].Text == "w")
+            {
+                AlertWindow alertWindow = new AlertWindow("Student ma już wprowadzoną ocenę. Możesz więc ją zmienić tylko używając statusu 'o' lub 'p'.");
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            if (!DataValidation.DataValidation.ValidGrade(tableRowContentList[4].Text, out errorMessage))
+            {
+                AlertWindow alertWindow = new AlertWindow(errorMessage);
+                alertWindow.ShowDialog();
+                return;
+            }
+
+            ChangeGradeProcedure grade = new ChangeGradeProcedure();
+            grade.StudentID = int.Parse(tableRowContentList[0].Text);
+            grade.GroupID = int.Parse(tableRowContentList[2].Text);
+            grade.NewGrade = tableRowContentList[4].Text;
+            grade.GradeStatus = tableRowContentList[5].Text;
+            grade.currentUser = signInUser.UserID;
+
+            DbService.DataBaseChangeGrade(grade);
+            AlertWindow alertWindow2 = new AlertWindow("Zmiana oceny przebiegła pomyślnie.");
+            alertWindow2.ShowDialog();
+            CreateOcenianieOcena();
         }
     }
 }
