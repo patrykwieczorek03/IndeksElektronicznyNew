@@ -382,6 +382,7 @@ namespace IndeksElektroniczny
             Grid.SetColumn(textBoxSearch, 0);
             Grid.SetColumnSpan(textBoxSearch, columns - 3);
             Grid.SetRow(textBoxSearch, 0);
+            textBoxSearch.IsEnabled = false;
             contentGrid.Children.Add(textBoxSearch);
 
             comboBoxSearch = new ComboBox();
@@ -389,6 +390,18 @@ namespace IndeksElektroniczny
             Grid.SetColumn(comboBoxSearch, 2);
             Grid.SetColumnSpan(comboBoxSearch, columns - 3);
             Grid.SetRow(comboBoxSearch, 0);
+            comboBoxSearch.SelectedIndex = 0;
+            ComboBoxItem c1 = new ComboBoxItem();
+            c1.FontSize = 32;
+            c1.Background = Brushes.White;
+            c1.Content = "Wszystkie";
+            comboBoxSearch.Items.Add(c1);
+            ComboBoxItem c2 = new ComboBoxItem();
+            c2.FontSize = 32;
+            c2.Background = Brushes.White;
+            c2.Content = "Numer indeksu";
+            comboBoxSearch.Items.Add(c2);
+            comboBoxSearch.SelectionChanged += new SelectionChangedEventHandler(this.Wybierz_SelectedChange);
             contentGrid.Children.Add(comboBoxSearch);
 
             contentDataGrid = new DataGrid();
@@ -717,7 +730,29 @@ namespace IndeksElektroniczny
 
         private void Szukaj_Click(object sender, RoutedEventArgs e)
         {
-
+            if (comboBoxSearch.Text != "Wszystkie")
+            {
+                string errorMessage = "";
+                if (DataValidation.DataValidation.ValidIndexNumber(textBoxSearch.Text, out errorMessage))
+                {
+                    lecturerStudentsDatas.Clear();
+                    contentDataGrid.Items.Clear();
+                    contentDataGrid.Items.Refresh();
+                    UpdateLecturerStudentsByIndexNumber();
+                }
+                else
+                {
+                    AlertWindow alertWindow = new AlertWindow(errorMessage);
+                    alertWindow.ShowDialog();
+                }
+            }
+            else
+            {
+                lecturerStudentsDatas.Clear();
+                contentDataGrid.Items.Clear();
+                contentDataGrid.Items.Refresh();
+                UpdateLecturerStudents();
+            }
         }
 
         private void TwojeDane_Click(object sender, RoutedEventArgs e)
@@ -733,6 +768,19 @@ namespace IndeksElektroniczny
         private void ZajeciaDataGrid_Click(object sender, RoutedEventArgs e)
         {
             CreateZajeciaPrzegladanieGrup();
+        }
+
+        private void Wybierz_SelectedChange(object sender, SelectionChangedEventArgs e)
+        {
+            if (comboBoxSearch.Text == "Wszystkie")
+            {
+                textBoxSearch.IsEnabled = true;
+            }
+            else
+            {
+                textBoxSearch.IsEnabled = false;
+                textBoxSearch.Text = "";
+            }
         }
 
         private void WybierzStudenta_SelectionChanged(object sender, MouseButtonEventArgs e)
@@ -862,6 +910,15 @@ namespace IndeksElektroniczny
         private void UpdateLecturerStudents()
         {
             lecturerStudentsDatas = DbService.DataBaseShowLecturerStudents(signInUser);
+            foreach (var item in lecturerStudentsDatas)
+            {
+                contentDataGrid.Items.Add(item);
+            }
+        }
+
+        private void UpdateLecturerStudentsByIndexNumber()
+        {
+            lecturerStudentsDatas = DbService.DataBaseShowLecturerStudentsByIndexNumber(signInUser, textBoxSearch.Text);
             foreach (var item in lecturerStudentsDatas)
             {
                 contentDataGrid.Items.Add(item);

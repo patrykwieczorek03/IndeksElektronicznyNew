@@ -213,6 +213,31 @@ namespace DataBaseMySqlServices
             return lecturerStudentsDatas;
         }
 
+        public List<LecturerStudentsDataView> DataBaseShowLecturerStudentsByIndexNumber(User user, string IndexNumber)
+        {
+            command = new MySqlCommand($"CALL wyswietl_studentow_prowadzacego_po_numerze_indeksu('{user.UserID}', '{IndexNumber}')", this.conection);
+            reader = command.ExecuteReader();
+            List<LecturerStudentsDataView> lecturerStudentsDatas = new List<LecturerStudentsDataView>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    LecturerStudentsDataView lecturerStudentsData = new LecturerStudentsDataView();
+                    lecturerStudentsData.IndexNumber = int.Parse(reader.GetValue(0).ToString());
+                    lecturerStudentsData.NameOfCourse = reader.GetValue(1).ToString();
+                    lecturerStudentsData.GroupID = int.Parse(reader.GetValue(2).ToString());
+                    lecturerStudentsData.TypeOfClasses = char.Parse(reader.GetValue(3).ToString());
+                    if (!DBNull.Value.Equals(reader.GetValue(4))) lecturerStudentsData.Grade = float.Parse(reader.GetValue(4).ToString());
+                    else lecturerStudentsData.Grade = 0.0F;
+                    if (!DBNull.Value.Equals(reader.GetValue(5))) lecturerStudentsData.GradeStatus = char.Parse(reader.GetValue(5).ToString());
+                    else lecturerStudentsData.GradeStatus = 'E';
+                    lecturerStudentsDatas.Add(lecturerStudentsData);
+                }
+            }
+            reader.Close();
+            return lecturerStudentsDatas;
+        }
+
         public StudentPreviewDataView DataBaseShowStudentPreview(int indexNumber)
         {
             command = new MySqlCommand($"CALL wyswietl_dane_studenta_podglad('{indexNumber}')", this.conection);
@@ -277,6 +302,36 @@ namespace DataBaseMySqlServices
         public List<BrowseGroupsDataView> DataBaseShowBrowseGroups()
         {
             command = new MySqlCommand("SELECT * FROM przegladanie_grup_view", this.conection);
+            reader = command.ExecuteReader();
+            List<BrowseGroupsDataView> browseGroupsDatas = new List<BrowseGroupsDataView>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    BrowseGroupsDataView browseGroupsData = new BrowseGroupsDataView();
+                    browseGroupsData.Name = reader.GetValue(0).ToString();
+                    browseGroupsData.Surname = reader.GetValue(1).ToString();
+                    browseGroupsData.NameOfCourse = reader.GetValue(2).ToString();
+                    browseGroupsData.Ects = int.Parse(reader.GetValue(3).ToString());
+                    browseGroupsData.GroupID = int.Parse(reader.GetValue(4).ToString());
+                    browseGroupsData.Building = reader.GetValue(5).ToString();
+                    browseGroupsData.Room = int.Parse(reader.GetValue(6).ToString());
+                    browseGroupsData.DayOfWeek = int.Parse(reader.GetValue(7).ToString());
+                    browseGroupsData.TypeOfClasses = char.Parse(reader.GetValue(8).ToString());
+                    DateTime arg1 = DateTime.Parse(reader.GetValue(9).ToString());
+                    DateTime arg2 = DateTime.Parse(reader.GetValue(10).ToString());
+                    browseGroupsData.StartTime = TimeSpan.Parse(arg1.Hour.ToString() + ":" + arg1.Minute.ToString());
+                    browseGroupsData.FinishTime = TimeSpan.Parse(arg2.Hour.ToString() + ":" + arg2.Minute.ToString());
+                    browseGroupsDatas.Add(browseGroupsData);
+                }
+            }
+            reader.Close();
+            return browseGroupsDatas;
+        }
+ 
+        public List<BrowseGroupsDataView> DataBaseShowBrowseGroupsByNameOfCourse(string NameOfCourse)
+        {
+            command = new MySqlCommand($"SELECT * FROM przegladanie_grup_view WHERE nazwa_kursu = ('{NameOfCourse}')", this.conection);
             reader = command.ExecuteReader();
             List<BrowseGroupsDataView> browseGroupsDatas = new List<BrowseGroupsDataView>();
             if (reader.HasRows)

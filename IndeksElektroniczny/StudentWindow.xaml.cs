@@ -626,8 +626,6 @@ namespace IndeksElektroniczny
 
         }
 
-
-
         public void CreateZajeciaPlanZajec()
         {
             Clear_Content();
@@ -748,12 +746,25 @@ namespace IndeksElektroniczny
             Grid.SetColumn(textBoxSearch, 1);
             Grid.SetColumnSpan(textBoxSearch, columns - 3);
             Grid.SetRow(textBoxSearch, 0);
+            textBoxSearch.IsEnabled = false;
             contentGrid.Children.Add(textBoxSearch);
 
             comboBoxSearch = new ComboBox();
             comboBoxSearch.Margin = margin;
             Grid.SetColumn(comboBoxSearch, 3);
             Grid.SetRow(comboBoxSearch, 0);
+            comboBoxSearch.SelectedIndex = 0;
+            ComboBoxItem c1 = new ComboBoxItem();
+            c1.FontSize = 32;
+            c1.Background = Brushes.White;
+            c1.Content = "Wszystkie";
+            comboBoxSearch.Items.Add(c1);
+            ComboBoxItem c2 = new ComboBoxItem();
+            c2.FontSize = 32;
+            c2.Background = Brushes.White;
+            c2.Content = "Nazwa kursu";
+            comboBoxSearch.Items.Add(c2);
+            comboBoxSearch.SelectionChanged += new SelectionChangedEventHandler(this.Wybierz_SelectedChange);
             contentGrid.Children.Add(comboBoxSearch);
 
             contentDataGrid = new DataGrid();
@@ -862,7 +873,20 @@ namespace IndeksElektroniczny
 
         private void Szukaj_Click(object sender, RoutedEventArgs e)
         {
-
+            if(comboBoxSearch.Text != "Wszystkie")
+            {
+                browseGroupsDatas.Clear();
+                contentDataGrid.Items.Clear();
+                contentDataGrid.Items.Refresh();
+                UpdateBrowseGroupsDataByNameOfCourse();
+            }
+            else
+            {
+                browseGroupsDatas.Clear();
+                contentDataGrid.Items.Clear();
+                contentDataGrid.Items.Refresh();
+                UpdateBrowseGroupsData();
+            }
         }
 
         private void TwojeDane_Click(object sender, RoutedEventArgs e)
@@ -888,6 +912,19 @@ namespace IndeksElektroniczny
         private void PlanZajec_Click(object sender, RoutedEventArgs e)
         {
             CreateZajeciaPlanZajec();
+        }
+
+        private void Wybierz_SelectedChange(object sender, RoutedEventArgs e)
+        {
+           if(comboBoxSearch.Text == "Wszystkie")
+            {
+                textBoxSearch.IsEnabled = true;
+            }
+           else
+            {
+                textBoxSearch.IsEnabled = false;
+                textBoxSearch.Text = "";
+            }
         }
 
         private void WybierzOcene_SelectionChanged(object sender, MouseButtonEventArgs e)
@@ -1067,6 +1104,15 @@ namespace IndeksElektroniczny
         private void UpdateBrowseGroupsData()
         {
             browseGroupsDatas = DbService.DataBaseShowBrowseGroups();
+            foreach (var item in browseGroupsDatas)
+            {
+                contentDataGrid.Items.Add(item);
+            }
+        }
+
+        private void UpdateBrowseGroupsDataByNameOfCourse()
+        {
+            browseGroupsDatas = DbService.DataBaseShowBrowseGroupsByNameOfCourse(textBoxSearch.Text);
             foreach (var item in browseGroupsDatas)
             {
                 contentDataGrid.Items.Add(item);

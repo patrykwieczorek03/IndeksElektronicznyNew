@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System.Threading.Tasks;   
 
 namespace DataValidation
 {
@@ -579,6 +579,25 @@ namespace DataValidation
             }
 
             errorMessage = "Ocena powinna mieć odpowiedni format.\n" + "Na przykład: '4.5'";
+            return false;
+        }
+
+        public static bool ValidIndexNumber(string indexNumber, out string errorMessage)
+        {
+            errorMessage = "";
+            if (indexNumber.Length > 6 || indexNumber.Length < 6)
+            {
+                errorMessage = "Pesel - niepoprawna ilość znaków. Wymagana ilość znaków: 6";
+                return false;
+            }
+
+            string expression = "^[0-9]*$";
+
+            if (Regex.IsMatch(indexNumber, expression))
+            {
+                return true;
+            }
+            errorMessage = "Pesel powinien mieć odpowiedni format.\n" + "Na przykład: '240000'";
             return false;
         }
     }
