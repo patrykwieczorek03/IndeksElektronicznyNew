@@ -17,7 +17,7 @@ namespace DataBaseMySqlServices.Models
         public int Room { get; set; }
         public int DayOfWeek { get; set; }
         public char TypeOfClasses { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime FinishTime { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan FinishTime { get; set; }
     }
 }

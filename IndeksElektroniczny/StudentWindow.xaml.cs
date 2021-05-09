@@ -1043,13 +1043,13 @@ namespace IndeksElektroniczny
             contentDataGrid.Columns.Add(c9);
 
             DataGridTextColumn c10 = new DataGridTextColumn();
-            c10.Header = "Godzina rozpoczęcia";
+            c10.Header = "Godz. rozp.";
             c10.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             c10.Binding = new Binding("StartTime");
             contentDataGrid.Columns.Add(c10);
 
             DataGridTextColumn c11 = new DataGridTextColumn();
-            c11.Header = "Godzina zakończenia";
+            c11.Header = "Godz. zak.";
             c11.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             c11.Binding = new Binding("FinishTime");
             contentDataGrid.Columns.Add(c11);
@@ -1121,13 +1121,13 @@ namespace IndeksElektroniczny
             contentDataGrid.Columns.Add(c9);
 
             DataGridTextColumn c10 = new DataGridTextColumn();
-            c10.Header = "Godzina rozpoczęcia";
+            c10.Header = "Godz. rozp.";
             c10.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             c10.Binding = new Binding("StartTime");
             contentDataGrid.Columns.Add(c10);
 
             DataGridTextColumn c11 = new DataGridTextColumn();
-            c11.Header = "Godzina zakończenia";
+            c11.Header = "Godz. zak.";
             c11.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             c11.Binding = new Binding("FinishTime");
             contentDataGrid.Columns.Add(c11);

@@ -157,8 +157,10 @@ namespace DataBaseMySqlServices
                     lecturerGroupsData.Room = reader.GetValue(2).ToString();
                     lecturerGroupsData.DayOfWeek = int.Parse(reader.GetValue(3).ToString());
                     lecturerGroupsData.TypeOfClasses = char.Parse(reader.GetValue(4).ToString());
-                    lecturerGroupsData.StartTime = DateTime.Parse(reader.GetValue(5).ToString());
-                    lecturerGroupsData.FinishTime = DateTime.Parse(reader.GetValue(6).ToString());
+                    DateTime arg1 = DateTime.Parse(reader.GetValue(5).ToString());
+                    DateTime arg2 = DateTime.Parse(reader.GetValue(6).ToString());
+                    lecturerGroupsData.StartTime = TimeSpan.Parse(arg1.Hour.ToString() + ":" + arg1.Minute.ToString());
+                    lecturerGroupsData.FinishTime = TimeSpan.Parse(arg2.Hour.ToString() + ":" + arg2.Minute.ToString());
                     lecturerGroupsDatas.Add(lecturerGroupsData);
                 }
             }
@@ -291,8 +293,10 @@ namespace DataBaseMySqlServices
                     browseGroupsData.Room = int.Parse(reader.GetValue(6).ToString());
                     browseGroupsData.DayOfWeek = int.Parse(reader.GetValue(7).ToString());
                     browseGroupsData.TypeOfClasses = char.Parse(reader.GetValue(8).ToString());
-                    browseGroupsData.StartTime = DateTime.Parse(reader.GetValue(9).ToString());
-                    browseGroupsData.FinishTime = DateTime.Parse(reader.GetValue(10).ToString());
+                    DateTime arg1 = DateTime.Parse(reader.GetValue(9).ToString());
+                    DateTime arg2 = DateTime.Parse(reader.GetValue(10).ToString());
+                    browseGroupsData.StartTime = TimeSpan.Parse(arg1.Hour.ToString() + ":" + arg1.Minute.ToString());
+                    browseGroupsData.FinishTime = TimeSpan.Parse(arg2.Hour.ToString() + ":" + arg2.Minute.ToString());
                     browseGroupsDatas.Add(browseGroupsData);
                 }
             }

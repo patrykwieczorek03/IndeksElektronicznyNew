@@ -847,13 +847,13 @@ namespace IndeksElektroniczny
             contentDataGrid.Columns.Add(c5);
 
             DataGridTextColumn c6 = new DataGridTextColumn();
-            c6.Header = "Godzina rozpoczęcia";
+            c6.Header = "Godz. rozp.";
             c6.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             c6.Binding = new Binding("StartTime");
             contentDataGrid.Columns.Add(c6);
 
             DataGridTextColumn c7 = new DataGridTextColumn();
-            c7.Header = "Godzina zakończenia";
+            c7.Header = "Godz. zak.";
             c7.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             c7.Binding = new Binding("FinishTime");
             contentDataGrid.Columns.Add(c7);
