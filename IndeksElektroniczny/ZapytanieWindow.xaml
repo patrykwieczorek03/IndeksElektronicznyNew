@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Style="{StaticResource SmallWindowStyle}"
         MouseDown="Window_MouseDown"
+        SizeToContent="WidthAndHeight"
         Title="ZapytanieWindow" Height="230" Width="800">
     <StackPanel>
         <StackPanel  Background="#333">
