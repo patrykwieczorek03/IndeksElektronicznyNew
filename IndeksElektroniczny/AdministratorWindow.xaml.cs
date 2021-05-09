@@ -389,16 +389,22 @@ namespace IndeksElektroniczny
             Grid.SetColumn(saveUserChangesButton, columns - 1);
             Grid.SetRow(saveUserChangesButton, all_rows - 1);
             contentGrid.Children.Add(saveUserChangesButton);
-
             saveUserChangesButton.Content = "Zapisz Zmiany";
             saveUserChangesButton.Click += new RoutedEventHandler(this.ZapiszZmianyUzytkownika_Click);
 
+            deleteUserButton = new Button();
+            deleteUserButton.Margin = margin;
+            Grid.SetColumn(deleteUserButton, columns - 2);
+            Grid.SetRow(deleteUserButton, all_rows - 1);
+            contentGrid.Children.Add(deleteUserButton);
+            deleteUserButton.Content = "Usuń użytkownika";
+            deleteUserButton.Click += new RoutedEventHandler(this.UsunUzytkownika_Click);
+
             dropChangesButton = new Button();
             dropChangesButton.Margin = margin;
-            Grid.SetColumn(dropChangesButton, columns - 2);
+            Grid.SetColumn(dropChangesButton, columns - 3);
             Grid.SetRow(dropChangesButton, all_rows - 1);
             contentGrid.Children.Add(dropChangesButton);
-
             dropChangesButton.Content = "Anuluj";
             dropChangesButton.Click += new RoutedEventHandler(this.AnulujDaneUzytkownika_Click);
 
@@ -496,9 +502,16 @@ namespace IndeksElektroniczny
             Grid.SetColumn(saveUserButton, columns - 1);
             Grid.SetRow(saveUserButton, all_rows - 1);
             contentGrid.Children.Add(saveUserButton);
-
             saveUserButton.Content = "Zapisz Użytkownika";
             saveUserButton.Click += new RoutedEventHandler(this.ZapiszUzytkownika_Click);
+
+            dropChangesButton = new Button();
+            dropChangesButton.Margin = margin;
+            Grid.SetColumn(dropChangesButton, columns - 2);
+            Grid.SetRow(dropChangesButton, all_rows - 1);
+            contentGrid.Children.Add(dropChangesButton);
+            dropChangesButton.Content = "Anuluj";
+            dropChangesButton.Click += new RoutedEventHandler(this.Uzytkownicy_Click);
         }
 
         private void Clear_Content()
@@ -591,7 +604,14 @@ namespace IndeksElektroniczny
 
         private void UsunUzytkownika_Click(object sender, RoutedEventArgs e)
         {
-
+            bool answer = false;
+            ZapytanieWindow question = new ZapytanieWindow("Czy na pewno chcesz usunąć uzytkownika?");
+            answer = question.ShowDialog(true);
+            if (answer)
+            {
+                DeleteUser();
+                CreateUzytkownicyLista();
+            }
         }
 
         private void WybierzUzytkownika_SelectionChanged(object sender, MouseButtonEventArgs e)
@@ -1061,6 +1081,16 @@ namespace IndeksElektroniczny
             AlertWindow alertWindow2 = new AlertWindow("Zmiana danych przebiegła pomyślnie.");
             alertWindow2.ShowDialog();
             CreateUzytkownicyLista();
+        }
+
+        private void DeleteUser()
+        {
+            DeleteUserProcedure user = new DeleteUserProcedure();
+            user.UserToDrop = choosenUserID;
+            user.CurrentUser = signInUser.UserID;
+            DbService.DataBaseDeleteUser(user);
+            AlertWindow alertWindow2 = new AlertWindow("Użytkownik został usunięty.");
+            alertWindow2.ShowDialog();
         }
     }
 }

@@ -483,12 +483,28 @@ namespace DataBaseMySqlServices
         {
             if (grade.GradeStatus == "o")
             {
-                command = new MySqlCommand($"odrzuc_reklamacje({grade.StudentID}, {grade.GroupID}, {grade.currentUser});", this.conection);
+                command = new MySqlCommand($"call odrzuc_reklamacje({grade.StudentID}, {grade.GroupID}, {grade.currentUser});", this.conection);
             }
             else if (grade.GradeStatus == "p")
             {
-                command = new MySqlCommand($"popraw_ocene('{grade.NewGrade}' ,{grade.StudentID}, {grade.GroupID}, {grade.currentUser});", this.conection);
+                command = new MySqlCommand($"call popraw_ocene('{grade.NewGrade}' ,{grade.StudentID}, {grade.GroupID}, {grade.currentUser});", this.conection);
             }
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+        }
+
+        public void DataBaseTakeGrade(GradeDecisionProcedure grade)
+        {
+            command = new MySqlCommand($"call zatwierdz_ocene({grade.MembershipID}, {grade.currentUser});", this.conection);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            command.Dispose();
+        }
+
+        public void DataBaseRejectGrade(GradeDecisionProcedure grade)
+        {
+            command = new MySqlCommand($"call reklamuj_ocene({grade.MembershipID}, {grade.currentUser});", this.conection);
             adapter.InsertCommand = command;
             adapter.InsertCommand.ExecuteNonQuery();
             command.Dispose();

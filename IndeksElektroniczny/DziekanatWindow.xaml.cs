@@ -517,9 +517,16 @@ namespace IndeksElektroniczny
             Grid.SetColumn(saveStudentButton, columns - 1);
             Grid.SetRow(saveStudentButton, all_rows - 1);
             contentGrid.Children.Add(saveStudentButton);
-
             saveStudentButton.Content = "Zapisz studenta";
             saveStudentButton.Click += new RoutedEventHandler(this.ZapiszStudenta_Click);
+
+            dropChangesButton = new Button();
+            dropChangesButton.Margin = margin;
+            Grid.SetColumn(dropChangesButton, columns - 2);
+            Grid.SetRow(dropChangesButton, rows);
+            contentGrid.Children.Add(dropChangesButton);
+            dropChangesButton.Content = "Anuluj";
+            dropChangesButton.Click += new RoutedEventHandler(this.Studenci_Click);
         }
 
         private void Clear_Content()
@@ -974,6 +981,8 @@ namespace IndeksElektroniczny
             user.UserToDrop = choosenUserID;
             user.CurrentUser = signInUser.UserID;
             DbService.DataBaseDeleteUser(user);
+            AlertWindow alertWindow2 = new AlertWindow("Student został usunięty.");
+            alertWindow2.ShowDialog();
         }
 
         private void ChangeStudentData()
