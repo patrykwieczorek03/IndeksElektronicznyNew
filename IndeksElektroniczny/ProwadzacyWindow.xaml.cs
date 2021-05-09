@@ -414,7 +414,7 @@ namespace IndeksElektroniczny
             int rows = all_rows - 1;
             int columns = 6;
 
-            titleTextBlock.Text = "Kurs:... Grupa:...";
+            
 
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
@@ -480,6 +480,8 @@ namespace IndeksElektroniczny
             }
 
             UpdateStudentGradeData();
+
+            titleTextBlock.Text = "Student: " + tableRowContentList[0].Text;
 
             if (tableRowContentList[5].Text == "E" || tableRowContentList[5].Text == "n")
             {
@@ -523,8 +525,6 @@ namespace IndeksElektroniczny
             int rows = all_rows - 1;
             int columns = 6;
 
-            titleTextBlock.Text = "Kurs:... Grupa:...";
-
             tableRowContentList = new List<TextBox>();
             tableRowTitleList = new List<TextBlock>();
 
@@ -589,6 +589,7 @@ namespace IndeksElektroniczny
             }
 
             UpdateStudentGradeData();
+            titleTextBlock.Text = "Student: " + tableRowContentList[0].Text;
             currentGradeStatus = tableRowContentList[5].Text;
 
 
@@ -1041,7 +1042,7 @@ namespace IndeksElektroniczny
             DbService.DataBaseAddGrade(grade);
             AlertWindow alertWindow2 = new AlertWindow("Wprowadzenie oceny przebiegło pomyślnie.");
             alertWindow2.ShowDialog();
-            CreateOcenianieOcena();
+            CreateOcenianie();
         }
 
         private void ChangeGrade()
@@ -1078,7 +1079,7 @@ namespace IndeksElektroniczny
             DbService.DataBaseChangeGrade(grade);
             AlertWindow alertWindow2 = new AlertWindow("Zmiana oceny przebiegła pomyślnie.");
             alertWindow2.ShowDialog();
-            CreateOcenianieOcena();
+            CreateOcenianie();
         }
     }
 }

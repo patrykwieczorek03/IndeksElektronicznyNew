@@ -72,6 +72,7 @@
     <Compile Include="Models\ChangeStudentDataProcedure.cs" />
     <Compile Include="Models\DeleteUserProcedure.cs" />
     <Compile Include="Models\FieldOfStudyCheckProcedure.cs" />
+    <Compile Include="Models\GradeDecisionProcedure.cs" />
     <Compile Include="Models\LecturerCursesDataView.cs" />
     <Compile Include="Models\LecturerGroupsDataView.cs" />
     <Compile Include="Models\LecturerStudentsDataView.cs" />
