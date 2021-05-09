@@ -289,6 +289,8 @@ namespace IndeksElektroniczny
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
 
+            contentGrid.RowDefinitions[0].Height = new GridLength(58);
+            contentGrid.RowDefinitions[1].Height = new GridLength(58);
 
             buttonStudentData = new Button();
             buttonStudentData.Margin = margin;
@@ -363,7 +365,7 @@ namespace IndeksElektroniczny
 
             ManageMainButtons(2);
 
-            int rows = 4;
+            int rows = 20;
             int columns = 5;
 
             titleTextBlock.Text = "Oceny";
@@ -382,6 +384,9 @@ namespace IndeksElektroniczny
             {
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
+
+            contentGrid.RowDefinitions[0].Height = new GridLength(50);
+            contentGrid.RowDefinitions[1].Height = new GridLength(50);
 
             buttonStudentData = new Button();
             buttonStudentData.Margin = margin;
@@ -441,7 +446,6 @@ namespace IndeksElektroniczny
             {
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
-
 
             for (int j = 0; j < rows; j++)
             {
@@ -550,7 +554,6 @@ namespace IndeksElektroniczny
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-
             for (int j = 0; j < rows; j++)
             {
                 Border infoBorder = new Border();
@@ -631,7 +634,7 @@ namespace IndeksElektroniczny
 
             ManageMainButtons(3);
 
-            int rows = 4;
+            int rows = 40;
             int columns = 5;
 
             titleTextBlock.Text = "Plan zajęć";
@@ -650,6 +653,9 @@ namespace IndeksElektroniczny
             {
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
+
+            contentGrid.RowDefinitions[0].Height = new GridLength(56);
+            contentGrid.RowDefinitions[1].Height = new GridLength(60);
 
             buttonGroups = new Button();
             buttonGroups.Margin = margin;
@@ -687,7 +693,7 @@ namespace IndeksElektroniczny
 
             ManageMainButtons(3);
 
-            int rows = 4;
+            int rows = 40;
             int columns = 5;
 
             titleTextBlock.Text = "Przeglądanie grup";
@@ -706,6 +712,9 @@ namespace IndeksElektroniczny
             {
                 contentGrid.RowDefinitions.Add(new RowDefinition());
             }
+
+            contentGrid.RowDefinitions[0].Height = new GridLength(60);
+            contentGrid.RowDefinitions[1].Height = new GridLength(60);
 
             buttonGroups = new Button();
             buttonGroups.Margin = margin;
