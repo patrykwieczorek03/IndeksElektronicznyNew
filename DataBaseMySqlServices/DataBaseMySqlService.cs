@@ -98,7 +98,7 @@ namespace DataBaseMySqlServices
                     studentGradesData.MembershipID = int.Parse(reader.GetValue(0).ToString());
                     studentGradesData.Name = reader.GetValue(1).ToString();
                     studentGradesData.Surname = reader.GetValue(2).ToString();
-                    studentGradesData.NameOfCoure = reader.GetValue(3).ToString();
+                    studentGradesData.NameOfCourse = reader.GetValue(3).ToString();
                     studentGradesData.Ects = int.Parse(reader.GetValue(4).ToString());
                     studentGradesData.GroupID = int.Parse(reader.GetValue(5).ToString());
                     if (!DBNull.Value.Equals(reader.GetValue(6))) studentGradesData.Grade = float.Parse(reader.GetValue(6).ToString());
@@ -124,7 +124,7 @@ namespace DataBaseMySqlServices
                     StudentTimeTableDataView studentTimeTableData = new StudentTimeTableDataView();
                     studentTimeTableData.Name = reader.GetValue(0).ToString();
                     studentTimeTableData.Surname = reader.GetValue(1).ToString();
-                    studentTimeTableData.NameOfCoure = reader.GetValue(2).ToString();
+                    studentTimeTableData.NameOfCourse = reader.GetValue(2).ToString();
                     studentTimeTableData.Ects = int.Parse(reader.GetValue(3).ToString());
                     studentTimeTableData.GroupID = int.Parse(reader.GetValue(4).ToString());
                     studentTimeTableData.Building = reader.GetValue(5).ToString();
@@ -197,7 +197,7 @@ namespace DataBaseMySqlServices
                 {
                     LecturerStudentsDataView lecturerStudentsData = new LecturerStudentsDataView();
                     lecturerStudentsData.IndexNumber = int.Parse(reader.GetValue(0).ToString());
-                    lecturerStudentsData.NameOfCoure = reader.GetValue(1).ToString();
+                    lecturerStudentsData.NameOfCourse = reader.GetValue(1).ToString();
                     lecturerStudentsData.GroupID = int.Parse(reader.GetValue(2).ToString());
                     lecturerStudentsData.TypeOfClasses = char.Parse(reader.GetValue(3).ToString());
                     if (!DBNull.Value.Equals(reader.GetValue(4))) lecturerStudentsData.Grade = float.Parse(reader.GetValue(4).ToString());
@@ -284,7 +284,7 @@ namespace DataBaseMySqlServices
                     BrowseGroupsDataView browseGroupsData = new BrowseGroupsDataView();
                     browseGroupsData.Name = reader.GetValue(0).ToString();
                     browseGroupsData.Surname = reader.GetValue(1).ToString();
-                    browseGroupsData.NameOfCoure = reader.GetValue(2).ToString();
+                    browseGroupsData.NameOfCourse = reader.GetValue(2).ToString();
                     browseGroupsData.Ects = int.Parse(reader.GetValue(3).ToString());
                     browseGroupsData.GroupID = int.Parse(reader.GetValue(4).ToString());
                     browseGroupsData.Building = reader.GetValue(5).ToString();

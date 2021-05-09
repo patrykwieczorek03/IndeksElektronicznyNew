@@ -9,7 +9,7 @@ namespace DataBaseMySqlServices.Models
     public class LecturerStudentsDataView
     {
         public int IndexNumber { get; set; }
-        public string NameOfCoure { get; set; }
+        public string NameOfCourse { get; set; }
         public int GroupID { get; set; }
         public char TypeOfClasses { get; set; }
         public float Grade { get; set; }

@@ -284,7 +284,9 @@ namespace IndeksElektroniczny
             Grid.SetColumnSpan(contentDataGrid, columns);
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows - 1);
+            DataGridUpdateUsersList();
             contentGrid.Children.Add(contentDataGrid);
+
             addUserButton = new Button();
             addUserButton.Margin = margin;
             Grid.SetColumn(addUserButton, columns - 1);
@@ -624,7 +626,37 @@ namespace IndeksElektroniczny
         private void UpdateUsersList()
         {
             userListDatas = DbService.DataBaseShowUsersList();
-            contentDataGrid.ItemsSource = userListDatas.ToList();
+            foreach (var item in userListDatas)
+            {
+                contentDataGrid.Items.Add(item);
+            }
+        }
+
+        private void DataGridUpdateUsersList()
+        {
+            DataGridTextColumn c1 = new DataGridTextColumn();
+            c1.Header = "ID użytkownika";
+            c1.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c1.Binding = new Binding("UserID");
+            contentDataGrid.Columns.Add(c1);
+
+            DataGridTextColumn c2 = new DataGridTextColumn();
+            c2.Header = "Imie";
+            c2.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c2.Binding = new Binding("Name");
+            contentDataGrid.Columns.Add(c2);
+
+            DataGridTextColumn c3 = new DataGridTextColumn();
+            c3.Header = "Nazwisko";
+            c3.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c3.Binding = new Binding("Surname");
+            contentDataGrid.Columns.Add(c3);
+
+            DataGridTextColumn c4 = new DataGridTextColumn();
+            c4.Header = "Rola";
+            c4.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c4.Binding = new Binding("Role");
+            contentDataGrid.Columns.Add(c4);
         }
 
         private void ShowChoosenUserData()

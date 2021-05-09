@@ -286,6 +286,7 @@ namespace IndeksElektroniczny
             Grid.SetColumnSpan(contentDataGrid, columns);
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows - 1);
+            DataGridUpdateStudentList();
             contentGrid.Children.Add(contentDataGrid);
 
             addStudentButton = new Button();
@@ -654,7 +655,67 @@ namespace IndeksElektroniczny
         private void UpdateStudentsList()
         {
             studentListDatas = DbService.DataBaseShowStudentsList();
-            contentDataGrid.ItemsSource = studentListDatas.ToList();
+            foreach (var item in studentListDatas)
+            {
+                contentDataGrid.Items.Add(item);
+            }
+        }
+
+        private void DataGridUpdateStudentList()
+        {
+            DataGridTextColumn c1 = new DataGridTextColumn();
+            c1.Header = "ID użytkownika";
+            c1.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c1.Binding = new Binding("UserID");
+            contentDataGrid.Columns.Add(c1);
+
+            DataGridTextColumn c2 = new DataGridTextColumn();
+            c2.Header = "Numer Indeksu";
+            c2.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c2.Binding = new Binding("IndexNumber");
+            contentDataGrid.Columns.Add(c2);
+
+            DataGridTextColumn c3 = new DataGridTextColumn();
+            c3.Header = "Imie";
+            c3.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c3.Binding = new Binding("Name");
+            contentDataGrid.Columns.Add(c3);
+
+            DataGridTextColumn c4 = new DataGridTextColumn();
+            c4.Header = "Nazwisko";
+            c4.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c4.Binding = new Binding("Surname");
+            contentDataGrid.Columns.Add(c4);
+
+            DataGridTextColumn c5 = new DataGridTextColumn();
+            c5.Header = "Pesel";
+            c5.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c5.Binding = new Binding("Pesel");
+            contentDataGrid.Columns.Add(c5);
+
+            DataGridTextColumn c6 = new DataGridTextColumn();
+            c6.Header = "Nazwa kierunku";
+            c6.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c6.Binding = new Binding("StudyFiled");
+            contentDataGrid.Columns.Add(c6);
+
+            DataGridTextColumn c7 = new DataGridTextColumn();
+            c7.Header = "Stopień";
+            c7.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c7.Binding = new Binding("Degree");
+            contentDataGrid.Columns.Add(c7);
+
+            DataGridTextColumn c8 = new DataGridTextColumn();
+            c8.Header = "Semestr";
+            c8.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c8.Binding = new Binding("Semestr");
+            contentDataGrid.Columns.Add(c8);
+
+            DataGridTextColumn c9 = new DataGridTextColumn();
+            c9.Header = "Numer kontaktowy";
+            c9.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c9.Binding = new Binding("ContactNumber");
+            contentDataGrid.Columns.Add(c9);
         }
 
         private void ShowChoosenStudentData()
@@ -677,7 +738,6 @@ namespace IndeksElektroniczny
             tableRowContentList[14].Text = studentPreviewData.Degree.ToString();
             tableRowContentList[15].Text = studentPreviewData.Semestr.ToString();
         }
-
 
         private void AddNewStudent()
         {

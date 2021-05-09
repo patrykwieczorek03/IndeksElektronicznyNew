@@ -407,6 +407,7 @@ namespace IndeksElektroniczny
             Grid.SetColumnSpan(contentDataGrid, columns - 1);
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows);
+            DataGridUpdateStudentGradesData();
             contentGrid.Children.Add(contentDataGrid);
 
             contentDataGrid.MouseDoubleClick += new MouseButtonEventHandler(this.WybierzOcene_SelectionChanged);
@@ -667,6 +668,7 @@ namespace IndeksElektroniczny
             Grid.SetColumnSpan(contentDataGrid, columns - 1);
             Grid.SetRow(contentDataGrid, 0);
             Grid.SetRowSpan(contentDataGrid, rows);
+            DataGridUpdateStudentTimeTableData();
             contentGrid.Children.Add(contentDataGrid);
 
             UpdateStudentTimeTableData();
@@ -743,6 +745,7 @@ namespace IndeksElektroniczny
             Grid.SetColumnSpan(contentDataGrid, columns - 1);
             Grid.SetRow(contentDataGrid, 1);
             Grid.SetRowSpan(contentDataGrid, rows - 1);
+            DataGridUpdateBrowseGroupsData();
             contentGrid.Children.Add(contentDataGrid);
 
             UpdateBrowseGroupsData();
@@ -910,30 +913,228 @@ namespace IndeksElektroniczny
         private void UpdateStudentGradesData()
         {
             studentGradesDatas = DbService.DataBaseShowStudentGradesData(signInUser);
-            contentDataGrid.ItemsSource = studentGradesDatas.ToList();
+            foreach (var item in studentGradesDatas)
+            {
+                contentDataGrid.Items.Add(item);
+            }
+        }
+
+        private void DataGridUpdateStudentGradesData()
+        {
+            DataGridTextColumn c1 = new DataGridTextColumn();
+            c1.Header = "ID Zapisu";
+            c1.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c1.Binding = new Binding("MembershipID");
+            contentDataGrid.Columns.Add(c1);
+
+            DataGridTextColumn c2 = new DataGridTextColumn();
+            c2.Header = "Imie";
+            c2.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c2.Binding = new Binding("Name");
+            contentDataGrid.Columns.Add(c2);
+
+            DataGridTextColumn c3 = new DataGridTextColumn();
+            c3.Header = "Nazwisko";
+            c3.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c3.Binding = new Binding("Surname");
+            contentDataGrid.Columns.Add(c3);
+
+            DataGridTextColumn c4 = new DataGridTextColumn();
+            c4.Header = "Nazwa kursu";
+            c4.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c4.Binding = new Binding("NameOfCourse");
+            contentDataGrid.Columns.Add(c4);
+
+            DataGridTextColumn c5 = new DataGridTextColumn();
+            c5.Header = "Ects";
+            c5.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c5.Binding = new Binding("Ects");
+            contentDataGrid.Columns.Add(c5);
+
+            DataGridTextColumn c6 = new DataGridTextColumn();
+            c6.Header = "ID Grupy";
+            c6.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c6.Binding = new Binding("GroupID");
+            contentDataGrid.Columns.Add(c6);
+
+            DataGridTextColumn c7 = new DataGridTextColumn();
+            c7.Header = "Ocena";
+            c7.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c7.Binding = new Binding("Grade");
+            contentDataGrid.Columns.Add(c7);
+
+            DataGridTextColumn c8 = new DataGridTextColumn();
+            c8.Header = "Status Oceny";
+            c8.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c8.Binding = new Binding("GradeStatus");
+            contentDataGrid.Columns.Add(c8);
+        }
+
+        private void UpdateStudentTimeTableData()
+        {
+            studentTimeTableDatas = DbService.DataBaseShowStudentTimeTableData(signInUser);
+            foreach (var item in studentTimeTableDatas)
+            {
+                contentDataGrid.Items.Add(item);
+            }
+        }
+
+        private void DataGridUpdateStudentTimeTableData()
+        {
+            DataGridTextColumn c1 = new DataGridTextColumn();
+            c1.Header = "Imie";
+            c1.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c1.Binding = new Binding("Name");
+            contentDataGrid.Columns.Add(c1);
+
+            DataGridTextColumn c2 = new DataGridTextColumn();
+            c2.Header = "Nazwisko";
+            c2.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c2.Binding = new Binding("Surname");
+            contentDataGrid.Columns.Add(c2);
+
+            DataGridTextColumn c3 = new DataGridTextColumn();
+            c3.Header = "Nazwa kursu";
+            c3.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c3.Binding = new Binding("NameOfCourse");
+            contentDataGrid.Columns.Add(c3);
+
+            DataGridTextColumn c4 = new DataGridTextColumn();
+            c4.Header = "Ects";
+            c4.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c4.Binding = new Binding("Ects");
+            contentDataGrid.Columns.Add(c4);
+
+            DataGridTextColumn c5 = new DataGridTextColumn();
+            c5.Header = "ID Grupy";
+            c5.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c5.Binding = new Binding("GroupID");
+            contentDataGrid.Columns.Add(c5);
+
+            DataGridTextColumn c6 = new DataGridTextColumn();
+            c6.Header = "Budynek";
+            c6.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c6.Binding = new Binding("Building");
+            contentDataGrid.Columns.Add(c6);
+
+            DataGridTextColumn c7 = new DataGridTextColumn();
+            c7.Header = "Sala";
+            c7.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c7.Binding = new Binding("Room");
+            contentDataGrid.Columns.Add(c7);
+
+            DataGridTextColumn c8 = new DataGridTextColumn();
+            c8.Header = "Dzień tygodnia";
+            c8.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c8.Binding = new Binding("DayOfWeek");
+            contentDataGrid.Columns.Add(c8);
+
+            DataGridTextColumn c9 = new DataGridTextColumn();
+            c9.Header = "Typ zajęć";
+            c9.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c9.Binding = new Binding("TypeOfClasses");
+            contentDataGrid.Columns.Add(c9);
+
+            DataGridTextColumn c10 = new DataGridTextColumn();
+            c10.Header = "Godzina rozpoczęcia";
+            c10.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c10.Binding = new Binding("StartTime");
+            contentDataGrid.Columns.Add(c10);
+
+            DataGridTextColumn c11 = new DataGridTextColumn();
+            c11.Header = "Godzina zakończenia";
+            c11.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c11.Binding = new Binding("FinishTime");
+            contentDataGrid.Columns.Add(c11);
+        }
+
+        private void UpdateBrowseGroupsData()
+        {
+            browseGroupsDatas = DbService.DataBaseShowBrowseGroups();
+            foreach (var item in browseGroupsDatas)
+            {
+                contentDataGrid.Items.Add(item);
+            }
+        }
+
+        private void DataGridUpdateBrowseGroupsData()
+        {
+            DataGridTextColumn c1 = new DataGridTextColumn();
+            c1.Header = "Imie";
+            c1.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c1.Binding = new Binding("Name");
+            contentDataGrid.Columns.Add(c1);
+
+            DataGridTextColumn c2 = new DataGridTextColumn();
+            c2.Header = "Nazwisko";
+            c2.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c2.Binding = new Binding("Surname");
+            contentDataGrid.Columns.Add(c2);
+
+            DataGridTextColumn c3 = new DataGridTextColumn();
+            c3.Header = "Nazwa kursu";
+            c3.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c3.Binding = new Binding("NameOfCourse");
+            contentDataGrid.Columns.Add(c3);
+
+            DataGridTextColumn c4 = new DataGridTextColumn();
+            c4.Header = "Ects";
+            c4.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c4.Binding = new Binding("Ects");
+            contentDataGrid.Columns.Add(c4);
+
+            DataGridTextColumn c5 = new DataGridTextColumn();
+            c5.Header = "ID Grupy";
+            c5.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c5.Binding = new Binding("GroupID");
+            contentDataGrid.Columns.Add(c5);
+
+            DataGridTextColumn c6 = new DataGridTextColumn();
+            c6.Header = "Budynek";
+            c6.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c6.Binding = new Binding("Building");
+            contentDataGrid.Columns.Add(c6);
+
+            DataGridTextColumn c7 = new DataGridTextColumn();
+            c7.Header = "Sala";
+            c7.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c7.Binding = new Binding("Room");
+            contentDataGrid.Columns.Add(c7);
+
+            DataGridTextColumn c8 = new DataGridTextColumn();
+            c8.Header = "Dzień tygodnia";
+            c8.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c8.Binding = new Binding("DayOfWeek");
+            contentDataGrid.Columns.Add(c8);
+
+            DataGridTextColumn c9 = new DataGridTextColumn();
+            c9.Header = "Typ zajęć";
+            c9.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c9.Binding = new Binding("TypeOfClasses");
+            contentDataGrid.Columns.Add(c9);
+
+            DataGridTextColumn c10 = new DataGridTextColumn();
+            c10.Header = "Godzina rozpoczęcia";
+            c10.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c10.Binding = new Binding("StartTime");
+            contentDataGrid.Columns.Add(c10);
+
+            DataGridTextColumn c11 = new DataGridTextColumn();
+            c11.Header = "Godzina zakończenia";
+            c11.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            c11.Binding = new Binding("FinishTime");
+            contentDataGrid.Columns.Add(c11);
         }
 
         private void UpdateStudentGradeData()
         {
             tableRowContentList[0].Text = choosenStudentGrade.Name;
             tableRowContentList[1].Text = choosenStudentGrade.Surname;
-            tableRowContentList[2].Text = choosenStudentGrade.NameOfCoure;
+            tableRowContentList[2].Text = choosenStudentGrade.NameOfCourse;
             tableRowContentList[3].Text = choosenStudentGrade.Ects.ToString();
             tableRowContentList[4].Text = choosenStudentGrade.GroupID.ToString();
             tableRowContentList[5].Text = choosenStudentGrade.Grade.ToString();
             tableRowContentList[6].Text = choosenStudentGrade.GradeStatus.ToString();
-        }
-
-        private void UpdateStudentTimeTableData()
-        {
-            studentTimeTableDatas = DbService.DataBaseShowStudentTimeTableData(signInUser);
-            contentDataGrid.ItemsSource = studentTimeTableDatas.ToList();
-        }
-
-        private void UpdateBrowseGroupsData()
-        {
-            browseGroupsDatas = DbService.DataBaseShowBrowseGroups();
-            contentDataGrid.ItemsSource = browseGroupsDatas.ToList();
         }
 
         private void ChangeUserData()

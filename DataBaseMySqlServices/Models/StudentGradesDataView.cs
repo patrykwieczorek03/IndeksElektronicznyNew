@@ -11,7 +11,7 @@ namespace DataBaseMySqlServices.Models
         public int MembershipID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string NameOfCoure { get; set; }
+        public string NameOfCourse { get; set; }
         public int Ects { get; set; }
         public int GroupID { get; set; }
         public float Grade { get; set; }
