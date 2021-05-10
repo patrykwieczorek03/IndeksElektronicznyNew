@@ -587,7 +587,7 @@ namespace DataValidation
             errorMessage = "";
             if (indexNumber.Length > 6 || indexNumber.Length < 6)
             {
-                errorMessage = "Pesel - niepoprawna ilość znaków. Wymagana ilość znaków: 6";
+                errorMessage = "Numer indeksu - niepoprawna ilość znaków. Wymagana ilość znaków: 6";
                 return false;
             }
 
@@ -597,7 +597,7 @@ namespace DataValidation
             {
                 return true;
             }
-            errorMessage = "Pesel powinien mieć odpowiedni format.\n" + "Na przykład: '240000'";
+            errorMessage = "Numer indeksu powinien mieć odpowiedni format.\n" + "Na przykład: '240000'";
             return false;
         }
     }
