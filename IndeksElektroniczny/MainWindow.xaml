@@ -45,10 +45,7 @@
                         <ColumnDefinition Width="6*"/>
                     </Grid.ColumnDefinitions>
                     <fa:ImageAwesome Icon="Key"/>
-                    <PasswordBox x:Name="HasloTextBox" Grid.Column="1" PasswordChar="•" Password="Haslo">
-
-                    </PasswordBox>
-                    
+                    <PasswordBox x:Name="HasloTextBox" Grid.Column="1" PasswordChar="•" Password="Haslo"/>
                 </Grid>
             </Border>
             <Border Padding="20">

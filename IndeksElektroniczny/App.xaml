@@ -74,7 +74,6 @@
             <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="FontSize" Value="20" />
-            <Setter Property="Password" Value="Haslo"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Padding" Value="5"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
