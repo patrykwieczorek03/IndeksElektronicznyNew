@@ -55,7 +55,7 @@ namespace IndeksElektroniczny
         /// <param name="e"> Contains state information and event data associated with a routed event  </param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            SignInUser = DbService.DataBaseSignIn(this.LoginTextBox.Text, this.HasloTextBox.Text);
+            SignInUser = DbService.DataBaseSignIn(this.LoginTextBox.Text, this.HasloTextBox.Password);
             if(SignInUser.CheckUser())
             {
                 if(SignInUser.Role == 'a')
