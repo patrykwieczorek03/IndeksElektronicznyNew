@@ -25,7 +25,8 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*$";
+            //string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*$";
+            string expression = "^[A-Z][a-z]*$";
 
             if (Regex.IsMatch(name, expression))
             {
@@ -52,7 +53,8 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*$";
+            //string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*$";
+            string expression = "^[A-Z][a-z]*$";
 
             if (Regex.IsMatch(surname, expression))
             {
@@ -187,7 +189,8 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*(\\s{1}[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń])*$";
+            //string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*(\\s{1}[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń])*$";
+            string expression = "^[A-Z][a-z]*(\\s{1}[A-Z][a-z])*$";
 
             if (Regex.IsMatch(country, expression))
             {
@@ -214,7 +217,8 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*(\\s{1}[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń])*$";
+            //string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*(\\s{1}[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń])*$";
+            string expression = "^[A-Z][a-z]*(\\s{1}[A-Z][a-z])*$";
 
             if (Regex.IsMatch(city, expression))
             {
@@ -241,7 +245,8 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*(\\s{1}[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń])*$";
+            //string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*(\\s{1}[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń])*$";
+            string expression = "^[A-Z][a-z]*(\\s{1}[A-Z][a-z])*$";
 
             if (Regex.IsMatch(street, expression))
             {
@@ -436,7 +441,8 @@ namespace DataValidation
                 return false;
             }
 
-            string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*(\\s{1}[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń])*$";
+            //string expression = "^[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń]*(\\s{1}[A-ZĄĘÓŁŻŹŚĆŃ][a-ząęółżźśćń])*$";
+            string expression = "^[A-Z][a-z]*(\\s{1}[A-Z][a-z])*$";
 
             if (Regex.IsMatch(field, expression))
             {
